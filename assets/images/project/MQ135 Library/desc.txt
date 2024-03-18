@@ -1,0 +1,12 @@
+I and Ashok Tirupatimahanti, worked on the MQ135 gas sensor. After extensive research, we’ve found that this sensor also detects the presence of several gases, but all the existing libraries till now are only made for calculating CO2’s PPM concentrations.
+
+So, we decided to make a library which can calculate the PPM concentrations of few other gases and made the necessary calculations and changes required. Now this library gives concentrations of CO2, CO, NH4, Acetone, Alcohol and Toluene.
+
+We used the sensitivity characteristics graph provided for the MQ135 and applied power regression analysis to obtain the parameters needed for the calculation of concentration for each gas.
+
+Our library also considers the influence of temperature and humidity on the output resistance ratio and gives the Corrected Concentration readings by eliminating the error caused.
+
+Few predefined values like load resistance, atmospheric concentration and calibrated resistance values have to be found and written in the header file.
+
+
+Github:https://github.com/AmanSCoder/MQ135

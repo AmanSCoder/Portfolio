@@ -1,0 +1,10 @@
+ "🌿 Introducing Green Tracker: Revolutionizing Carbon Footprint Awareness with Advanced Machine Learning 🌿
+
+Team Solver.io has achieved a remarkable milestone in the ACM-VIT and @CSI-VIT's Hackathon HackStory! With our groundbreaking project, Green Tracker, we've secured a prestigious position among the top 5 teams, competing against 250+ brilliant minds.
+
+Green Tracker is an innovative solution designed to calculate the carbon footprint of an individual's daily activities using the power of our advanced machine learning model. Our aim is to raise awareness about the environmental impact of our actions and empower individuals to make informed, sustainable choices.
+
+Join us on this mission towards a greener and sustainable future! Together, we can make a significant difference. 🌍✨ #GreenTracker #Sustainability #TechForGood"  
+
+
+github link:
