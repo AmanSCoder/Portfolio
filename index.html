@@ -426,6 +426,105 @@
   }
   .lightbox-close:hover{ color: var(--accent); border-color: var(--accent-line); }
   .lightbox-close svg{ width:18px; height:18px; }
+
+  /* ---------- DETAIL MODAL (terminal popup) ---------- */
+  [data-detail]{ cursor:pointer; }
+  .detail-hint{
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--text-faint);
+    margin-top: 2px;
+    display:flex; align-items:center; gap:4px;
+    transition: color .15s ease;
+  }
+  [data-detail]:hover .detail-hint{ color: var(--accent); }
+  .proj-mini .detail-hint{ margin-top: 8px; }
+
+  .detail-overlay{
+    position:fixed; inset:0; z-index: 1001;
+    background: rgba(4,6,10,0.88);
+    backdrop-filter: blur(6px);
+    display:flex; align-items:center; justify-content:center;
+    padding: 30px 16px;
+    opacity:0; visibility:hidden;
+    transition: opacity .2s ease;
+  }
+  .detail-overlay.open{ opacity:1; visibility:visible; }
+  .detail-window{
+    width: min(680px, 100%);
+    max-height: 84vh;
+    background: var(--bg-terminal);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    box-shadow: var(--shadow-lg);
+    display:flex; flex-direction:column;
+    transform: scale(.96) translateY(8px);
+    transition: transform .2s ease;
+    overflow:hidden;
+  }
+  .detail-overlay.open .detail-window{ transform: scale(1) translateY(0); }
+  .detail-bar{
+    display:flex; align-items:center; gap:8px;
+    padding: 12px 14px;
+    background: var(--bg-raised);
+    border-bottom: 1px solid var(--border-soft);
+    flex-shrink:0;
+  }
+  .detail-bar .detail-filename{
+    margin-left: 8px;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--text-faint);
+    flex:1;
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  }
+  .detail-bar .detail-x{
+    background:none; border:none; color: var(--text-faint);
+    cursor:pointer; padding:4px; display:flex;
+    transition: color .15s ease;
+  }
+  .detail-bar .detail-x:hover{ color: var(--accent); }
+  .detail-bar .detail-x svg{ width:16px; height:16px; }
+  .detail-body{
+    padding: 24px 26px 28px;
+    overflow-y: auto;
+    font-size: 14.5px;
+    line-height: 1.75;
+  }
+  .detail-body .dt-tag{
+    font-family: var(--mono); font-size: 11px; color: var(--accent);
+    background: var(--accent-dim); border: 1px solid var(--accent-line);
+    padding: 3px 8px; border-radius: 999px; display:inline-block; margin-bottom: 12px;
+  }
+  .detail-body h4{
+    font-family: var(--sans); font-weight: 700; font-size: 19px;
+    color: var(--text-bright); margin: 0 0 14px; line-height:1.4;
+  }
+  .detail-body p{ margin: 0 0 14px; color: var(--text); }
+  .detail-body ul{ margin: 0 0 14px; padding-left: 0; display:grid; gap:8px; }
+  .detail-body ul li{
+    list-style:none; padding-left: 18px; position:relative; color: var(--text);
+  }
+  .detail-body ul li::before{
+    content:"›"; position:absolute; left:0; color: var(--accent); font-family: var(--mono);
+  }
+  .detail-body .dt-note{
+    margin-top: 18px; padding: 12px 14px;
+    background: var(--bg-card); border: 1px solid var(--border-soft); border-radius: 8px;
+    font-family: var(--mono); font-size: 12.5px; color: var(--text-faint); line-height:1.6;
+  }
+  .detail-body a.dt-link{
+    font-family: var(--mono); font-size: 13px; color: var(--accent);
+    display:inline-flex; align-items:center; gap:6px; margin-top: 6px;
+  }
+  .detail-body a.dt-link:hover{ text-decoration: underline; }
+  .detail-body a.dt-link svg{ width:12px; height:12px; }
+  .detail-body code{
+    font-family: var(--mono); font-size: 13px;
+    color: var(--syn-string); background: var(--bg-card);
+    padding: 1px 6px; border-radius: 4px; border: 1px solid var(--border-soft);
+  }
+
   .hero-kicker{
     font-family: var(--mono);
     color: var(--accent);
@@ -1074,7 +1173,7 @@
             <dt>company</dt><dd>Fixit AI</dd>
             <dt>location</dt><dd>Gurgaon, Haryana</dd>
             <dt>education</dt><dd>B.Tech CS, VIT — CGPA 9.15/10</dd>
-            <dt>ownership</dt><dd>Module Owner — Agent AI, Worker, Security &amp; Observability, SLA/SLO @ Fixit AI</dd>
+            <dt>ownership</dt><dd>Module Owner — Agent AI, Worker, Security &amp; Observability @ Fixit AI</dd>
             <dt>leadership</dt><dd>Chairperson, ISA-VIT</dd>
             <dt>email</dt><dd><a href="mailto:amansrivastava7969@gmail.com">amansrivastava7969@gmail.com</a></dd>
             <dt>github</dt><dd><a href="https://github.com/AmanSCoder" target="_blank" rel="noopener">@AmanSCoder</a></dd>
@@ -1101,7 +1200,7 @@
             <span class="t-company">@ Fixit AI</span>
             <span class="t-date">Sept 2025 — Present</span>
           </div>
-          <p class="t-desc">Built a <b>security agent</b> monitoring the entire system for security issues, an <b>agentic AI flow for lead management</b> (LangChain, LangSmith), observability with <b>Axiom</b> and feature flags, and ramped up on <b>Kubernetes</b>. Module owner for <b>Agent AI</b>, <b>Worker</b>, <b>Security &amp; Observability</b>, and <b>SLA/SLO management</b>.</p>
+          <p class="t-desc">Built a <b>security agent</b> monitoring the entire system for security issues, an <b>agentic AI flow for lead management</b> (LangChain, LangSmith), observability with <b>Axiom</b> and feature flags, and ramped up on <b>Kubernetes</b>. Module owner for <b>Agent AI</b>, <b>Worker</b>, and <b>Security &amp; Observability</b>.</p>
         </div>
         <div class="t-item">
           <span class="t-dot"></span>
@@ -1219,71 +1318,84 @@
       </div>
 
       <div class="proj-featured">
-        <article class="proj-card">
+        <article class="proj-card" data-detail="defendra">
           <div class="proj-top"><span class="proj-name">Defendra — AI Security Agent</span><span class="proj-tag">in progress</span></div>
           <p class="proj-desc">An autonomous AI agent that finds the same class of security issues a compliance auditor would — before they show up in someone else's report. Scopes a target, attacks it the way a real adversary would, and maps findings back to compliance controls (PCI DSS, SOC2, ISO 27001, GDPR, HIPAA). Early version operates autonomously and reports back into Slack.</p>
           <a class="proj-link" href="https://github.com/AmanSCoder/defendra-security-agent" target="_blank" rel="noopener">github.com/AmanSCoder/defendra-security-agent <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
           <a class="proj-link" href="https://lnkd.in/p/gtnixSGh" target="_blank" rel="noopener">building in public — LinkedIn <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
+          <div class="detail-hint">❯ view details</div>
         </article>
 
-        <article class="proj-card">
+        <article class="proj-card" data-detail="axiom-mcp">
           <div class="proj-top"><span class="proj-name">Axiom Monitors MCP</span><span class="proj-tag">MCP server</span></div>
           <p class="proj-desc">An MCP server that exposes Axiom's monitor and notifier REST endpoints as MCP tools — filling a gap left by Axiom's official (read-only) MCP server by adding create / update / delete for monitors and notifiers.</p>
           <a class="proj-link" href="https://github.com/AmanSCoder/axiom-monitors-mcp" target="_blank" rel="noopener">github.com/AmanSCoder/axiom-monitors-mcp <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
+          <div class="detail-hint">❯ view details</div>
         </article>
 
-        <article class="proj-card">
+        <article class="proj-card" data-detail="chicken">
           <div class="proj-top"><span class="proj-name">Chicken Disease Classification</span><span class="proj-tag">MLOps / CI-CD</span></div>
           <p class="proj-desc">TensorFlow CNN classifier (VGG16) with a full CI/CD pipeline: DVC for data/model lifecycle, GitHub Actions for linting/tests/Docker builds, deployed to AWS EC2 via ECR, secrets managed through AWS Secrets Manager.</p>
           <a class="proj-link" href="https://github.com/AmanSCoder/Chicken-Disease-Classification" target="_blank" rel="noopener">github.com/AmanSCoder/Chicken-Disease-Classification <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
+          <div class="detail-hint">❯ view details</div>
         </article>
 
-        <article class="proj-card">
+        <article class="proj-card" data-detail="neuroassist">
           <div class="proj-top"><span class="proj-name">NeuroAssist</span><span class="proj-tag">🏆 hackathon winner</span></div>
           <p class="proj-desc">Web app leveraging Intel's optimized modules, ML (RandomForestClassifier, XGBoost), and Gemini Pro AI for diagnosing and supporting learning disorders (Autism, OCD, Dyslexia), with a React.js UI. Won Intel GenAI Hackathon 2024.</p>
           <a class="proj-link" href="https://github.com/Pr3mKum4r/BoltHack" target="_blank" rel="noopener">github.com/Pr3mKum4r/BoltHack <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
+          <div class="detail-hint">❯ view details</div>
         </article>
 
-        <article class="proj-card">
+        <article class="proj-card" data-detail="forest-fire">
           <div class="proj-top"><span class="proj-name">Algerian Forest Fire Prediction</span><span class="proj-tag">ML / regression</span></div>
           <p class="proj-desc">EDA, feature selection, and model training using Ridge, Lasso, and ElasticNet regression on the Algerian forest fire dataset.</p>
           <a class="proj-link" href="https://github.com/AmanSCoder/Forest_Fire_Prediction" target="_blank" rel="noopener">github.com/AmanSCoder/Forest_Fire_Prediction <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
+          <div class="detail-hint">❯ view details</div>
         </article>
       </div>
 
       <p class="proj-more-head"><span class="glyph" style="color:var(--accent)">#</span> more repositories</p>
       <div class="proj-grid-more">
-        <div class="proj-mini">
+        <div class="proj-mini" data-detail="carbonsense">
           <div class="pm-name">Carbonsense <a href="https://github.com/AmanSCoder/CarbonSense" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a></div>
           <div class="pm-desc">IoT-powered web app to monitor and visualize household appliance / transportation emissions using ML.</div>
+          <div class="detail-hint">❯ view details</div>
         </div>
-        <div class="proj-mini">
+        <div class="proj-mini" data-detail="cricwizard">
           <div class="pm-name">CricWizard <a href="https://github.com/AmanSCoder/CricWizard" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a></div>
           <div class="pm-desc">Web scraping project analyzing T20 World Cup player stats from ESPN; deployed via Render.</div>
+          <div class="detail-hint">❯ view details</div>
         </div>
-        <div class="proj-mini">
+        <div class="proj-mini" data-detail="decibel">
           <div class="pm-name">Decibel Detector &amp; Notifier</div>
           <div class="pm-desc">IoT noise monitoring device (NodeMCU, LCD, sound sensor); IFTTT alerts above 85dB, trends on ThingSpeak.</div>
+          <div class="detail-hint">❯ view details</div>
         </div>
-        <div class="proj-mini">
+        <div class="proj-mini" data-detail="product-review">
           <div class="pm-name">Product Review Scraper <a href="https://github.com/AmanSCoder/Web_Scrapper" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a></div>
           <div class="pm-desc">Scrapes Flipkart product reviews into MongoDB for sentiment analysis.</div>
+          <div class="detail-hint">❯ view details</div>
         </div>
-        <div class="proj-mini">
+        <div class="proj-mini" data-detail="mq135">
           <div class="pm-name">MQ135 Library <a href="https://github.com/AmanSCoder/MQ135" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a></div>
           <div class="pm-desc">Enhanced Arduino library for the MQ135 gas sensor, correcting PPM for temperature / humidity.</div>
+          <div class="detail-hint">❯ view details</div>
         </div>
-        <div class="proj-mini">
+        <div class="proj-mini" data-detail="password-manager">
           <div class="pm-name">Password Strength Checker &amp; Manager <a href="https://github.com/AmanSCoder/PasswordManager" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a></div>
           <div class="pm-desc">Password manager with face-recognition-gated access, plus a public password strength checker.</div>
+          <div class="detail-hint">❯ view details</div>
         </div>
-        <div class="proj-mini">
+        <div class="proj-mini" data-detail="green-tracker">
           <div class="pm-name">Green Tracker</div>
           <div class="pm-desc">ML-powered carbon footprint calculator based on daily activities.</div>
+          <div class="detail-hint">❯ view details</div>
         </div>
-        <div class="proj-mini">
+        <div class="proj-mini" data-detail="diabetes">
           <div class="pm-name">Diabetes Prediction <a href="https://github.com/AmanSCoder/Diabetes-Prediction" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a></div>
           <div class="pm-desc">Logistic regression model with EDA, feature selection, and GridSearchCV tuning.</div>
+          <div class="detail-hint">❯ view details</div>
         </div>
       </div>
     </div>
@@ -1366,18 +1478,20 @@
       </div>
 
       <div class="pub-grid">
-        <article class="pub-card">
+        <article class="pub-card" data-detail="pub-eeg">
           <span class="pub-badge">IEEE &middot; conference paper</span>
           <h3 class="pub-title">EEG signals analysis with 1D CNN-GRU architecture via transfer learning</h3>
           <p class="pub-desc">A hybrid 1D CNN-GRU deep learning architecture for classifying EEG signals, using transfer learning to improve accuracy on limited neurological data.</p>
           <a class="pub-link-lg" href="https://ieeexplore.ieee.org/document/10714752" target="_blank" rel="noopener">ieeexplore.ieee.org/document/10714752 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
+          <div class="detail-hint">❯ view details</div>
         </article>
 
-        <article class="pub-card">
+        <article class="pub-card" data-detail="pub-plant">
           <span class="pub-badge">IEEE &middot; conference paper</span>
           <h3 class="pub-title">Medical Plant Detection using Transfer Learning Coupled with K-Nearest Neighbour Algorithm</h3>
           <p class="pub-desc">Combines transfer learning with a KNN classifier to identify medicinal plant species from images, aiding automated herbal identification.</p>
           <a class="pub-link-lg" href="https://ieeexplore.ieee.org/document/10574671" target="_blank" rel="noopener">ieeexplore.ieee.org/document/10574671 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
+          <div class="detail-hint">❯ view details</div>
         </article>
       </div>
     </div>
@@ -1446,7 +1560,7 @@
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.6 3.6 12 3.6 12 3.6s-7.6 0-9.4.5A3 3 0 00.5 6.2 31 31 0 000 12a31 31 0 00.5 5.8 3 3 0 002.1 2.1c1.8.5 9.4.5 9.4.5s7.6 0 9.4-.5a3 3 0 002.1-2.1A31 31 0 0024 12a31 31 0 00-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
         </a>
         <a class="social-btn" href="https://leetcode.com/u/amanscoder/" target="_blank" rel="noopener" aria-label="LeetCode" title="LeetCode">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 3l-6.5 7 3 3-4 4a3 3 0 004.24 4.24L14 17M20 15l-3-3 3-3"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.938 5.938 0 0 0 1.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 0 0-1.951-.003l-2.396 2.392a3.021 3.021 0 0 1-4.205.038l-.02-.019-4.276-4.193c-.652-.64-.972-1.469-.948-2.263a2.68 2.68 0 0 1 .066-.523 2.545 2.545 0 0 1 .619-1.164L9.13 8.114c1.058-1.134 3.204-1.27 4.43-.278l3.501 2.831c.593.48 1.461.387 1.94-.207a1.384 1.384 0 0 0-.207-1.943l-3.5-2.831c-.8-.647-1.766-1.045-2.774-1.202l2.015-2.158A1.384 1.384 0 0 0 13.483 0zm-2.866 12.815a1.38 1.38 0 0 0-1.38 1.382 1.38 1.38 0 0 0 1.38 1.382H20.79a1.38 1.38 0 0 0 1.38-1.382 1.38 1.38 0 0 0-1.38-1.382z"/></svg>
         </a>
       </div>
 
@@ -1469,6 +1583,19 @@
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
   </button>
   <img class="lightbox-img" src="./assets/images/avatar.jpg" alt="Aman Srivastava">
+</div>
+
+<div class="detail-overlay" id="detailOverlay" role="dialog" aria-modal="true" aria-label="Project details">
+  <div class="detail-window">
+    <div class="detail-bar">
+      <span class="tl-dot r"></span><span class="tl-dot y"></span><span class="tl-dot g"></span>
+      <span class="detail-filename" id="detailFilename">cat README.md</span>
+      <button class="detail-x" id="detailClose" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="detail-body" id="detailBody"></div>
+  </div>
 </div>
 
 <script>
@@ -1527,6 +1654,204 @@
   }
   document.addEventListener('keydown', function(e){
     if(e.key === 'Escape' && lightbox.classList.contains('open')){ closeLightbox(); }
+  });
+
+  // ---------- project/publication detail modal ----------
+  var DETAILS = {
+    "defendra": {
+      file: "cat defendra-security-agent/NOTES.md",
+      html: '<span class="dt-tag">in progress &middot; building in public</span>' +
+        '<h4>Defendra — AI Security Agent</h4>' +
+        '<p>Compliance audits always surface findings on someone else\'s timeline — an external auditor finds the gap, and you scramble to fix it before the report ships. Defendra flips that: it scopes a target, attacks it the way a real adversary would, and maps whatever it finds back to the actual compliance controls an auditor would check.</p>' +
+        '<ul>' +
+        '<li>Maps findings to PCI DSS, SOC2, ISO 27001, GDPR, and HIPAA controls</li>' +
+        '<li>Operates autonomously — asks for scope up front, then runs unattended</li>' +
+        '<li>Reports back into Slack; no dashboard yet, just the skeleton doing real work</li>' +
+        '<li>Built on top of the OpenClaw agent framework</li>' +
+        '</ul>' +
+        '<div class="dt-note">// source note: this summary is drawn from Aman\'s "building in public" LinkedIn series (part 1 of 8), not the repo\'s README — the GitHub repo itself still carries the generic OpenClaw starter README, since project-specific docs haven\'t been written yet.</div>' +
+        '<a class="dt-link" href="https://github.com/AmanSCoder/defendra-security-agent" target="_blank" rel="noopener">→ github.com/AmanSCoder/defendra-security-agent</a><br>' +
+        '<a class="dt-link" href="https://lnkd.in/p/gtnixSGh" target="_blank" rel="noopener">→ building in public — LinkedIn</a>'
+    },
+    "axiom-mcp": {
+      file: "cat axiom-monitors-mcp/README.md",
+      html: '<span class="dt-tag">MCP server</span>' +
+        '<h4>Axiom Monitors MCP</h4>' +
+        '<p>Axiom\'s official MCP server (mcp.axiom.co) only exposes read operations for monitors — getMonitors and getMonitorsHistory. It has no way to create, update, or delete anything. This server fills that exact gap by wrapping Axiom\'s REST API as MCP tools.</p>' +
+        '<ul>' +
+        '<li>15 tools total, including create_threshold_monitor and create_slack_notifier</li>' +
+        '<li>Full CRUD for both monitors and notifiers</li>' +
+        '<li>Installs via uvx, wired into Cursor through ~/.cursor/mcp.json</li>' +
+        '<li>Needs an Axiom personal access token scoped to monitors:* and notifiers:*</li>' +
+        '</ul>' +
+        '<p>Stack: Python 3.10+, <code>uv</code> package manager.</p>' +
+        '<a class="dt-link" href="https://github.com/AmanSCoder/axiom-monitors-mcp" target="_blank" rel="noopener">→ github.com/AmanSCoder/axiom-monitors-mcp</a>'
+    },
+    "chicken": {
+      file: "cat Chicken-Disease-Classification/README.md",
+      html: '<span class="dt-tag">MLOps / CI-CD</span>' +
+        '<h4>Chicken Disease Classification</h4>' +
+        '<p>A CNN image classifier (VGG16 backbone) that detects Coccidiosis — a parasitic disease — from chicken fecal images, wrapped in a fully automated MLOps pipeline.</p>' +
+        '<ul>' +
+        '<li>4 DVC-tracked stages: data ingestion → base model prep → training → evaluation, each versioned for reproducibility</li>' +
+        '<li><code>predict.py</code> loads the saved Keras model, preprocesses the input to 224×224, and returns a healthy / Coccidiosis label</li>' +
+        '<li>GitHub Actions runs linting + tests, builds a Docker image, and pushes it to AWS ECR</li>' +
+        '<li>Deployment job pulls the latest image and runs it as a container on an EC2 instance, port 8080 — every push to main redeploys automatically</li>' +
+        '</ul>' +
+        '<a class="dt-link" href="https://github.com/AmanSCoder/Chicken-Disease-Classification" target="_blank" rel="noopener">→ github.com/AmanSCoder/Chicken-Disease-Classification</a>'
+    },
+    "neuroassist": {
+      file: "cat BoltHack/README.md",
+      html: '<span class="dt-tag">🏆 hackathon winner</span>' +
+        '<h4>NeuroAssist</h4>' +
+        '<p>A web app for diagnosing and supporting learning disorders — Autism, OCD, Dyslexia — in children, combining structured ML models with an LLM layer.</p>' +
+        '<ul>' +
+        '<li>RandomForestClassifier + XGBoost for the diagnostic signal</li>' +
+        '<li>Gemini Pro AI for the conversational / LLM layer</li>' +
+        '<li>React.js frontend, Intel\'s optimized ML modules under the hood</li>' +
+        '<li>Won 1st place at the Intel GenAI Hackathon 2024, among 1000+ participants</li>' +
+        '</ul>' +
+        '<div class="dt-note">// this was a team project — the repo lives under teammate Pr3mKum4r\'s GitHub, not Aman\'s own account.</div>' +
+        '<a class="dt-link" href="https://github.com/Pr3mKum4r/BoltHack" target="_blank" rel="noopener">→ github.com/Pr3mKum4r/BoltHack</a>'
+    },
+    "forest-fire": {
+      file: "cat Forest_Fire_Prediction/README.md",
+      html: '<span class="dt-tag">ML / regression</span>' +
+        '<h4>Algerian Forest Fire Prediction</h4>' +
+        '<p>EDA, feature selection, and model training using Ridge (L2), Lasso (L1), and ElasticNet regression on the Algerian forest fire dataset — comparing how each regularization approach handles multicollinearity and correlated features.</p>' +
+        '<div class="dt-note">// limited info: the repo\'s own README is leftover boilerplate from an unrelated Flask lab exercise, not project-specific documentation. Everything above is what\'s already in the portfolio/resume — there\'s no deeper write-up to pull from yet.</div>' +
+        '<a class="dt-link" href="https://github.com/AmanSCoder/Forest_Fire_Prediction" target="_blank" rel="noopener">→ github.com/AmanSCoder/Forest_Fire_Prediction</a>'
+    },
+    "carbonsense": {
+      file: "cat CarbonSense/README.md",
+      html: '<span class="dt-tag">IoT / ML</span>' +
+        '<h4>Carbonsense</h4>' +
+        '<p>An IoT-powered web app to monitor and visualize household appliance and transportation emissions using ML, aimed at helping users reduce their carbon footprint.</p>' +
+        '<div class="dt-note">// limited info: the repo\'s README is just a one-line hackathon title ("CarbonSense-YantraHack") — no further documentation exists yet in the repo itself.</div>' +
+        '<a class="dt-link" href="https://github.com/AmanSCoder/CarbonSense" target="_blank" rel="noopener">→ github.com/AmanSCoder/CarbonSense</a>'
+    },
+    "cricwizard": {
+      file: "cat CricWizard/README.md",
+      html: '<span class="dt-tag">web scraping</span>' +
+        '<h4>CricWizard</h4>' +
+        '<p>Scrapes ESPN\'s T20 World Cup data and lets you filter players by role — Batsman, Bowler, Wicketkeeper, All-Rounder — with detailed per-player stats.</p>' +
+        '<ul>' +
+        '<li>React frontend + Flask backend</li>' +
+        '<li>Deployed live at cricwizard.onrender.com</li>' +
+        '<li>Built for fantasy-league and cricket-analytics use cases</li>' +
+        '</ul>' +
+        '<a class="dt-link" href="https://github.com/AmanSCoder/CricWizard" target="_blank" rel="noopener">→ github.com/AmanSCoder/CricWizard</a>'
+    },
+    "decibel": {
+      file: "no repo linked",
+      html: '<span class="dt-tag">IoT</span>' +
+        '<h4>Decibel Detector &amp; Notifier</h4>' +
+        '<p>An IoT noise-monitoring device built on NodeMCU with an LCD display and sound sensor. Sends instant IFTTT notifications when ambient noise exceeds 85dB, and logs trends to ThingSpeak for analysis.</p>' +
+        '<div class="dt-note">// limited info: this project has no public GitHub repo linked, so there\'s nothing beyond the one-line summary already shown on the page.</div>'
+    },
+    "product-review": {
+      file: "cat Web_Scrapper/app.py",
+      html: '<span class="dt-tag">web scraping</span>' +
+        '<h4>Product Review Scraper</h4>' +
+        '<p>Scrapes Flipkart product listings and reviews — names, ratings, comments, comment headings — using BeautifulSoup, storing everything in MongoDB for downstream sentiment analysis.</p>' +
+        '<div class="dt-note">// limited info: the repo has no README — the detail above comes from reading app.py directly (confirmed pymongo + Flipkart scraping logic), not from documentation.</div>' +
+        '<a class="dt-link" href="https://github.com/AmanSCoder/Web_Scrapper" target="_blank" rel="noopener">→ github.com/AmanSCoder/Web_Scrapper</a>'
+    },
+    "mq135": {
+      file: "cat MQ135/README.md",
+      html: '<span class="dt-tag">embedded / C++</span>' +
+        '<h4>MQ135 Library</h4>' +
+        '<p>An enhanced Arduino/C++ library for the MQ135 gas sensor, correcting its raw resistance readings for temperature and humidity drift.</p>' +
+        '<ul>' +
+        '<li>Calculates PPM for CO2, CO, NH4, Acetone, Alcohol, and Toluene using power-regression curves fit to the sensor\'s published sensitivity characteristics</li>' +
+        '<li>Co-authored with Ashok Tirupatimahanti</li>' +
+        '<li>Requires calibration constants (load resistance, atmospheric CO2 baseline, calibrated resistance) set in the header file before use</li>' +
+        '</ul>' +
+        '<a class="dt-link" href="https://github.com/AmanSCoder/MQ135" target="_blank" rel="noopener">→ github.com/AmanSCoder/MQ135</a>'
+    },
+    "password-manager": {
+      file: "cat PasswordManager/README.md",
+      html: '<span class="dt-tag">security</span>' +
+        '<h4>Password Strength Checker &amp; Manager</h4>' +
+        '<p>A password manager gated by face recognition, plus a standalone strength-checking API anyone can hit.</p>' +
+        '<ul>' +
+        '<li><code>/strength</code> — checks a password, flags breach status and potential issues</li>' +
+        '<li><code>/adduser</code>, <code>/login</code> — account flow</li>' +
+        '<li><code>/faceauth</code> — face-recognition gate</li>' +
+        '<li><code>/save</code>, <code>/savedpassword</code> — encrypted storage/retrieval keyed by reference</li>' +
+        '</ul>' +
+        '<p>Saved passwords are only viewable after successful face authentication — the strength checker itself stays open to anyone.</p>' +
+        '<a class="dt-link" href="https://github.com/AmanSCoder/PasswordManager" target="_blank" rel="noopener">→ github.com/AmanSCoder/PasswordManager</a>'
+    },
+    "green-tracker": {
+      file: "no repo linked",
+      html: '<span class="dt-tag">ML</span>' +
+        '<h4>Green Tracker</h4>' +
+        '<p>An ML-powered carbon footprint calculator that estimates emissions based on daily activities.</p>' +
+        '<div class="dt-note">// limited info: no public GitHub repo linked for this one — nothing beyond the one-line summary already shown on the page.</div>'
+    },
+    "diabetes": {
+      file: "cat Diabetes-Prediction/README.md",
+      html: '<span class="dt-tag">ML / healthcare</span>' +
+        '<h4>Diabetes Prediction</h4>' +
+        '<p>Predicts diabetes likelihood from 8 health parameters — glucose, BMI, blood pressure, skin thickness, insulin, pregnancies, diabetes pedigree function — using a tuned Scikit-learn model.</p>' +
+        '<ul>' +
+        '<li>EDA → feature selection → hyperparameter tuning via GridSearchCV</li>' +
+        '<li>Compared Logistic Regression against Decision Tree / SVC before picking the production model</li>' +
+        '<li>Flask backend, HTML frontend, model serialized with pickle</li>' +
+        '</ul>' +
+        '<a class="dt-link" href="https://github.com/AmanSCoder/Diabetes-Prediction" target="_blank" rel="noopener">→ github.com/AmanSCoder/Diabetes-Prediction</a>'
+    },
+    "pub-eeg": {
+      file: "cat papers/eeg-cnn-gru.pdf",
+      html: '<span class="dt-tag">IEEE &middot; conference paper</span>' +
+        '<h4>EEG signals analysis with 1D CNN-GRU architecture via transfer learning</h4>' +
+        '<p>A hybrid 1D CNN-GRU deep learning architecture for classifying EEG signals, using transfer learning to improve accuracy on limited neurological data.</p>' +
+        '<div class="dt-note">// limited info: this paper sits behind IEEE Xplore\'s paywall — only the title and DOI are accessible without institutional access, so this is the full, honest summary rather than a guess at the paper\'s actual methodology or results.</div>' +
+        '<a class="dt-link" href="https://ieeexplore.ieee.org/document/10714752" target="_blank" rel="noopener">→ ieeexplore.ieee.org/document/10714752</a>'
+    },
+    "pub-plant": {
+      file: "cat papers/medical-plant-knn.pdf",
+      html: '<span class="dt-tag">IEEE &middot; conference paper</span>' +
+        '<h4>Medical Plant Detection using Transfer Learning Coupled with K-Nearest Neighbour Algorithm</h4>' +
+        '<p>Combines transfer learning with a KNN classifier to identify medicinal plant species from images, aiding automated herbal identification.</p>' +
+        '<div class="dt-note">// limited info: same situation as the EEG paper — paywalled on IEEE Xplore, so only the title/DOI are confirmed; treat the summary above as inferred from the title, not the paper\'s content.</div>' +
+        '<a class="dt-link" href="https://ieeexplore.ieee.org/document/10574671" target="_blank" rel="noopener">→ ieeexplore.ieee.org/document/10574671</a>'
+    }
+  };
+
+  var detailOverlay = document.getElementById('detailOverlay');
+  var detailBody = document.getElementById('detailBody');
+  var detailFilename = document.getElementById('detailFilename');
+  var detailClose = document.getElementById('detailClose');
+
+  function openDetail(slug){
+    var d = DETAILS[slug];
+    if(!d){ return; }
+    detailFilename.textContent = d.file;
+    detailBody.innerHTML = d.html;
+    detailOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDetail(){
+    detailOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('[data-detail]').forEach(function(card){
+    card.addEventListener('click', function(e){
+      if(e.target.closest('a')){ return; }
+      openDetail(card.getAttribute('data-detail'));
+    });
+  });
+  if(detailClose){ detailClose.addEventListener('click', closeDetail); }
+  if(detailOverlay){
+    detailOverlay.addEventListener('click', function(e){
+      if(e.target === detailOverlay){ closeDetail(); }
+    });
+  }
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && detailOverlay.classList.contains('open')){ closeDetail(); }
   });
 
   // ---------- skills gutter line numbers ----------
