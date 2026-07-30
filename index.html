@@ -1,1612 +1,1490 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aman's Portfolio</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aman Srivastava — Founding Software Engineer @ Fixit AI</title>
+<meta name="description" content="Aman Srivastava is a Founding Software Engineer at Fixit AI, building agentic AI systems, backend infrastructure, and security &amp; observability tooling. View his experience, skills, and open-source projects.">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Aman Srivastava">
+<link rel="canonical" href="https://amanscoder.github.io/Portfolio/">
+<link rel="shortcut icon" href="./assets/images/logo.ico" type="image/x-icon">
 
-  <!--
-    - favicon
-  -->
-  <link rel="shortcut icon" href="./assets/images/logo.ico" type="image/x-icon">
+<!-- Open Graph -->
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Aman Srivastava — Founding Software Engineer @ Fixit AI">
+<meta property="og:description" content="Building agentic AI systems, backend infrastructure, and security &amp; observability tooling at Fixit AI. Experience, skills, and open-source projects.">
+<meta property="og:url" content="https://amanscoder.github.io/Portfolio/">
+<meta property="og:image" content="https://amanscoder.github.io/Portfolio/assets/images/avatar.jpg">
+<meta property="og:site_name" content="Aman Srivastava">
+<meta property="profile:first_name" content="Aman">
+<meta property="profile:last_name" content="Srivastava">
 
-  <!--
-    - custom css link
-  -->
-  <link rel="stylesheet" href="./assets/css/style.css">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Aman Srivastava — Founding Software Engineer @ Fixit AI">
+<meta name="twitter:description" content="Building agentic AI systems, backend infrastructure, and security &amp; observability tooling at Fixit AI.">
+<meta name="twitter:image" content="https://amanscoder.github.io/Portfolio/assets/images/avatar.jpg">
+<meta name="twitter:site" content="@aman_7905">
 
-  <!--
-    - google font link
-  -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- Structured data (GEO/AEO: Person + key facts, verbatim from resume/portfolio) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Aman Srivastava",
+  "url": "https://amanscoder.github.io/Portfolio/",
+  "image": "https://amanscoder.github.io/Portfolio/assets/images/avatar.jpg",
+  "jobTitle": "Founding Software Engineer",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Fixit AI"
+  },
+  "alumniOf": {
+    "@type": "CollegeOrUniversity",
+    "name": "Vellore Institute of Technology"
+  },
+  "email": "mailto:amansrivastava7969@gmail.com",
+  "telephone": "+91-7905959989",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Vellore",
+    "addressCountry": "IN"
+  },
+  "sameAs": [
+    "https://github.com/AmanSCoder",
+    "https://www.linkedin.com/in/aman-srivastava-b60594245/",
+    "https://twitter.com/aman_7905",
+    "https://www.instagram.com/agentaman0/",
+    "https://www.youtube.com/channel/UCPPPE09eloCe8gJehNYt0Bw",
+    "https://leetcode.com/amanscoder"
+  ],
+  "knowsAbout": [
+    "Agentic AI", "LangChain", "LangSmith", "Backend Development", "Django", "Flask", "FastAPI",
+    "Security Monitoring", "Observability", "Axiom", "Kubernetes", "Docker", "AWS", "Machine Learning"
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What does Aman Srivastava currently work on?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Aman is a Founding Software Engineer at Fixit AI, where he builds agentic AI systems, backend infrastructure, and observability tooling. His current work includes a security monitoring agent, an agentic AI workflow for lead management built with LangChain and LangSmith, and observability with Axiom on Kubernetes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is Defendra?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Defendra is an autonomous AI security agent Aman is building that finds the same class of security issues a compliance auditor would, before they show up in someone else's report. It scopes a target, tests it the way a real adversary would, and maps findings back to compliance controls like PCI DSS, SOC2, ISO 27001, GDPR, and HIPAA."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What technologies does Aman specialize in?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Agentic AI (LangChain, LangSmith), backend development (Django, Flask, FastAPI, Spring Boot), and DevOps/observability (Docker, Kubernetes, AWS, Axiom, CI/CD)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is Aman available for new opportunities?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, Aman is open to new opportunities and collaborations alongside his role at Fixit AI. He can be reached via email at amansrivastava7969@gmail.com."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where can I find Aman's open-source work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "All of Aman's public projects, including Defendra and the Axiom Monitors MCP server, are available on GitHub at github.com/AmanSCoder."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is Aman's educational background?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Aman holds a B.Tech in Computer Science from Vellore Institute of Technology (VIT), Vellore, with a CGPA of 9.15/10.0."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+  :root{
+    color-scheme: dark;
+    --bg: #0d1117;
+    --bg-raised: #12181f;
+    --bg-terminal: #0a0e14;
+    --bg-card: #131a23;
+    --border: #212a35;
+    --border-soft: #1b232c;
+    --text: #c9d3dd;
+    --text-bright: #eef2f6;
+    --text-muted: #8791a0;
+    --text-faint: #5b6472;
+    --accent: #6ee7a8;
+    --accent-strong: #8ef4bc;
+    --accent-dim: rgba(110, 231, 168, 0.10);
+    --accent-line: rgba(110, 231, 168, 0.32);
+    --accent-glow: rgba(110, 231, 168, 0.18);
+
+    --syn-key: #ff9580;
+    --syn-string: #9ecbff;
+    --syn-comment: #6d7684;
+    --syn-punct: #d7dce2;
+    --syn-num: #f2cc60;
+
+    --shadow-lg: 0 20px 60px -20px rgba(0,0,0,0.6);
+    --radius: 10px;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --mono: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+
+  :root[data-theme="light"]{
+    color-scheme: light;
+    --bg: #f6f8fa;
+    --bg-raised: #ffffff;
+    --bg-terminal: #ffffff;
+    --bg-card: #ffffff;
+    --border: #d7dce2;
+    --border-soft: #e4e8ec;
+    --text: #2a323c;
+    --text-bright: #10151b;
+    --text-muted: #5b6472;
+    --text-faint: #8791a0;
+    --accent: #146c3f;
+    --accent-strong: #0e5230;
+    --accent-dim: rgba(20, 108, 63, 0.08);
+    --accent-line: rgba(20, 108, 63, 0.28);
+    --accent-glow: rgba(20, 108, 63, 0.12);
+
+    --syn-key: #cf3b23;
+    --syn-string: #0952b3;
+    --syn-comment: #6e7781;
+    --syn-punct: #2a323c;
+    --syn-num: #9a6700;
+
+    --shadow-lg: 0 20px 50px -25px rgba(30,40,55,0.25);
+  }
+
+  @media (prefers-color-scheme: light){
+    :root:not([data-theme="dark"]){
+      color-scheme: light;
+      --bg: #f6f8fa;
+      --bg-raised: #ffffff;
+      --bg-terminal: #ffffff;
+      --bg-card: #ffffff;
+      --border: #d7dce2;
+      --border-soft: #e4e8ec;
+      --text: #2a323c;
+      --text-bright: #10151b;
+      --text-muted: #5b6472;
+      --text-faint: #8791a0;
+      --accent: #146c3f;
+      --accent-strong: #0e5230;
+      --accent-dim: rgba(20, 108, 63, 0.08);
+      --accent-line: rgba(20, 108, 63, 0.28);
+      --accent-glow: rgba(20, 108, 63, 0.12);
+      --syn-key: #cf3b23;
+      --syn-string: #0952b3;
+      --syn-comment: #6e7781;
+      --syn-punct: #2a323c;
+      --syn-num: #9a6700;
+      --shadow-lg: 0 20px 50px -25px rgba(30,40,55,0.25);
+    }
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    transition: background .25s ease, color .25s ease;
+  }
+  img{ max-width:100%; display:block; }
+  a{ color: inherit; text-decoration: none; }
+  ul{ margin:0; padding:0; list-style:none; }
+  section{ padding: 96px 0; border-bottom: 1px solid var(--border-soft); }
+  section:last-of-type{ border-bottom: none; }
+  .wrap{ max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+  code, .mono{ font-family: var(--mono); }
+
+  ::selection{ background: var(--accent-glow); color: var(--text-bright); }
+
+  /* scrollbar */
+  ::-webkit-scrollbar{ width: 10px; height:10px; }
+  ::-webkit-scrollbar-track{ background: var(--bg); }
+  ::-webkit-scrollbar-thumb{ background: var(--border); border-radius: 8px; }
+  ::-webkit-scrollbar-thumb:hover{ background: var(--text-faint); }
+
+  /* ---------- Eyebrow / section headings ---------- */
+  .eyebrow{
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: .04em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 14px;
+  }
+  .eyebrow::before{ content: attr(data-tag); color: var(--text-faint); }
+  .eyebrow .glyph{ color: var(--accent); }
+  h2.section-title{
+    font-family: var(--sans);
+    font-weight: 800;
+    font-size: clamp(26px, 3.4vw, 36px);
+    color: var(--text-bright);
+    margin: 0 0 12px;
+    letter-spacing: -0.01em;
+  }
+  .section-sub{
+    color: var(--text-muted);
+    max-width: 640px;
+    margin: 0 0 48px;
+    font-size: 15.5px;
+  }
+  .section-head{ margin-bottom: 44px; }
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .nav-inner{
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 28px;
+    height: 62px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .brand{
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--text-bright);
+    display:flex;
+    align-items:center;
+    gap: 8px;
+    white-space: nowrap;
+  }
+  .brand .glyph{ color: var(--accent); }
+  nav.links{
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    font-family: var(--mono);
+    font-size: 13.5px;
+  }
+  nav.links a{
+    padding: 8px 12px;
+    border-radius: 6px;
+    color: var(--text-muted);
+    transition: color .15s ease, background .15s ease;
+  }
+  nav.links a:hover{ color: var(--accent); background: var(--accent-dim); }
+  .nav-actions{ display:flex; align-items:center; gap: 10px; }
+  .theme-toggle{
+    width: 34px; height: 34px;
+    border-radius: 7px;
+    border: 1px solid var(--border);
+    background: var(--bg-raised);
+    color: var(--text-muted);
+    display: flex; align-items:center; justify-content:center;
+    cursor: pointer;
+    transition: color .15s ease, border-color .15s ease;
+  }
+  .theme-toggle:hover{ color: var(--accent); border-color: var(--accent-line); }
+  .theme-toggle svg{ width: 16px; height:16px; }
+  .icon-sun{ display:none; }
+  :root[data-theme="light"] .icon-moon{ display:none; }
+  :root[data-theme="light"] .icon-sun{ display:block; }
+  .nav-toggle{
+    display:none;
+    width: 34px; height: 34px;
+    border-radius: 7px;
+    border: 1px solid var(--border);
+    background: var(--bg-raised);
+    color: var(--text);
+    align-items:center; justify-content:center;
+    cursor:pointer;
+  }
+  .nav-toggle svg{ width:18px; height:18px; }
+
+  @media (max-width: 820px){
+    nav.links{
+      position: absolute;
+      top: 62px; left:0; right:0;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border-soft);
+      flex-direction: column;
+      align-items: stretch;
+      padding: 8px;
+      display: none;
+      box-shadow: var(--shadow-lg);
+    }
+    nav.links.open{ display:flex; }
+    nav.links a{ padding: 12px 14px; }
+    .nav-toggle{ display:flex; }
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding: 72px 0 90px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .hero-avatar-row{
+    display:flex; align-items:center; gap:14px;
+    margin-bottom: 4px;
+  }
+  .hero-avatar{
+    width:56px; height:56px;
+    border-radius:50%;
+    object-fit:cover;
+    border:2px solid var(--border);
+    box-shadow: 0 0 0 3px var(--accent-dim);
+  }
+  .hero-kicker{
+    font-family: var(--mono);
+    color: var(--accent);
+    font-size: 14px;
+    margin-bottom: 18px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .hero-avatar-row .hero-kicker{ margin-bottom:0; }
+  .building-now{
+    display:flex; align-items:center; gap:10px;
+    font-family: var(--mono);
+    font-size: 13.5px;
+    color: var(--text);
+    background: var(--accent-dim);
+    border: 1px solid var(--accent-line);
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin: 4px 0 26px;
+    max-width: fit-content;
+    transition: border-color .15s ease, transform .15s ease;
+  }
+  .building-now:hover{ border-color: var(--accent); transform: translateY(-1px); }
+  .building-now .bn-dot{
+    width:7px; height:7px; border-radius:50%; flex-shrink:0;
+    background: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-dim);
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+  .building-now .bn-label{ color: var(--accent); }
+  .building-now .bn-text b{ color: var(--text-bright); }
+  .building-now .bn-arrow{ color: var(--text-faint); flex-shrink:0; }
+  @media (max-width: 560px){
+    .building-now{ font-size:12.5px; }
+  }
+  .hero-kicker .dot{
+    width:7px;height:7px;border-radius:50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-dim);
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse{ 0%,100%{ opacity:1; } 50%{ opacity:.35; } }
+  .hero h1{
+    font-size: clamp(32px, 5vw, 52px);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    color: var(--text-bright);
+    font-weight: 800;
+    margin: 0 0 18px;
+  }
+  .hero h1 .accent{ color: var(--accent); }
+  .hero p.lead{
+    color: var(--text-muted);
+    font-size: 17px;
+    max-width: 52ch;
+    margin: 0 0 32px;
+  }
+  .hero-cta{ display:flex; flex-wrap: wrap; gap: 12px; }
+  .btn{
+    font-family: var(--mono);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 12px 18px;
+    border-radius: 7px;
+    border: 1px solid var(--border);
+    display: inline-flex;
+    align-items:center;
+    gap: 8px;
+    transition: all .15s ease;
+    cursor:pointer;
+  }
+  .btn-primary{
+    background: var(--accent);
+    color: #06130b;
+    border-color: var(--accent);
+    font-weight: 700;
+  }
+  .btn-primary:hover{ background: var(--accent-strong); border-color: var(--accent-strong); transform: translateY(-1px); }
+  .btn-ghost{ color: var(--text); background: var(--bg-raised); }
+  .btn-ghost:hover{ border-color: var(--accent-line); color: var(--accent); transform: translateY(-1px); }
+
+  /* faux terminal */
+  .terminal{
+    background: var(--bg-terminal);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+  }
+  .terminal-bar{
+    display:flex;
+    align-items:center;
+    gap: 8px;
+    padding: 12px 14px;
+    background: var(--bg-raised);
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .tl-dot{ width:11px; height:11px; border-radius:50%; }
+  .tl-dot.r{ background:#ff6159; }
+  .tl-dot.y{ background:#ffbd2e; }
+  .tl-dot.g{ background:#28ca41; }
+  .terminal-title{
+    margin-left: 8px;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--text-faint);
+  }
+  .terminal-body{
+    padding: 24px 22px 28px;
+    font-family: var(--mono);
+    font-size: 13.6px;
+    line-height: 1.9;
+    min-height: 260px;
+  }
+  .terminal-body .prompt{ color: var(--accent); }
+  .terminal-body .path{ color: var(--syn-string); }
+  .terminal-body .out{ color: var(--text); }
+  .terminal-body .muted{ color: var(--text-faint); }
+  .cursor{
+    display:inline-block;
+    width: 8px; height: 15px;
+    background: var(--accent);
+    margin-left: 2px;
+    vertical-align: -2px;
+    animation: blink 1s steps(1) infinite;
+  }
+  @keyframes blink{ 50%{ opacity: 0; } }
+  #term-lines div{ min-height: 1.9em; }
+
+  @media (max-width: 900px){
+    .hero-grid{ grid-template-columns: 1fr; }
+  }
+
+  /* ---------- STAT ROW ---------- */
+  .stat-row{
+    display:grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+    margin-top: 40px;
+  }
+  .stat-tile{
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 14px;
+    position: relative;
+    overflow: hidden;
+  }
+  .stat-tile::before{
+    content:"";
+    position:absolute; top:0; left:0; right:0; height:2px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    opacity: .75;
+  }
+  .stat-tile .stat-num{
+    font-family: var(--mono);
+    font-size: clamp(20px, 2.6vw, 26px);
+    font-weight: 700;
+    color: var(--text-bright);
+    letter-spacing: -0.02em;
+  }
+  .stat-tile .stat-label{
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    margin-top: 6px;
+    font-weight: 500;
+  }
+  @media (max-width: 980px){
+    .stat-row{ grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 560px){
+    .stat-row{ grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 48px;
+  }
+  .about-grid p{ margin: 0 0 16px; color: var(--text); }
+  .about-grid p:last-child{ margin-bottom:0; }
+  .about-card{
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px 22px 20px;
+    font-family: var(--mono);
+    font-size: 13px;
+    align-self: start;
+  }
+  .about-card .card-title{ color: var(--text-faint); font-size: 12px; margin-bottom: 14px; }
+  .about-card dl{ display:grid; grid-template-columns: auto 1fr; gap: 10px 14px; margin:0; }
+  .about-card dt{ color: var(--text-faint); }
+  .about-card dd{ margin:0; color: var(--text); }
+  .about-card dd a:hover{ color: var(--accent); }
+  .focus-list{ margin-top: 26px; display:grid; gap: 10px; }
+  .focus-item{
+    display:flex; gap:12px; align-items:baseline;
+    padding: 10px 12px;
+    border: 1px solid var(--border-soft);
+    border-radius: 8px;
+    background: var(--bg-raised);
+  }
+  .focus-item .fi-num{ font-family: var(--mono); color: var(--accent); font-size: 12.5px; }
+  .focus-item .fi-text b{ color: var(--text-bright); }
+  .focus-item .fi-text{ color: var(--text-muted); font-size: 14.5px; }
+
+  @media (max-width: 900px){
+    .about-grid{ grid-template-columns: 1fr; }
+  }
+
+  /* ---------- EXPERIENCE ---------- */
+  .timeline{ position: relative; padding-left: 28px; }
+  .timeline::before{
+    content:"";
+    position:absolute;
+    left: 5px; top: 6px; bottom: 6px;
+    width: 1px;
+    background: linear-gradient(var(--accent-line), var(--border) 85%);
+  }
+  .t-item{ position: relative; padding-bottom: 40px; }
+  .t-item:last-child{ padding-bottom: 0; }
+  .t-dot{
+    position:absolute; left: -28px; top: 4px;
+    width: 11px; height: 11px; border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-dim);
+  }
+  .t-item:not(:first-child) .t-dot{ border-color: var(--text-faint); box-shadow:none; }
+  .t-meta{
+    display:flex; flex-wrap:wrap; align-items:baseline; gap: 10px 16px;
+    margin-bottom: 6px;
+  }
+  .t-role{ font-weight: 700; color: var(--text-bright); font-size: 17px; }
+  .t-company{ color: var(--accent); font-family: var(--mono); font-size: 14px; }
+  .t-date{
+    font-family: var(--mono); font-size: 12.5px; color: var(--text-faint);
+    margin-left: auto;
+    white-space: nowrap;
+  }
+  .t-desc{ color: var(--text-muted); font-size: 15px; max-width: 68ch; }
+  .t-desc b{ color: var(--text); font-weight: 600; }
+
+  /* ---------- SKILLS ---------- */
+  .code-block{
+    background: var(--bg-terminal);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+  }
+  .code-block .terminal-bar{ justify-content: space-between; }
+  .code-block .terminal-bar .tabs{ display:flex; gap:8px; }
+  .code-block .terminal-bar .filename{
+    font-family: var(--mono); font-size: 12.5px; color: var(--text-faint);
+  }
+  .code-lines{
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    font-family: var(--mono);
+    font-size: 13.6px;
+    line-height: 1.95;
+  }
+  .code-lines .gutter{
+    text-align: right;
+    padding: 20px 12px 20px 0;
+    color: var(--text-faint);
+    opacity: .55;
+    background: color-mix(in srgb, var(--bg-raised) 60%, transparent);
+    user-select: none;
+    border-right: 1px solid var(--border-soft);
+  }
+  .code-lines .gutter div{ min-height: 1.95em; }
+  .code-content{ padding: 20px 20px 20px 18px; overflow-x: auto; }
+  .code-content .cl-comment{ color: var(--syn-comment); font-style: italic; }
+  .code-content .cl-key{ color: var(--syn-key); }
+  .code-content .cl-punct{ color: var(--syn-punct); }
+  .code-content .cl-str{ color: var(--syn-string); }
+  .code-content .cl-lang{ color: var(--text); }
+  .skills-languages{
+    margin-top: 22px;
+    display:flex; flex-wrap:wrap; align-items:center; gap: 10px 12px;
+    font-family: var(--mono); font-size: 13.5px;
+  }
+  .skills-languages .lbl{ color: var(--text-faint); }
+  .lang-chip{
+    padding: 4px 10px;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    color: var(--text);
+    background: var(--bg-raised);
+  }
+
+  @media (max-width: 640px){
+    .code-lines{ grid-template-columns: 32px 1fr; font-size: 12.5px; }
+  }
+
+  /* ---------- PROJECTS ---------- */
+  .proj-featured{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 48px;
+  }
+  .proj-card{
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px;
+    display:flex;
+    flex-direction:column;
+    gap: 12px;
+    transition: border-color .18s ease, transform .18s ease;
+  }
+  .proj-card:hover{ border-color: var(--accent-line); transform: translateY(-2px); }
+  .proj-top{ display:flex; align-items:flex-start; justify-content:space-between; gap: 10px; }
+  .proj-name{ font-weight: 700; color: var(--text-bright); font-size: 16.5px; }
+  .proj-tag{
+    font-family: var(--mono); font-size: 11px;
+    color: var(--accent);
+    background: var(--accent-dim);
+    border: 1px solid var(--accent-line);
+    padding: 3px 8px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .proj-desc{ color: var(--text-muted); font-size: 14.3px; flex:1; }
+  .proj-link{
+    font-family: var(--mono); font-size: 12.6px; color: var(--text-faint);
+    display:flex; align-items:center; gap:6px;
+    margin-top: 4px;
+  }
+  .proj-link:hover{ color: var(--accent); }
+  .proj-link svg{ width:12px; height:12px; }
+
+  .proj-more-head{
+    font-family: var(--mono); font-size: 12.5px; color: var(--text-faint);
+    margin: 0 0 16px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .proj-grid-more{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .proj-mini{
+    border: 1px solid var(--border-soft);
+    border-radius: 8px;
+    padding: 14px 16px;
+    background: var(--bg-raised);
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+  }
+  .proj-mini:hover{ border-color: var(--accent-line); }
+  .proj-mini .pm-name{ font-weight:600; color: var(--text-bright); font-size: 14px; display:flex; justify-content:space-between; gap:8px; }
+  .proj-mini .pm-name svg{ width:11px;height:11px; color:var(--text-faint); flex-shrink:0; margin-top:3px; }
+  .proj-mini .pm-desc{ color: var(--text-muted); font-size: 13px; }
+
+  @media (max-width: 780px){
+    .proj-featured, .proj-grid-more{ grid-template-columns: 1fr; }
+  }
+
+  /* ---------- CREDENTIALS (education / certs / achievements / publications) ---------- */
+  .cred-grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px 48px;
+  }
+  .cred-block h3{
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: .03em;
+    margin: 0 0 18px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .cred-block h3::before{ content: "$"; color: var(--text-faint); }
+  .cred-list{ display:grid; gap: 14px; }
+  .cred-row{
+    display:flex; gap: 12px; align-items:flex-start;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .cred-list .cred-row:last-child{ border-bottom:none; padding-bottom:0; }
+  .cred-icon{
+    width: 30px; height:30px; flex-shrink:0;
+    border-radius: 7px;
+    background: var(--accent-dim);
+    border: 1px solid var(--accent-line);
+    display:flex; align-items:center; justify-content:center;
+    color: var(--accent);
+  }
+  .cred-icon svg{ width:15px;height:15px; }
+  .cred-body b{ display:block; color: var(--text-bright); font-size: 14.5px; font-weight:600; }
+  .cred-body span{ color: var(--text-muted); font-size: 13.4px; }
+  .cred-body a.pub-link{ color: var(--accent); font-family: var(--mono); font-size: 12.5px; }
+
+  @media (max-width: 860px){
+    .cred-grid{ grid-template-columns: 1fr; }
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq-list{ display:grid; gap:10px; }
+  .faq-item{
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 4px 20px;
+  }
+  .faq-item summary{
+    cursor: pointer;
+    padding: 16px 0;
+    font-weight: 600;
+    color: var(--text-bright);
+    font-size: 15px;
+    list-style: none;
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+  }
+  .faq-item summary::-webkit-details-marker{ display:none; }
+  .faq-item summary::after{
+    content: "+";
+    font-family: var(--mono);
+    color: var(--accent);
+    font-size: 18px;
+    flex-shrink:0;
+    transition: transform .2s ease;
+  }
+  .faq-item[open] summary::after{ content:"–"; }
+  .faq-item p{
+    margin: 0 0 18px;
+    color: var(--text-muted);
+    font-size: 14.5px;
+    max-width: 70ch;
+  }
+  .faq-item p a:hover{ color: var(--accent); }
+
+  /* ---------- CONTACT ---------- */
+  .contact{
+    background: var(--bg-raised);
+  }
+  .contact-inner{ text-align:center; max-width: 640px; margin: 0 auto; }
+  .contact h2.section-title{ font-size: clamp(28px,4vw,40px); }
+  .contact-sub{ color: var(--text-muted); margin-bottom: 36px; }
+  .contact-cta{
+    display:inline-flex; align-items:center; gap:10px;
+    font-family: var(--mono);
+  }
+  .social-row{
+    display:flex; flex-wrap:wrap; justify-content:center; gap: 12px;
+    margin-top: 40px;
+  }
+  .social-btn{
+    width: 44px; height: 44px;
+    border-radius: 9px;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    display:flex; align-items:center; justify-content:center;
+    color: var(--text-muted);
+    transition: all .15s ease;
+  }
+  .social-btn svg{ width: 19px; height:19px; }
+  .social-btn:hover{ color: var(--accent); border-color: var(--accent-line); transform: translateY(-2px); }
+  .contact-direct{
+    margin-top: 28px;
+    font-family: var(--mono);
+    font-size: 13.5px;
+    color: var(--text-faint);
+    display:flex; flex-wrap:wrap; justify-content:center; gap: 18px;
+  }
+  .contact-direct a:hover{ color: var(--accent); }
+
+  footer{
+    padding: 28px 0 40px;
+    text-align:center;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--text-faint);
+  }
+  footer .glyph{ color: var(--accent); }
+
+  .reveal{ opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in{ opacity:1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  }
+</style>
 </head>
-
 <body>
 
-  <!--
-    - #MAIN
-  -->
+<header class="nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand"><span class="glyph">❯</span>aman<span style="color:var(--text-faint)">@</span>fixitai<span style="color:var(--text-faint)">:~$</span></a>
+    <nav class="links" id="navLinks">
+      <a href="#about">about</a>
+      <a href="#experience">experience</a>
+      <a href="#skills">skills</a>
+      <a href="#projects">projects</a>
+      <a href="#credentials">credentials</a>
+      <a href="#faq">faq</a>
+      <a href="#contact">contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle color theme">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </button>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
 
-  <main>
+<main id="top">
 
-    <!--
-      - #SIDEBAR
-    -->
-
-    <aside class="sidebar" data-sidebar>
-
-      <div class="sidebar-info">
-      
-        <figure class="avatar-box">
-          <img src="assets\images\Certificate\aman.jpg" alt="Aman Srivastava " width="80">
-        </figure>
-
-        <div class="info-content">
-          <h1 class="name" title="Aman Srivastava">Aman Srivastava</h1>
-
-          <p class="title">Founding Software Engineer</p>
+  <!-- HERO -->
+  <section class="hero" style="border-bottom:1px solid var(--border-soft); padding-top:64px;">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="hero-avatar-row">
+          <img class="hero-avatar" src="./assets/images/avatar.jpg" width="56" height="56" alt="Aman Srivastava headshot" loading="eager">
+          <div class="hero-kicker"><span class="dot"></span>available &middot; open to new opportunities</div>
         </div>
-
-        <button class="info_more-btn" data-sidebar-btn>
-          <span>Show Contacts</span>
-
-          <ion-icon name="chevron-down"></ion-icon>
-        </button>
-
-      </div>
-
-      <div class="sidebar-info_more">
-
-        <div class="separator"></div>
-
-        <ul class="contacts-list">
-
-          <li class="contact-item">
-
-            <div class="icon-box">
-              <ion-icon name="mail-outline"></ion-icon>
-            </div>
-
-            <div class="contact-info">
-              <p class="contact-title">Email</p>
-
-              <a href="mailto:amansrivastava7969@gmail.com" class="contact-link">amansrivastava7969@gmail.com</a>
-            </div>
-
-          </li>
-
-          <li class="contact-item">
-
-            <div class="icon-box">
-              <ion-icon name="phone-portrait-outline"></ion-icon>
-            </div>
-
-            <div class="contact-info">
-              <p class="contact-title">Phone</p>
-
-              <a href="tel:+917905959989" class="contact-link">7905959989</a>
-            </div>
-
-          </li>
-
-          <li class="contact-item">
-
-            <div class="icon-box">
-              <ion-icon name="calendar-outline"></ion-icon>
-            </div>
-
-            <div class="contact-info">
-              <p class="contact-title">Birthday</p>
-
-              <time datetime="1982-06-23">May 26, 2002</time>
-            </div>
-
-          </li>
-
-          <li class="contact-item">
-
-            <div class="icon-box">
-              <ion-icon name="location-outline"></ion-icon>
-            </div>
-
-            <div class="contact-info">
-              <p class="contact-title">Location</p>
-
-              <address>Lucknow,Uttar Pradesh ,India</address>
-            </div>
-
-          </li>
-
-        </ul>
-
-        <div class="separator"></div>
-
-        <ul class="social-list">
-
-         
-
-          <li class="social-item">
-            <a href="https://twitter.com/aman_7905" class="social-link">
-              <ion-icon name="logo-twitter"></ion-icon>
-            </a>
-          </li>
-
-          <li class="social-item">
-            <a href="https://www.instagram.com/agentaman0/" class="social-link">
-              <ion-icon name="logo-instagram"></ion-icon>
-            </a>
-          </li>
-
-          <li class="social-item">
-            <a href="https://www.linkedin.com/in/aman-srivastava-b60594245/" class="social-link">
-              <ion-icon name="logo-linkedin"></ion-icon>
-            </a>
-          </li>
-          <li class="social-item">
-            <a href="https://github.com/AmanSCoder" class="social-link">
-              <ion-icon name="logo-github"></ion-icon>
-            </a>
-          </li>
-          <li class="social-item">
-            <a href="https://www.youtube.com/channel/UCPPPE09eloCe8gJehNYt0Bw" class="social-link">
-              <ion-icon name="logo-youtube"></ion-icon>
-            </a>
-          </li>
-          
-          
-          
-
-        </ul>
-
-      </div>
-
-    </aside>
-
-
-
-
-
-    <!--
-      - #main-content
-    -->
-
-    <div class="main-content">
-
-      <!--
-        - #NAVBAR
-      -->
-
-      <nav class="navbar">
-
-        <ul class="navbar-list">
-
-          <li class="navbar-item">
-            <button class="navbar-link  active" data-nav-link>About</button>
-          </li>
-
-          <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Resume</button>
-          </li>
-
-          <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Certification</button>
-          </li>
-
-          <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Project</button>
-          </li>
-
-          <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Contact</button>
-          </li>
-
-        </ul>
-
-      </nav>
-
-
-
-
-
-      <!--
-        - #ABOUT
-      -->
-
-      <article class="about  active" data-page="about">
-
-        <header>
-          <h2 class="h2 article-title">About me</h2>
-        </header>
-
-        <section class="about-text">
-          <p>
-            I'm a Founding Software Engineer at Fixit, building agentic AI systems and backend infrastructure. I'm a B.Tech Computer Science graduate from Vellore Institute of Technology, and my current work spans building security monitoring agents, agentic AI workflows for lead management (LangChain, LangSmith), observability and feature-flagging systems (Axiom, Kubernetes), and owning our Agent and Worker services end to end.
-            </p>
-            <p>
-            My technical repertoire extends across backend development and DevOps, with a robust understanding of AWS cloud services that enables me to architect, deploy, and manage scalable applications efficiently. Proficiency in frameworks like Django, Flask, and Spring Boot has allowed me to build dynamic, production-grade server-side applications, and I have hands-on experience integrating LLMs (OpenAI, Anthropic) and vector databases into real products.
-            </p>
-            <p>
-              My work ethic is underpinned by attributes such as intelligence, an unyielding aptitude for learning, and boundless motivation. Being an enthusiastic team player, I am always eager to collaborate and contribute to the success of my team.
-
-              Leadership is second nature to me, as evidenced by my role as the chairperson of the ISA-VIT chapter, where I have learned to lead with vision and integrity. My experiences here have not only sharpened my organizational capabilities but have also amplified my ability to drive collective efforts towards common goals.
-
-              I am committed to constant growth and ready to leverage my skills to contribute to and learn from the exciting opportunities in the field of technology.
-            </p>
-        </section>
-
-
-        <!--
-          - service
-        -->
-
-        <section class="service">
-
-          <h3 class="h3 service-title">What i'm doing</h3>
-
-          <ul class="service-list">
-
-            <li class="service-item">
-
-              <div class="service-icon-box">
-                <img src="./assets/images/icon-design.svg
-                " alt="design icon" width="40">
-              </div>
-
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Agentic AI Systems</h4>
-
-                <p class="service-item-text">
-                  Building agentic AI workflows and LLM-powered automation using LangChain and LangSmith.
-                </p>
-              </div>
-
-            </li>
-
-            <li class="service-item">
-
-              <div class="service-icon-box">
-                <img src="./assets/images/icon-dev.svg" alt="Web development icon" width="40">
-              </div>
-
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Security &amp; Observability</h4>
-
-                <p class="service-item-text">
-                  Building security monitoring agents and observability/feature-flag systems with Axiom.
-                </p>
-              </div>
-
-            </li>
-
-            <li class="service-item">
-
-              <div class="service-icon-box">
-                <img src="./assets/images/icon-app.svg" alt="mobile app icon" width="40">
-              </div>
-
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Backend Dev (Django, Flask, FastAPI)</h4>
-
-                <p class="service-item-text">
-                  Architecting and shipping production backend services and APIs.
-                </p>
-              </div>
-
-            </li>
-
-            <li class="service-item">
-
-              <div class="service-icon-box">
-                <img src="./assets/images/icon-photo.svg" alt="camera icon" width="40">
-              </div>
-
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">DevOps (Docker, Kubernetes)</h4>
-
-                <p class="service-item-text">
-                  Containerizing and deploying services with CI/CD pipelines on AWS.
-                </p>
-              </div>
-
-            </li>
-            <!-- <div class="service-icon-box">
-              <img src="./assets/images/icon-design.svg
-              " alt="design icon" width="40">
-            </div>
-
-            <div class="service-content-box">
-              <h4 class="h4 service-item-title">Python Dev(Flask)</h4>
-
-              <p class="service-item-text">
-               
-              </p>
-            </div>
-
-          </li>
-          <div class="service-icon-box">
-            <img src="./assets/images/icon-design.svg
-            " alt="design icon" width="40">
-          </div>
-
-          <div class="service-content-box">
-            <h4 class="h4 service-item-title">Web Scraping</h4>
-
-            <p class="service-item-text">
-           
-            </p>
-          </div>
-
-        </li> -->
-
-          </ul>
-
-        </section>
-
-
-        <!--
-          - testimonials
-        -->
-
-    
-        <!--
-          - testimonials modal
-        -->
-
-        <div class="modal-container" data-modal-container>
-
-          <div class="overlay" data-overlay></div>
-
-          <section class="testimonials-modal">
-
-            <button class="modal-close-btn" data-modal-close-btn>
-              <ion-icon name="close-outline"></ion-icon>
-            </button>
-
-           
-
-           
-
-          </section>
-
+        <h1>Aman Srivastava<br>Founding Software <span class="accent">Engineer</span>.</h1>
+        <p class="lead">Building agentic AI systems and backend infrastructure at Fixit AI — from security monitoring agents to the observability stack that watches everything else.</p>
+
+        <a class="building-now" href="https://github.com/AmanSCoder/defendra-security-agent" target="_blank" rel="noopener">
+          <span class="bn-dot"></span>
+          <span class="bn-text"><span class="bn-label">currently building</span> — <b>Defendra</b>, an autonomous AI security agent that finds compliance gaps before your auditor does</span>
+          <span class="bn-arrow">↗</span>
+        </a>
+
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#projects">view projects</a>
+          <a class="btn btn-ghost" href="#contact">// get in touch</a>
+          <a class="btn btn-ghost" href="https://github.com/AmanSCoder" target="_blank" rel="noopener">github ↗</a>
+          <a class="btn btn-ghost" href="./assets/aman-srivastava-resume.pdf" download>⇩ resume.pdf</a>
         </div>
-
-
-        <!--
-          - clients
-        -->
-
-        <section class="clients">
-
-          <h3 class="h3 clients-title">Language </h3>
-
-          <ul class="clients-list has-scrollbar">
-
-            <li class="clients-item">
-              <a href="#">
-                <img src="./assets/images/python3.png" alt="client logo">
-              </a>
-            </li>
-
-            <li class="clients-item">
-              <a href="#">
-                <img src="assets\images\lang\c-and-c++-interview-questions-and-answers.png" alt="client logo">
-              </a>
-            </li>
-
-            <li class="clients-item">
-              <a href="#">
-                <img src="assets\images\lang\download (1).png" alt="client logo">
-              </a>
-            </li>
-
-            <li class="clients-item">
-              <a href="#">
-                <img src="assets\images\lang\download.png" alt="client logo">
-              </a>
-            </li>
-
-            <li class="clients-item">
-              <a href="#">
-                <img src="assets\images\lang\tensorflow.jfif" alt="client logo">
-              </a>
-            </li>
-
-            
-
-            <!-- <li class="clients-item">
-              <a href="#">
-                <img src="./assets/images/logo-5-color.png" alt="client logo">
-              </a>
-            </li> -->
-
-            <!-- <li class="clients-item">
-              <a href="#">
-                <img src="./assets/images/logo-6-color.png" alt="client logo">
-              </a>
-            </li> -->
-
-          </ul>
-
-        </section>
-
-      </article>
-
-
-
-
-
-   <article class="resume" data-page="resume">
-    <header>
-      <h2 class="h2 article-title">Resume</h2>
-    </header>
-
-    <section class="timeline">
-      <div class="title-wrapper">
-        <div class="icon-box">
-          <ion-icon name="book-outline"></ion-icon>
-        </div>
-        <h3 class="h3">Education</h3>
       </div>
-
-      <ol class="timeline-list">
-        <li class="timeline-item">
-          <h4 class="h4 timeline-item-title">Vellore Institute Of Technology, Vellore</h4>
-          <span>2021 — 2025 </span>
-          <p class="timeline-text">
-            BTech- Computer Science And Engineering
-          </p>
-        </li>
-
-        <li class="timeline-item">
-          <h4 class="h4 timeline-item-title">Army Public School, SP Marg</h4>
-          <span>2018 — 2020</span>
-          <p class="timeline-text">
-            Completed My 10+2 in PCM
-          </p>
-        </li>
-      </ol>
-    </section>
-
-
-    <section class="timeline">
-      <div class="title-wrapper">
-        <div class="icon-box">
-          <ion-icon name="book-outline"></ion-icon>
+      <div class="terminal reveal">
+        <div class="terminal-bar">
+          <span class="tl-dot r"></span><span class="tl-dot y"></span><span class="tl-dot g"></span>
+          <span class="terminal-title">aman@fixitai — zsh — 80×24</span>
         </div>
-        <h3 class="h3">Experiences</h3>
+        <div class="terminal-body" id="term-lines"></div>
       </div>
-
-      <ol class="timeline-list">
-        <li class="timeline-item">
-          <h4 class="h4 timeline-item-title">Founding Software Engineer</h4>
-          <span>September 2025 — Present</span>
-          <p class="timeline-text">
-            Fixit — Built a security agent monitoring the entire system for security issues, an agentic AI flow for lead management (LangChain, LangSmith), observability with Axiom and feature flags, and ramped up on Kubernetes. Module owner for the Agent and Worker (consumer) services.
-          </p>
-        </li>
-
-        <li class="timeline-item">
-          <h4 class="h4 timeline-item-title">SDE Intern (LLMs &amp; Backend)</h4>
-          <span>January 2025 — August 2025</span>
-          <p class="timeline-text">
-            AFFINSYS AI — Built an LLM-based recommendation system for banks, a clickstream data collection service, and loan disbursement/auto-repayment workflows using Django &amp; Celery.
-          </p>
-        </li>
-
-        <li class="timeline-item">
-          <h4 class="h4 timeline-item-title">Open Source Contributor</h4>
-          <span>March 2025 — April 2025</span>
-          <p class="timeline-text">
-            BioChatter (EMBL) — Built a production-ready LLM abstraction layer unifying multiple providers via LiteLLM and LangChain, with an extensible API for corrective agents and RAG integration.
-          </p>
-        </li>
-
-        <li class="timeline-item">
-          <h4 class="h4 timeline-item-title">Machine Learning Intern</h4>
-          <span>July 2024 — July 2024</span>
-          <p class="timeline-text">
-            PW Skills — Developed an NLP classifier for BBC News achieving 92% accuracy; produced HLD, LLD, and architecture documentation.
-          </p>
-        </li>
-      </ol>
-    </section>
-
-    <!-- Download Button Section -->
-   
-        <!-- <!-- <section class="timeline">
-
-          <div class="title-wrapper">
-            <div class="icon-box">
-              <ion-icon name="book-outline"></ion-icon>
-            </div>
-
-            <h3 class="h3">Project</h3>
-          </div>
-
-          <ol class="timeline-list">
-
-            <li class="timeline-item">
-
-              <h4 class="h4 timeline-item-title">Train Your Model</h4>
-
-             <span>2023 — Present</span> -->
-
-              <!-- <p class="timeline-text">
-                Train Your Model is a machine learning website that uses Django and SQLite for
-                its backend and HTML, CSS, JavaScript, and Bootstrap for its frontend. Scikit-learn is used for machine learning tasks.
-              </p>
-              <p class="timeline-text">
-                The site provides a platform for users to train and evaluate their models and is designed for both beginners and advanced users
-              </p>
-              <li class="timeline-item">
-
-                <h4 class="h4 timeline-item-title">Web Scrapping</h4> -->
-  
-                <!-- <span>2022 — Present</span>
-   -->
-                <!-- <p class="timeline-text">
-                  This project leverages Selenium and Beautiful Soup for efficient data gathering in today's digital era. Employing web scraping and automation techniques, the system extracts information from multiple websites, seamlessly navigating and collecting data, which is then stored in a CSV file for further analysis and utilization.
-                </p>
-                <p class="timeline-text">
-                
-                </p> -->
-   
-
-            <!-- </li> -->
-
-            <!-- <li class="timeline-item">
-
-              <h4 class="h4 timeline-item-title">Video Game Analysis</h4>
-            -->
-              <!-- <span>2022 — 2023</span> -->
-
-              <!-- <p class="timeline-text">
-                This project is based on game survey data and involves producing 2D graphs for
-                visualization of raw data. The graphs are created using Matplotlib, while data
-                cleaning is done using Pandas. The data is then presented on a webpage using Streamlit
-              </p> -->
-              <!-- <p class="timeline-text">
-                Interactive and visual survey data display for gaming insights, useful  for game developers and marketers.
-              </p> --> 
-<!-- 
-            </li> --> 
-
-     
-
-          </ol>
-
-        </section>
-
-        <section class="skill">
-
-          <h3 class="h3 skills-title">My skills</h3>
-
-          <ul class="skills-list content-card">
-
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">Python</h5>
-                <data value="80">90%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 90%;"></div>
-              </div>
-
-            </li>
-
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">C/C++</h5>
-                <data value="70">80%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 80%;"></div>
-              </div>
-
-            </li>
-
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">Java</h5>
-                <data value="90">80%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 80%;"></div>
-              </div>
-
-            </li>
-
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">PL/SQL</h5>
-                <data value="50">70%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 70%;"></div>
-              </div>
-
-            </li>
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">R</h5>
-                <data value="50">50%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 50%;"></div>
-              </div>
-
-            </li>
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">TensorFlow</h5>
-                <data value="80">90%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 90%;"></div>
-              </div>
-
-            </li>
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">PyTorch</h5>
-                <data value="80">90%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 90%;"></div>
-              </div>
-
-            </li>
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">IOT</h5>
-                <data value="80">90%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 90%;"></div>
-              </div>
-
-            </li>
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">Mongo</h5>
-                <data value="80">90%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 90%;"></div>
-              </div>
-
-            </li>
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">PostGres</h5>
-                <data value="80">90%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 90%;"></div>
-              </div>
-
-            </li>  <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">Computer Networks</h5>
-                <data value="80">90%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 90%;"></div>
-              </div>
-
-            </li>  <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">ML/DL</h5>
-                <data value="80">90%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 90%;"></div>
-              </div>
-
-            </li>  <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">Image Processing</h5>
-                <data value="80">90%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 90%;"></div>
-              </div>
-
-            </li>  <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">SpringBoot</h5>
-                <data value="80">90%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 90%;"></div>
-              </div>
-
-            </li>  <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">Flask</h5>
-                <data value="80">90%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 90%;"></div>
-              </div>
-
-            </li>  <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">Git/Github</h5>
-                <data value="80">90%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 90%;"></div>
-              </div>
-
-            </li>  <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">WebScrapping</h5>
-                <data value="80">90%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 90%;"></div>
-              </div>
-
-            </li>  <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">ORM</h5>
-                <data value="80">90%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 90%;"></div>
-              </div>
-
-            </li>
-
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">Agentic AI (LangChain/LangSmith)</h5>
-                <data value="80">90%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 90%;"></div>
-              </div>
-
-            </li>
-
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">Docker/Kubernetes</h5>
-                <data value="80">80%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 80%;"></div>
-              </div>
-
-            </li>
-
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">AWS</h5>
-                <data value="80">90%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 90%;"></div>
-              </div>
-
-            </li>
-
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">Django/FastAPI</h5>
-                <data value="80">90%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 90%;"></div>
-              </div>
-
-            </li>
-
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">Redis/Celery</h5>
-                <data value="80">80%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 80%;"></div>
-              </div>
-
-            </li>
-
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">Observability (Axiom)</h5>
-                <data value="80">80%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 80%;"></div>
-              </div>
-
-            </li>
-
-
-
-          </ul>
-
-        </section>
-
-      </article>
-      <section class="download-section">
-        <a href="https://drive.google.com/drive/folders/1-z_2x2GZfmznbEt-tDDsb2aVdAMhLVvZ?usp=sharing" download="MyResume" class="download-button">Download Resume</a>
-      </section>
-  </article>
-  
-
-
-
-
-
-
-      <article class="portfolio" data-page="certification">
-
-        <header>
-          <h2 class="h2 article-title">Certificate </h2>
-        </header>
-
-        <section class="projects">
-
-          <ul class="filter-list">
-
-            <li class="filter-item">
-              <button class="active" data-filter-btn>All</button>
-            </li>
-
-            <li class="filter-item">
-              <button data-filter-btn>Certificate</button>
-            </li>
-
-            
-            <li class="filter-item">
-              <button data-filter-btn>Achievements</button>
-            </li>
-
-            <!-- <li class="filter-item">
-              <button data-filter-btn>Internship Letter</button>
-            </li> -->
-
-          </ul>
-
-          <div class="filter-select-box">
-
-            <button class="filter-select" data-select>
-
-              <div class="select-value" data-selecct-value>Select category</div>
-
-              <div class="select-icon">
-                <ion-icon name="chevron-down"></ion-icon>
-              </div>
-
-            </button>
-
-            <ul class="select-list">
-
-              <li class="select-item">
-                <button data-select-item>All</button>
-              </li>
-
-              <li class="select-item">
-                <button data-select-item>certificate</button>
-              </li>
-
-              
-            <li class="filter-item">
-              <button data-filter-btn>Achievements</button>
-            </li>
-
-              <!-- <li class="select-item">
-                <button data-select-item>internship Letter</button>
-              </li> -->
-
-            </ul>
-
-          </div>
-
-          <ul class="project-list">
-
-
-            <li class="project-item  active" data-filter-item data-category="certificate">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="assets\images\Certificate\dsmasters.png" alt="orizon" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Data Science Masters(PW Skills)</h3>
-
-                <a href="assets\images\Certificate\dsmasters.png" target="_blank"><p class="project-category">View Certificate</p></a>
-
-              </a>
-            </li>
-
-
-            <li class="project-item  active" data-filter-item data-category="certificate">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="assets\images\Certificate\aws1.png" alt="finance" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">AWS-Cloud Practitioner</h3>
-
-                <a href="assets\images\Certificate\aws1.png" target="_blank"><p class="project-category">View Certificate</p></a>
-
-              </a>
-            </li>
-
-
-            
-
-            <li class="project-item  active" data-filter-item data-category="certificate">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="assets\images\Certificate\aws2.png" alt="orizon" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">AWS-Architext Associate</h3>
-
-                <a href="assets\images\Certificate\aws2.png" target="_blank"><p class="project-category">View Certificate</p></a>
-
-              </a>
-            </li>
-            <li class="project-item  active" data-filter-item data-category="certificate">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="assets\images\Certificate\mlwp.jpeg" alt="orizon" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Machine Learning with Python</h3>
-
-                <a href="assets\images\Certificate\mlwp.jpeg" target="_blank"><p class="project-category">View Certificate</p> </a>
-            </li>
-            <li class="project-item  active" data-filter-item data-category="achievements">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="assets\images\project\Medical_leave_paper\ss.jpg" alt="orizon" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Research Paper: Medical Plant Detection using Transfer Learning Coupled with K-Nearest Neighbour Algorithm</h3>
-
-                <a href="https://ieeexplore.ieee.org/document/10574671" target="_blank"><p class="project-category">View Paper</p></a>
-
-              </a>
-            </li>
-            <li class="project-item  active" data-filter-item data-category="achievements">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="assets\images\project\Medical_leave_paper\ss.jpg" alt="orizon" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Research Paper: EEG Signals Analysis with 1D CNN-GRU Architecture via Transfer Learning</h3>
-
-                <a href="https://ieeexplore.ieee.org/document/10714752" target="_blank"><p class="project-category">View Paper</p></a>
-
-              </a>
-            </li>
-          </ul>
-          </section>
-      </article>
-
-            <!-- <li class="project-item  active" data-filter-item data-category="certificate">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="assets\images\Certificate\digipython.png" alt="orizon" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Python</h3>
-
-               <a href="assets\images\Certificate\Digipodium(Data Science).pdf" target="_blank"><p class="project-category">View Certificate</p></a>
-
-              </a>
-            </li>
-
-
-            <li class="project-item  active" data-filter-item data-category="badges">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="assets\images\Certificate\data-science.png" alt="fundo" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Data Science</h3>
-
-                <a href="https://www.credly.com/badges/80bbe650-d7b6-48fb-8c5e-14fe5e80b7bb/linked_in_profile" target="_blank"><p class="project-category">View Badge</p></a>
-
-              </a>
-            </li>
-            <li class="project-item  active" data-filter-item data-category="badges">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="assets\images\Certificate\Pandas_icon.png" alt="fundo" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Pandas</h3>
-
-                <a href="assets\images\Certificate\Pandas_icon.png"><p class="project-category">View Badge</p></a>
-
-              </a>
-            </li>
-            <li class="project-item  active" data-filter-item data-category="badges">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="assets\images\Certificate\machine-learning.png" alt="fundo" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Machine Learning</h3>
-
-                <a href="https://www.credly.com/badges/43627508-a375-4be1-a19b-45ab4f4abc6a/linked_in?t=rjhoky" target="_blank"><p class="project-category">Web design</p></a>
-
-              </a>
-            </li>
-
-            <li class="project-item  active" data-filter-item data-category="internship Letter"> 
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="assets\images\Certificate\trainyourmodel.png" alt="brawlhalla" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Brawlhalla</h3>
-
-                <p class="project-category">Applications</p>
-
-              </a>
-            </li>
-
-            
-           
-
-          </ul>
-
-        </section>
-
-      </article>
-    -->
-
-
-
-
-      <!--
-        - #BLOG
-      -->
-
-      <article class="blog" data-page="project">
-
-        <header>
-          <h2 class="h2 article-title">Projects</h2>
-        </header>
-
-        <section class="blog-posts">
-
-          <ul class="blog-posts-list">
-
-            <li class="blog-post-item">
-              <a href="https://github.com/AmanSCoder/defendra-security-agent" target="_blank">
-
-                <figure class="blog-banner-box">
-                  <img src="assets\images\project\download.png" alt="Defendra security agent" loading="lazy">
-                </figure>
-
-                <div class="blog-content">
-
-                  <h3 class="h3 blog-item-title">Defendra — AI Security Agent (in progress)</h3>
-
-                  <p class="blog-text">
-                    Building an autonomous AI agent that finds the same class of security issues a compliance auditor would — before they show up in someone else's report. It scopes a target, attacks it the way a real adversary would, and maps findings back to actual compliance controls (PCI DSS, SOC2, ISO 27001, GDPR, HIPAA). Early version operates autonomously and reports back into Slack.
-                  </p>
-
-                </div>
-
-              </a>
-            </li>
-
-            <li class="blog-post-item">
-              <a href="https://github.com/AmanSCoder/axiom-monitors-mcp" target="_blank">
-
-                <figure class="blog-banner-box">
-                  <img src="assets\images\project\download.png" alt="Axiom Monitors MCP" loading="lazy">
-                </figure>
-
-                <div class="blog-content">
-
-                  <h3 class="h3 blog-item-title">Axiom Monitors MCP</h3>
-
-                  <p class="blog-text">
-                    An MCP server that exposes Axiom's monitor and notifier REST endpoints as MCP tools, filling a gap left by Axiom's official (read-only) MCP server — adds create/update/delete for monitors and notifiers so agents can manage observability alerting directly.
-                  </p>
-
-                </div>
-
-              </a>
-            </li>
-
-            <li class="blog-post-item">
-              <a href="https://github.com/AmanSCoder/Forest_Fire_Prediction" target="_blank">
-
-                <figure class="blog-banner-box">
-                  <img src="assets\images\project\Algerian.jpg" alt="Design conferences in 2022" loading="lazy">
-                </figure>
-
-                <div class="blog-content">
-<!-- 
-                  <div class="blog-meta">
-                    <p class="blog-category">MAchine Learning </p>
-
-                    <span class="dot"></span>
-
-                    <time datetime="2022-02-23">Fab 23, 2022</time>
-                  </div> -->
-
-                  <h3 class="h3 blog-item-title">Algerian Forest Fire Prediction </h3>
-
-                  <p class="blog-text">
-                    Conducted EDA, feature selection, and model training on the Algerian forest fire dataset using Ridge (L2 regularization), Lasso (L1 regularization), and ElasticNet (combination of L1 and L2 regularization) models. These techniques help with multicollinearity, feature selection, and combining the strengths of Ridge and Lasso for sparse datasets with correlated features.
-                  </p>
-                  
-                </div>
-
-              </a>
-            </li>
-
-            <li class="blog-post-item">
-              <a href="https://github.com/AmanSCoder/CarbonSense" target="_blank">
-
-                <figure class="blog-banner-box">
-                  <img src="assets\images\project\carbonsense.jpg" alt="Best fonts every designer" loading="lazy">
-                </figure>
-
-                <div class="blog-content">
-
-                  <!-- <div class="blog-meta">
-                    <p class="blog-category">Design</p>
-
-                    <span class="dot"></span>
-
-                    <time datetime="2022-02-23">Fab 23, 2022</time>
-                  </div> -->
-
-                  <h3 class="h3 blog-item-title">Carbonsense</h3>
-
-                  <p class="blog-text">
-                    Developed an IoT-powered web application to monitor and visualize household appliance and transportation emissions using machine learning algorithms, enabling users to analyze and reduce their carbon footprints for a sustainable future.                  </p>
-
-                </div>
-
-              </a>
-            </li>
-
-            <li class="blog-post-item">
-              <a href="https://github.com/AmanSCoder/CricWizard" target="_blank">
-
-                <figure class="blog-banner-box">
-                  <img src="assets\images\project\cricwizard.jpg" alt="Design digest #80" loading="lazy">
-                </figure>
-
-                <div class="blog-content">
-
-                  <!-- <div class="blog-meta"> -->
-                    <!-- <p class="blog-category">Design</p> -->
-
-                    <!-- <span class="dot"></span> -->
-
-                    <!-- <time datetime="2022-02-23">Fab 23, 2022</time> -->
-                  <!-- </div> -->
-
-                  <h3 class="h3 blog-item-title">Cricwizard</h3>
-
-                  <p class="blog-text">
-                    CricWizard is a web scraping project that allows users to discover and analyze T20 World Cup players' statistics by scraping live data from ESPN using Python libraries, providing fresh insights for cricket analytics, fantasy league strategies, and data-driven decision-making, with seamless deployment via Render services.
-
-                </div>
-
-              </a>
-            </li>
-
-            <li class="blog-post-item">
-              <a href="https://youtu.be/syYkFZxSqv4?si=xh5bORtkxjkOFxDL">
-
-                <figure class="blog-banner-box">
-                  <img src="assets\images\project\decibel.jpg" alt="UI interactions of the week" loading="lazy">
-                </figure>
-
-                <div class="blog-content">
-
-                  <!-- <div class="blog-meta">
-                    <p class="blog-category">Design</p>
-
-                    <span class="dot"></span>
-
-                    <time datetime="2022-02-23">Fab 23, 2022</time>
-                  </div> -->
-
-                  <h3 class="h3 blog-item-title">Decibel Detector and Notifier</h3>
-
-                  <p class="blog-text">
-                    
-                    I've developed an IoT noise monitoring device using NodeMCU, LCD Display, and Sound Sensor. It sends instant notifications via IFTTT when noise exceeds 85dB and enables data visualization on ThingSpeak for comprehensive analysis of noise patterns and trends.
-                  </p>
-
-                </div>
-
-              </a>
-            </li>
-
-            <li class="blog-post-item">
-              <a href="https://github.com/AmanSCoder/Web_Scrapper" target="_blank">
-
-                <figure class="blog-banner-box">
-                  <img src="assets\images\project\productreview.jpg" alt="The forgotten art of spacing" loading="lazy">
-                </figure>
-
-                <div class="blog-content">
-
-                  <!-- <div class="blog-meta">
-                    <p class="blog-category">Design</p>
-
-                    <span class="dot"></span>
-
-                    <time datetime="2022-02-23">Fab 23, 2022</time>
-                  </div> -->
-
-                  <h3 class="h3 blog-item-title">Product Review</h3>
-
-                  <p class="blog-text">
-                    I've developed a powerful product review web scraper that leverages web scraping techniques to extract valuable customer feedback from Flipkart, one of India's leading e-commerce platforms. With MongoDB as the backbone, the scraper efficiently stores customer names, ratings, comments, and comment headings, providing a comprehensive dataset for sentiment analysis and data-driven insights into customer sentiments and opinions.
-
-                  </p>
-
-                </div>
-
-              </a>
-            </li>
-            <li class="blog-post-item">
-              <a href="https://github.com/Pr3mKum4r/BoltHack" target="_blank">
-
-                <figure class="blog-banner-box">
-                  <img src="assets\images\project\download.png" alt="The forgotten art of spacing" loading="lazy">
-                </figure>
-
-                <div class="blog-content">
-
-                  <!-- <div class="blog-meta">
-                    <p class="blog-category">Design</p>
-
-                    <span class="dot"></span>
-
-                    <time datetime="2022-02-23">Fab 23, 2022</time>
-                  </div> -->
-
-                  <h3 class="h3 blog-item-title">Neuro Assist</h3>
-
-                  <p class="blog-text">
-                    We developed NeuroAssist, a web app leveraging Intel's optimized modules, ML (RandomForestClassifier, XGBoost), and Gemini Pro AI for diagnosing and supporting learning disorders, integrating data handling with Intel Distribution of Modin, model training with daal4py and scikit-learn-intelex, and user-friendly UI with React.js.
-
-                  </p>
-
-                </div>
-
-              </a>
-            </li>
-            <li class="blog-post-item">
-              <a href="https://github.com/AmanSCoder/MQ135" target="_blank">
-
-                <figure class="blog-banner-box">
-                  <img src="assets\images\project\MQ135 Library\mq.jpeg" alt="The forgotten art of spacing" loading="lazy">
-                </figure>
-
-                <div class="blog-content">
-
-                  <!-- <div class="blog-meta">
-                    <p class="blog-category">Design</p>
-
-                    <span class="dot"></span>
-
-                    <time datetime="2022-02-23">Fab 23, 2022</time>
-                  </div> -->
-
-                  <h3 class="h3 blog-item-title">MQ135 Library</h3>
-
-                  <p class="blog-text">
-                    I, along with Ashok Tirupatimahanti, developed an enhanced library for the MQ135 gas sensor that calculates PPM concentrations of CO2, CO, NH4, Acetone, Alcohol, and Toluene, using power regression analysis on the sensor's sensitivity characteristics. The library considers temperature and humidity effects, providing corrected concentration readings by eliminating errors, and requires predefined values like load resistance, atmospheric concentration, and calibrated resistance values in the header file.
-
-                  </p>
-
-                </div>
-
-              </a>
-            </li>
-            <li class="blog-post-item">
-              <a href="https://github.com/AmanSCoder/PasswordManager" target="_blank">
-
-                <figure class="blog-banner-box">
-                  <img src="assets\images\project\download.png" alt="The forgotten art of spacing" loading="lazy">
-                </figure>
-
-                <div class="blog-content">
-
-                  <!-- <div class="blog-meta">
-                    <p class="blog-category">Design</p>
-
-                    <span class="dot"></span>
-
-                    <time datetime="2022-02-23">Fab 23, 2022</time>
-                  </div> -->
-
-                  <h3 class="h3 blog-item-title">Password strength checker and manager</h3>
-
-                  <p class="blog-text">
-                    A cutting-edge Password Manager and Strength Checker Web Application! 🚀 Built with security at its core, it offers a unique twist: access is exclusively via face recognition, ensuring that only you can manage your passwords. Plus, our robust password strength checking feature is available to everyone, aiming to upgrade your online security.
-
-                  </p>
-
-                </div>
-
-              </a>
-            </li>
-            <li class="blog-post-item">
-              <a href="#">
-
-                <figure class="blog-banner-box">
-                  <img src="assets\images\project\GreenTracker\greent.jpg" alt="The forgotten art of spacing" loading="lazy">
-                </figure>
-
-                <div class="blog-content">
-
-                  <!-- <div class="blog-meta">
-                    <p class="blog-category">Design</p>
-
-                    <span class="dot"></span>
-
-                    <time datetime="2022-02-23">Fab 23, 2022</time>
-                  </div> -->
-
-                  <h3 class="h3 blog-item-title">Green Tracker</h3>
-
-                  <p class="blog-text">
-                    Green Tracker: An innovative machine learning-powered solution that calculates an individual's carbon footprint based on their daily activities, aiming to raise awareness and empower sustainable choices.
-
-                  </p>
-
-                </div>
-
-              </a>
-            </li>
-            <li class="blog-post-item">
-              <a href="https://github.com/AmanSCoder/Diabetes-Prediction" target="_blank">
-
-                <figure class="blog-banner-box">
-                  <img src="assets\images\project\Diabetes Prediction\diap.jpg" alt="The forgotten art of spacing" loading="lazy">
-                </figure>
-
-                <div class="blog-content">
-
-                  <!-- <div class="blog-meta">
-                    <p class="blog-category">Design</p>
-
-                    <span class="dot"></span>
-
-                    <time datetime="2022-02-23">Fab 23, 2022</time>
-                  </div> -->
-
-                  <h3 class="h3 blog-item-title">Diabetes Prediction</h3>
-
-                  <p class="blog-text">
-                    Developed an advanced logistic regression model for diabetes prediction by performing comprehensive EDA, feature selection, hyperparameter tuning with GridSearchCV, and standardization using StandardScaler, resulting in a cutting-edge predictive analytics solution for healthcare data science.
-                  </p>
-
-                </div>
-
-              </a>
-            </li>
-
-            <!-- <li class="blog-post-item">
-              <a href="#">
-
-                <figure class="blog-banner-box">
-                  <img src="./assets/images/blog-6.jpg" alt="Design digest #79" loading="lazy">
-                </figure>
-
-                <div class="blog-content">
-
-                  <div class="blog-meta">
-                    <p class="blog-category">Design</p>
-
-                    <span class="dot"></span>
-
-                    <time datetime="2022-02-23">Fab 23, 2022</time>
-                  </div>
-
-                  <h3 class="h3 blog-item-title">Design digest #79</h3>
-
-                  <p class="blog-text">
-                    Optio cumque nihil impedit uo minus quod maxime placeat, velit esse cillum.
-                  </p>
-
-                </div>
-
-              </a>
-            </li> -->
-
-          </ul>
-
-        </section>
-
-      </article>
-
-
-
-
-
-      <!--
-        - #CONTACT
-      -->
-
-      <article class="contact" data-page="contact">
-
-        <header>
-          <h2 class="h2 article-title">Contact</h2>
-        </header>
-
-        <!-- <section class="mapbox" data-mapbox>
-          <figure>
-              <iframe src="https://api.mapbox.com/styles/v1/mapbox/streets-v11.html?title=true&access_token=YOUR_ACCESS_TOKEN#zoom=15&pitch=45&center=76.7532,30.7282"
-                  width="100%" height="400px" frameborder="0" allowfullscreen="true"></iframe>
-          </figure>
-      </section> -->
-
-        <section class="contact-form">
-
-          <h3 class="h3 form-title">Contact Form</h3>
-
-          <form action="#" class="form" data-form>
-
-            <div class="input-wrapper">
-              <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input>
-
-              <input type="email" name="email" class="form-input" placeholder="Email address" required data-form-input>
-            </div>
-
-            <textarea name="message" class="form-input" placeholder="Your Message" required data-form-input></textarea>
-
-            <button class="form-btn" type="submit" disabled data-form-btn>
-              <ion-icon name="paper-plane"></ion-icon>
-              <span>Send Message</span>
-            </button>
-
-          </form>
-
-        </section>
-
-      </article>
-
     </div>
 
-  </main>
+    <div class="wrap">
+      <div class="stat-row reveal">
+        <div class="stat-tile"><div class="stat-num">4</div><div class="stat-label">Roles held</div></div>
+        <div class="stat-tile"><div class="stat-num">13</div><div class="stat-label">Projects logged</div></div>
+        <div class="stat-tile"><div class="stat-num">2</div><div class="stat-label">IEEE publications</div></div>
+        <div class="stat-tile"><div class="stat-num">9.15<span style="font-size:.55em;color:var(--text-faint);">/10</span></div><div class="stat-label">CGPA, B.Tech CS</div></div>
+        <div class="stat-tile"><div class="stat-num" style="color:var(--accent);">92%</div><div class="stat-label">NLP model accuracy</div></div>
+        <div class="stat-tile"><div class="stat-num">1000+</div><div class="stat-label">Hackathon field, 1st place</div></div>
+      </div>
+    </div>
+  </section>
 
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow" data-tag="// 01"><span class="glyph">❯</span> about</p>
+        <h2 class="section-title">whoami --verbose</h2>
+      </div>
+      <div class="about-grid">
+        <div>
+          <p>I'm a Founding Software Engineer at Fixit AI, building agentic AI systems and backend infrastructure. I hold a B.Tech in Computer Science from Vellore Institute of Technology, and my current work spans building security monitoring agents, agentic AI workflows for lead management (LangChain, LangSmith), observability and feature-flagging systems (Axiom, Kubernetes), and owning our Agent and Worker services end to end.</p>
+          <p>My technical repertoire extends across backend development and DevOps, with a robust understanding of AWS cloud services that lets me architect, deploy, and manage scalable applications efficiently. Proficiency in frameworks like Django, Flask, and Spring Boot has let me build dynamic, production-grade server-side applications, and I have hands-on experience integrating LLMs (OpenAI, Anthropic) and vector databases into real products.</p>
+          <p>My work ethic is underpinned by intelligence, an unyielding aptitude for learning, and boundless motivation. I'm an enthusiastic team player, always eager to collaborate and contribute to the success of my team — and leadership is second nature, as chairperson of the ISA-VIT chapter, where I learned to lead with vision and integrity.</p>
 
+          <div class="focus-list">
+            <div class="focus-item"><span class="fi-num">01</span><span class="fi-text"><b>Agentic AI Systems</b> — workflows &amp; LLM-powered automation with LangChain / LangSmith</span></div>
+            <div class="focus-item"><span class="fi-num">02</span><span class="fi-text"><b>Security &amp; Observability</b> — monitoring agents, feature-flag &amp; observability systems with Axiom</span></div>
+            <div class="focus-item"><span class="fi-num">03</span><span class="fi-text"><b>Backend Dev</b> — production services &amp; APIs in Django, Flask, FastAPI</span></div>
+            <div class="focus-item"><span class="fi-num">04</span><span class="fi-text"><b>DevOps</b> — Docker, Kubernetes &amp; CI/CD pipelines on AWS</span></div>
+          </div>
+        </div>
 
+        <aside class="about-card">
+          <div class="card-title">// quick_facts.json</div>
+          <dl>
+            <dt>role</dt><dd>Founding Software Engineer</dd>
+            <dt>company</dt><dd>Fixit AI</dd>
+            <dt>location</dt><dd>Vellore, India</dd>
+            <dt>education</dt><dd>B.Tech CS, VIT — CGPA 9.15/10</dd>
+            <dt>leadership</dt><dd>Chairperson, ISA-VIT</dd>
+            <dt>email</dt><dd><a href="mailto:amansrivastava7969@gmail.com">amansrivastava7969@gmail.com</a></dd>
+            <dt>github</dt><dd><a href="https://github.com/AmanSCoder" target="_blank" rel="noopener">@AmanSCoder</a></dd>
+          </dl>
+        </aside>
+      </div>
+    </div>
+  </section>
 
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow" data-tag="// 02"><span class="glyph">❯</span> experience</p>
+        <h2 class="section-title">git log --author=aman</h2>
+        <p class="section-sub">A reverse-chronological history of roles, contributions, and the systems they shipped.</p>
+      </div>
 
+      <div class="timeline">
+        <div class="t-item">
+          <span class="t-dot"></span>
+          <div class="t-meta">
+            <span class="t-role">Founding Software Engineer</span>
+            <span class="t-company">@ Fixit AI</span>
+            <span class="t-date">Sept 2025 — Present</span>
+          </div>
+          <p class="t-desc">Built a <b>security agent</b> monitoring the entire system for security issues, an <b>agentic AI flow for lead management</b> (LangChain, LangSmith), observability with <b>Axiom</b> and feature flags, and ramped up on <b>Kubernetes</b>. Module owner for the Agent and Worker (consumer) services.</p>
+        </div>
+        <div class="t-item">
+          <span class="t-dot"></span>
+          <div class="t-meta">
+            <span class="t-role">SDE Intern — LLMs &amp; Backend</span>
+            <span class="t-company">@ AFFINSYS AI</span>
+            <span class="t-date">Jan 2025 — Aug 2025</span>
+          </div>
+          <p class="t-desc">Built an <b>LLM-based recommendation system for banks</b>, a clickstream data collection service, and loan disbursement / auto-repayment workflows using <b>Django &amp; Celery</b>.</p>
+        </div>
+        <div class="t-item">
+          <span class="t-dot"></span>
+          <div class="t-meta">
+            <span class="t-role">Open Source Contributor</span>
+            <span class="t-company">@ BioChatter (EMBL)</span>
+            <span class="t-date">Mar 2025 — Apr 2025</span>
+          </div>
+          <p class="t-desc">Built a production-ready <b>LLM abstraction layer</b> unifying multiple providers via LiteLLM and LangChain, with an extensible API for corrective agents and RAG integration.</p>
+        </div>
+        <div class="t-item">
+          <span class="t-dot"></span>
+          <div class="t-meta">
+            <span class="t-role">Machine Learning Intern</span>
+            <span class="t-company">@ PW Skills</span>
+            <span class="t-date">Jul 2024</span>
+          </div>
+          <p class="t-desc">Developed an <b>NLP classifier for BBC News</b> achieving 92% accuracy; produced HLD, LLD, and architecture documentation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <!--
-    - custom js link
-  -->
-  <script src="./assets/js/script.js"></script>
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow" data-tag="// 03"><span class="glyph">❯</span> skills</p>
+        <h2 class="section-title">skills.yaml</h2>
+        <p class="section-sub">Grouped by domain, the way I'd actually organize a config file — not a wall of badges.</p>
+      </div>
 
-  <!--
-    - ionicon link
-  -->
-  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+      <div class="code-block">
+        <div class="terminal-bar">
+          <div class="tabs"><span class="tl-dot r"></span><span class="tl-dot y"></span><span class="tl-dot g"></span></div>
+          <span class="filename">~/aman/skills.yaml</span>
+        </div>
+        <div class="code-lines">
+          <div class="gutter" id="skillGutter"></div>
+          <div class="code-content"><pre id="skillContent" style="margin:0; white-space:pre-wrap;"><span class="cl-comment"># auto-generated — do not edit by hand</span>
+<span class="cl-key">ai_ml:</span>
+  <span class="cl-punct">-</span> <span class="cl-str">LLM</span>
+  <span class="cl-punct">-</span> <span class="cl-str">Agentic AI (LangChain / LangSmith)</span>
+  <span class="cl-punct">-</span> <span class="cl-str">TensorFlow</span>
+  <span class="cl-punct">-</span> <span class="cl-str">PyTorch</span>
+  <span class="cl-punct">-</span> <span class="cl-str">NLP</span>
+  <span class="cl-punct">-</span> <span class="cl-str">Computer Vision / OpenCV</span>
+  <span class="cl-punct">-</span> <span class="cl-str">Feature Engineering</span>
+  <span class="cl-punct">-</span> <span class="cl-str">MLOps</span>
+
+<span class="cl-key">backend:</span>
+  <span class="cl-punct">-</span> <span class="cl-str">Django</span>
+  <span class="cl-punct">-</span> <span class="cl-str">Flask</span>
+  <span class="cl-punct">-</span> <span class="cl-str">FastAPI</span>
+  <span class="cl-punct">-</span> <span class="cl-str">Spring Boot</span>
+  <span class="cl-punct">-</span> <span class="cl-str">REST APIs</span>
+  <span class="cl-punct">-</span> <span class="cl-str">System Design</span>
+  <span class="cl-punct">-</span> <span class="cl-str">Message Queues (RabbitMQ / Nats.io)</span>
+  <span class="cl-punct">-</span> <span class="cl-str">Redis</span>
+  <span class="cl-punct">-</span> <span class="cl-str">Celery</span>
+
+<span class="cl-key">cloud_devops:</span>
+  <span class="cl-punct">-</span> <span class="cl-str">AWS</span>
+  <span class="cl-punct">-</span> <span class="cl-str">Docker</span>
+  <span class="cl-punct">-</span> <span class="cl-str">Kubernetes</span>
+  <span class="cl-punct">-</span> <span class="cl-str">CI/CD</span>
+  <span class="cl-punct">-</span> <span class="cl-str">GitHub Actions</span>
+  <span class="cl-punct">-</span> <span class="cl-str">Observability (Axiom)</span>
+  <span class="cl-punct">-</span> <span class="cl-str">Feature Flags</span>
+
+<span class="cl-key">data:</span>
+  <span class="cl-punct">-</span> <span class="cl-str">PostgreSQL</span>
+  <span class="cl-punct">-</span> <span class="cl-str">MongoDB</span>
+  <span class="cl-punct">-</span> <span class="cl-str">DBMS</span>
+  <span class="cl-punct">-</span> <span class="cl-str">Vector Databases (QdrantDB)</span>
+
+<span class="cl-key">other:</span>
+  <span class="cl-punct">-</span> <span class="cl-str">Git / GitHub</span>
+  <span class="cl-punct">-</span> <span class="cl-str">Linux</span>
+  <span class="cl-punct">-</span> <span class="cl-str">Computer Networks</span>
+  <span class="cl-punct">-</span> <span class="cl-str">OS</span>
+  <span class="cl-punct">-</span> <span class="cl-str">WebSocket</span>
+  <span class="cl-punct">-</span> <span class="cl-str">ORM</span></pre></div>
+        </div>
+      </div>
+
+      <div class="skills-languages">
+        <span class="lbl">// languages —</span>
+        <span class="lang-chip">Python</span>
+        <span class="lang-chip">C / C++</span>
+        <span class="lang-chip">Java</span>
+        <span class="lang-chip">PL/SQL</span>
+        <span class="lang-chip">R</span>
+        <span class="lang-chip">SQL</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow" data-tag="// 04"><span class="glyph">❯</span> projects</p>
+        <h2 class="section-title">ls -la ~/projects</h2>
+        <p class="section-sub">Top picks get the full write-up; the rest of the repo list is below.</p>
+      </div>
+
+      <div class="proj-featured">
+        <article class="proj-card">
+          <div class="proj-top"><span class="proj-name">Defendra — AI Security Agent</span><span class="proj-tag">in progress</span></div>
+          <p class="proj-desc">An autonomous AI agent that finds the same class of security issues a compliance auditor would — before they show up in someone else's report. Scopes a target, attacks it the way a real adversary would, and maps findings back to compliance controls (PCI DSS, SOC2, ISO 27001, GDPR, HIPAA). Early version operates autonomously and reports back into Slack.</p>
+          <a class="proj-link" href="https://github.com/AmanSCoder/defendra-security-agent" target="_blank" rel="noopener">github.com/AmanSCoder/defendra-security-agent <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
+        </article>
+
+        <article class="proj-card">
+          <div class="proj-top"><span class="proj-name">Axiom Monitors MCP</span><span class="proj-tag">MCP server</span></div>
+          <p class="proj-desc">An MCP server that exposes Axiom's monitor and notifier REST endpoints as MCP tools — filling a gap left by Axiom's official (read-only) MCP server by adding create / update / delete for monitors and notifiers.</p>
+          <a class="proj-link" href="https://github.com/AmanSCoder/axiom-monitors-mcp" target="_blank" rel="noopener">github.com/AmanSCoder/axiom-monitors-mcp <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
+        </article>
+
+        <article class="proj-card">
+          <div class="proj-top"><span class="proj-name">Chicken Disease Classification</span><span class="proj-tag">MLOps / CI-CD</span></div>
+          <p class="proj-desc">TensorFlow CNN classifier (VGG16) with a full CI/CD pipeline: DVC for data/model lifecycle, GitHub Actions for linting/tests/Docker builds, deployed to AWS EC2 via ECR, secrets managed through AWS Secrets Manager.</p>
+          <a class="proj-link" href="https://github.com/AmanSCoder/Chicken-Disease-Classification" target="_blank" rel="noopener">github.com/AmanSCoder/Chicken-Disease-Classification <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
+        </article>
+
+        <article class="proj-card">
+          <div class="proj-top"><span class="proj-name">NeuroAssist</span><span class="proj-tag">🏆 hackathon winner</span></div>
+          <p class="proj-desc">Web app leveraging Intel's optimized modules, ML (RandomForestClassifier, XGBoost), and Gemini Pro AI for diagnosing and supporting learning disorders (Autism, OCD, Dyslexia), with a React.js UI. Won Intel GenAI Hackathon 2024.</p>
+          <a class="proj-link" href="https://github.com/Pr3mKum4r/BoltHack" target="_blank" rel="noopener">github.com/Pr3mKum4r/BoltHack <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
+        </article>
+
+        <article class="proj-card">
+          <div class="proj-top"><span class="proj-name">Algerian Forest Fire Prediction</span><span class="proj-tag">ML / regression</span></div>
+          <p class="proj-desc">EDA, feature selection, and model training using Ridge, Lasso, and ElasticNet regression on the Algerian forest fire dataset.</p>
+          <a class="proj-link" href="https://github.com/AmanSCoder/Forest_Fire_Prediction" target="_blank" rel="noopener">github.com/AmanSCoder/Forest_Fire_Prediction <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
+        </article>
+      </div>
+
+      <p class="proj-more-head"><span class="glyph" style="color:var(--accent)">#</span> more repositories</p>
+      <div class="proj-grid-more">
+        <div class="proj-mini">
+          <div class="pm-name">Carbonsense <a href="https://github.com/AmanSCoder/CarbonSense" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a></div>
+          <div class="pm-desc">IoT-powered web app to monitor and visualize household appliance / transportation emissions using ML.</div>
+        </div>
+        <div class="proj-mini">
+          <div class="pm-name">CricWizard <a href="https://github.com/AmanSCoder/CricWizard" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a></div>
+          <div class="pm-desc">Web scraping project analyzing T20 World Cup player stats from ESPN; deployed via Render.</div>
+        </div>
+        <div class="proj-mini">
+          <div class="pm-name">Decibel Detector &amp; Notifier</div>
+          <div class="pm-desc">IoT noise monitoring device (NodeMCU, LCD, sound sensor); IFTTT alerts above 85dB, trends on ThingSpeak.</div>
+        </div>
+        <div class="proj-mini">
+          <div class="pm-name">Product Review Scraper <a href="https://github.com/AmanSCoder/Web_Scrapper" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a></div>
+          <div class="pm-desc">Scrapes Flipkart product reviews into MongoDB for sentiment analysis.</div>
+        </div>
+        <div class="proj-mini">
+          <div class="pm-name">MQ135 Library <a href="https://github.com/AmanSCoder/MQ135" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a></div>
+          <div class="pm-desc">Enhanced Arduino library for the MQ135 gas sensor, correcting PPM for temperature / humidity.</div>
+        </div>
+        <div class="proj-mini">
+          <div class="pm-name">Password Strength Checker &amp; Manager <a href="https://github.com/AmanSCoder/PasswordManager" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a></div>
+          <div class="pm-desc">Password manager with face-recognition-gated access, plus a public password strength checker.</div>
+        </div>
+        <div class="proj-mini">
+          <div class="pm-name">Green Tracker</div>
+          <div class="pm-desc">ML-powered carbon footprint calculator based on daily activities.</div>
+        </div>
+        <div class="proj-mini">
+          <div class="pm-name">Diabetes Prediction <a href="https://github.com/AmanSCoder/Diabetes-Prediction" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a></div>
+          <div class="pm-desc">Logistic regression model with EDA, feature selection, and GridSearchCV tuning.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CREDENTIALS: education / certifications / achievements / publications -->
+  <section id="credentials">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow" data-tag="// 05"><span class="glyph">❯</span> credentials</p>
+        <h2 class="section-title">education, certs &amp; record</h2>
+      </div>
+
+      <div class="cred-grid">
+        <div class="cred-block">
+          <h3>education</h3>
+          <div class="cred-list">
+            <div class="cred-row">
+              <span class="cred-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg></span>
+              <div class="cred-body"><b>B.Tech, Computer Science</b><span>Vellore Institute of Technology (VIT), Vellore &middot; 2021 – 2025 &middot; CGPA 9.15/10.0</span></div>
+            </div>
+            <div class="cred-row">
+              <span class="cred-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg></span>
+              <div class="cred-body"><b>10+2, PCM</b><span>Army Public School, SP Marg &middot; 2018 – 2020</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cred-block">
+          <h3>certifications</h3>
+          <div class="cred-list">
+            <div class="cred-row">
+              <span class="cred-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15l-5.5 3 1-6L3 8l6-1 3-6 3 6 6 1-4.5 4 1 6z"/></svg></span>
+              <div class="cred-body"><b>Data Science Masters</b><span>PW Skills</span></div>
+            </div>
+            <div class="cred-row">
+              <span class="cred-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15l-5.5 3 1-6L3 8l6-1 3-6 3 6 6 1-4.5 4 1 6z"/></svg></span>
+              <div class="cred-body"><b>AWS Solutions Architect</b><span>Amazon Web Services</span></div>
+            </div>
+            <div class="cred-row">
+              <span class="cred-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15l-5.5 3 1-6L3 8l6-1 3-6 3 6 6 1-4.5 4 1 6z"/></svg></span>
+              <div class="cred-body"><b>AWS Cloud Practitioner</b><span>Amazon Web Services</span></div>
+            </div>
+            <div class="cred-row">
+              <span class="cred-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15l-5.5 3 1-6L3 8l6-1 3-6 3 6 6 1-4.5 4 1 6z"/></svg></span>
+              <div class="cred-body"><b>Machine Learning with Python</b></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cred-block">
+          <h3>achievements</h3>
+          <div class="cred-list">
+            <div class="cred-row">
+              <span class="cred-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 21h8M12 17v4M7 4h10v4a5 5 0 01-10 0V4z"/><path d="M7 5H3v2a4 4 0 004 4M17 5h4v2a4 4 0 01-4 4"/></svg></span>
+              <div class="cred-body"><b>Won Intel GenAI Hackathon 2024</b><span>Among 1000+ participants, with NeuroAssist — a solution for neural disease diagnosis</span></div>
+            </div>
+            <div class="cred-row">
+              <span class="cred-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v6M12 17v6M4.22 4.22l4.24 4.24M15.54 15.54l4.24 4.24M1 12h6M17 12h6M4.22 19.78l4.24-4.24M15.54 8.46l4.24-4.24"/></svg></span>
+              <div class="cred-body"><b>Keynote Speaker</b><span>Offline IoT workshop</span></div>
+            </div>
+            <div class="cred-row">
+              <span class="cred-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></span>
+              <div class="cred-body"><b>Chairperson, ISA-VIT</b><span>Led 20+ technical initiatives</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cred-block">
+          <h3>publications</h3>
+          <div class="cred-list">
+            <div class="cred-row">
+              <span class="cred-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></span>
+              <div class="cred-body">
+                <b>EEG signals analysis with 1D CNN-GRU architecture via transfer learning</b>
+                <a class="pub-link" href="https://ieeexplore.ieee.org/document/10714752" target="_blank" rel="noopener">ieeexplore.ieee.org/document/10714752 ↗</a>
+              </div>
+            </div>
+            <div class="cred-row">
+              <span class="cred-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></span>
+              <div class="cred-body">
+                <b>Medical Plant Detection using Transfer Learning Coupled with K-Nearest Neighbour Algorithm</b>
+                <a class="pub-link" href="https://ieeexplore.ieee.org/document/10574671" target="_blank" rel="noopener">ieeexplore.ieee.org/document/10574671 ↗</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow" data-tag="// 06"><span class="glyph">❯</span> faq</p>
+        <h2 class="section-title">man aman</h2>
+        <p class="section-sub">Common questions, answered directly.</p>
+      </div>
+
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary>What does Aman Srivastava currently work on?</summary>
+          <p>Aman is a Founding Software Engineer at Fixit AI, where he builds agentic AI systems, backend infrastructure, and observability tooling. His current work includes a security monitoring agent, an agentic AI workflow for lead management built with LangChain and LangSmith, and observability with Axiom on Kubernetes.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What is Defendra?</summary>
+          <p>Defendra is an autonomous AI security agent Aman is building that finds the same class of security issues a compliance auditor would — before they show up in someone else's report. It scopes a target, tests it the way a real adversary would, and maps findings back to compliance controls like PCI DSS, SOC2, ISO 27001, GDPR, and HIPAA.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What technologies does Aman specialize in?</summary>
+          <p>Agentic AI (LangChain, LangSmith), backend development (Django, Flask, FastAPI, Spring Boot), and DevOps/observability (Docker, Kubernetes, AWS, Axiom, CI/CD).</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is Aman available for new opportunities?</summary>
+          <p>Yes — Aman is open to new opportunities and collaborations alongside his role at Fixit AI. Reach out via email at amansrivastava7969@gmail.com.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Where can I find Aman's open-source work?</summary>
+          <p>All of Aman's public projects, including Defendra and the Axiom Monitors MCP server, are available on GitHub at <a href="https://github.com/AmanSCoder" target="_blank" rel="noopener">github.com/AmanSCoder</a>.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What is Aman's educational background?</summary>
+          <p>Aman holds a B.Tech in Computer Science from Vellore Institute of Technology (VIT), Vellore, with a CGPA of 9.15/10.0.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact">
+    <div class="wrap contact-inner">
+      <p class="eyebrow" data-tag="// 07" style="justify-content:center;"><span class="glyph">❯</span> contact</p>
+      <h2 class="section-title">./get-in-touch.sh</h2>
+      <p class="contact-sub">Building something interesting, or just want to talk agentic AI, backend systems, or DevOps? My terminal's always open.</p>
+      <a class="btn btn-primary contact-cta" href="mailto:amansrivastava7969@gmail.com">$ mail amansrivastava7969@gmail.com</a>
+
+      <div class="social-row">
+        <a class="social-btn" href="https://github.com/AmanSCoder" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.98 5.24.98 11.52c0 5.02 3.26 9.28 7.78 10.79.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.1-3.17.69-3.84-1.35-3.84-1.35-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.68 1.25 3.33.95.1-.74.4-1.25.72-1.54-2.53-.29-5.19-1.27-5.19-5.63 0-1.24.44-2.26 1.17-3.06-.12-.29-.51-1.45.11-3.02 0 0 .96-.31 3.14 1.17a10.9 10.9 0 015.71 0c2.18-1.48 3.14-1.17 3.14-1.17.62 1.57.23 2.73.11 3.02.73.8 1.17 1.82 1.17 3.06 0 4.37-2.67 5.34-5.21 5.62.41.35.77 1.04.77 2.11 0 1.52-.01 2.75-.01 3.12 0 .3.2.66.79.55A11.03 11.03 0 0023.02 11.5C23.02 5.24 18.27.5 12 .5z"/></svg>
+        </a>
+        <a class="social-btn" href="https://www.linkedin.com/in/aman-srivastava-b60594245/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 110-4.12 2.06 2.06 0 010 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+        </a>
+        <a class="social-btn" href="https://twitter.com/aman_7905" target="_blank" rel="noopener" aria-label="X (Twitter)" title="X / Twitter">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.6 8.68L23.3 22h-7l-5.47-7.15L4.6 22H1.5l8.13-9.29L.9 2h7.16l4.94 6.54L18.9 2zm-1.22 18h1.72L6.4 3.9H4.56L17.68 20z"/></svg>
+        </a>
+        <a class="social-btn" href="https://www.instagram.com/agentaman0/" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+        </a>
+        <a class="social-btn" href="https://www.youtube.com/channel/UCPPPE09eloCe8gJehNYt0Bw" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.6 3.6 12 3.6 12 3.6s-7.6 0-9.4.5A3 3 0 00.5 6.2 31 31 0 000 12a31 31 0 00.5 5.8 3 3 0 002.1 2.1c1.8.5 9.4.5 9.4.5s7.6 0 9.4-.5a3 3 0 002.1-2.1A31 31 0 0024 12a31 31 0 00-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+        </a>
+        <a class="social-btn" href="https://leetcode.com/amanscoder" target="_blank" rel="noopener" aria-label="LeetCode" title="LeetCode">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 3l-6.5 7 3 3-4 4a3 3 0 004.24 4.24L14 17M20 15l-3-3 3-3"/></svg>
+        </a>
+      </div>
+
+      <div class="contact-direct">
+        <a href="mailto:amansrivastava7969@gmail.com">amansrivastava7969@gmail.com</a>
+        <a href="tel:+917905959989">+91 79059 59989</a>
+        <span>Vellore, India</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span class="glyph">❯</span> built with vanilla HTML/CSS/JS &middot; <span id="year"></span> Aman Srivastava
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  // ---------- theme toggle ----------
+  var root = document.documentElement;
+  var toggle = document.getElementById('themeToggle');
+  var stored = null;
+  try { stored = localStorage.getItem('theme'); } catch(e){}
+  if(stored === 'light' || stored === 'dark'){ root.setAttribute('data-theme', stored); }
+
+  toggle.addEventListener('click', function(){
+    var current = root.getAttribute('data-theme');
+    var prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+    var effective = current || (prefersLight ? 'light' : 'dark');
+    var next = effective === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('theme', next); } catch(e){}
+  });
+
+  // ---------- mobile nav ----------
+  var navToggle = document.getElementById('navToggle');
+  var navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', function(){
+    navLinks.classList.toggle('open');
+  });
+  navLinks.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){ navLinks.classList.remove('open'); });
+  });
+
+  // ---------- footer year ----------
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // ---------- skills gutter line numbers ----------
+  var contentEl = document.getElementById('skillContent');
+  var gutter = document.getElementById('skillGutter');
+  if(contentEl && gutter){
+    var lineCount = contentEl.innerText.split('\n').length;
+    var html = '';
+    for(var i=1;i<=lineCount;i++){ html += '<div>'+i+'</div>'; }
+    gutter.innerHTML = html;
+  }
+
+  // ---------- hero terminal typing ----------
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var termEl = document.getElementById('term-lines');
+  var script = [
+    { p: '$ ', t: 'whoami', speed: 45 },
+    { o: 'Aman Srivastava — Founding Software Engineer @ Fixit AI' },
+    { p: '$ ', t: 'cat focus.txt', speed: 45 },
+    { o: 'Agentic AI · Security &amp; Observability · Backend · DevOps' },
+    { p: '$ ', t: './status.sh --current', speed: 45 },
+    { o: 'building agent + worker services · ramping up on k8s' },
+    { p: '$ ', t: '', speed: 0, cursorOnly: true }
+  ];
+
+  function renderStatic(){
+    var out = '';
+    script.forEach(function(line){
+      if(line.cursorOnly){
+        out += '<div><span class="prompt">'+line.p+'</span><span class="cursor"></span></div>';
+      } else if(line.p !== undefined){
+        out += '<div><span class="prompt">'+line.p+'</span><span class="path">'+line.t+'</span></div>';
+      } else {
+        out += '<div class="out muted">'+line.o+'</div>';
+      }
+    });
+    termEl.innerHTML = out;
+  }
+
+  if(reduceMotion || !termEl){
+    renderStatic();
+  } else {
+    var lineIdx = 0, charIdx = 0;
+    var lineEls = [];
+
+    function typeNext(){
+      if(lineIdx >= script.length){ return; }
+      var line = script[lineIdx];
+
+      if(line.o !== undefined){
+        var div = document.createElement('div');
+        div.className = 'out muted';
+        div.innerHTML = line.o;
+        termEl.appendChild(div);
+        lineIdx++;
+        setTimeout(typeNext, 260);
+        return;
+      }
+
+      if(!lineEls[lineIdx]){
+        var d = document.createElement('div');
+        d.innerHTML = '<span class="prompt">'+line.p+'</span><span class="path"></span>';
+        termEl.appendChild(d);
+        lineEls[lineIdx] = d;
+      }
+
+      var pathEl = lineEls[lineIdx].querySelector('.path');
+      if(line.cursorOnly){
+        lineEls[lineIdx].innerHTML = '<span class="prompt">'+line.p+'</span><span class="cursor"></span>';
+        lineIdx++;
+        return;
+      }
+
+      if(charIdx <= line.t.length){
+        pathEl.textContent = line.t.slice(0, charIdx);
+        charIdx++;
+        setTimeout(typeNext, line.speed);
+      } else {
+        charIdx = 0;
+        lineIdx++;
+        setTimeout(typeNext, 320);
+      }
+    }
+    typeNext();
+  }
+
+  // ---------- reveal on scroll ----------
+  var revealEls = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window && revealEls.length){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){ entry.target.classList.add('in'); io.unobserve(entry.target); }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('in'); });
+  }
+})();
+</script>
 
 </body>
-
 </html>
