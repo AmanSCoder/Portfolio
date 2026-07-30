@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — Aman Srivastava</title>
+<meta name="description" content="Engineering notes from Aman Srivastava — Founding Software Engineer at Fixit AI. Observability, Kubernetes, and building an AI security agent in public.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://amanscoder.github.io/Portfolio/blog/">
+<link rel="shortcut icon" href="../assets/images/logo.ico" type="image/x-icon">
+
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Blog — Aman Srivastava">
+<meta property="og:description" content="Engineering notes on observability, Kubernetes, and building an AI security agent in public.">
+<meta property="og:url" content="https://amanscoder.github.io/Portfolio/blog/">
+<meta property="og:image" content="https://amanscoder.github.io/Portfolio/assets/images/avatar.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "Aman Srivastava's Engineering Blog",
+  "url": "https://amanscoder.github.io/Portfolio/blog/",
+  "author": { "@type": "Person", "name": "Aman Srivastava", "url": "https://amanscoder.github.io/Portfolio/" },
+  "blogPost": [
+    {
+      "@type": "BlogPosting",
+      "headline": "Building Production Dashboards with the Axiom MCP Server",
+      "datePublished": "2026-07-01",
+      "author": { "@type": "Person", "name": "Aman Srivastava" }
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "When Your Traces Are Lying: Debugging Orphaned Spans in an Async Pipeline",
+      "datePublished": "2026-07-28",
+      "author": { "@type": "Person", "name": "Aman Srivastava" }
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "Building My AI Security Agent — Part 1: The Idea",
+      "datePublished": "2026-07-30",
+      "author": { "@type": "Person", "name": "Aman Srivastava" }
+    }
+  ]
+}
+</script>
+
+<style>
+  :root{
+    color-scheme: dark;
+    --bg-app:#1b2129;
+    --bg-sidebar:#171c23;
+    --bg-titlebar:#171c23;
+    --bg-tab-active:#232a33;
+    --bg-tab-inactive:#171c23;
+    --bg-card:#232a33;
+    --border:#384250;
+    --border-soft:#2b323c;
+    --text:#d7dde4;
+    --text-bright:#f5f7f9;
+    --text-muted:#9aa4b0;
+    --text-faint:#6b7480;
+    --text-dim:#4d5560;
+
+    --accent:#8fc9a3;
+    --accent-strong:#a8d9b8;
+    --accent-fg:#0d1f15;
+    --accent-dim:rgba(143,201,163,.12);
+    --accent-line:rgba(143,201,163,.35);
+    --accent-glow:rgba(143,201,163,.20);
+
+    --syn-tag:#d99a86;
+    --syn-string:#8bb8e0;
+    --syn-comment:#7a8290;
+
+    --mono:'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    --sans:'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --radius: 8px;
+  }
+
+  *{ box-sizing:border-box; }
+  html,body{ height:100%; }
+  body{
+    margin:0;
+    background: var(--bg-app);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size:15px;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{ color:inherit; }
+  ::selection{ background: var(--accent-glow); color: var(--text-bright); }
+  ::-webkit-scrollbar{ width:9px; height:9px; }
+  ::-webkit-scrollbar-track{ background: var(--bg-sidebar); }
+  ::-webkit-scrollbar-thumb{ background: var(--border); border-radius:8px; }
+
+  .ide{ display:flex; flex-direction:column; height:100vh; }
+
+  /* ---- titlebar ---- */
+  .titlebar{
+    display:flex; align-items:center; gap:10px;
+    padding:10px 14px;
+    background: var(--bg-titlebar);
+    border-bottom:1px solid var(--border-soft);
+    flex-shrink:0;
+  }
+  .tl-dots{ display:flex; gap:7px; }
+  .tl-dot{ width:11px;height:11px;border-radius:50%; }
+  .tl-dot.r{ background:#e0736a; }
+  .tl-dot.y{ background:#e0b84f; }
+  .tl-dot.g{ background:#7fc46b; }
+  .titlebar-path{
+    font-family: var(--mono); font-size:12.5px; color: var(--text-faint);
+    margin-left:6px; flex:1;
+  }
+  .titlebar-back{
+    font-family: var(--mono); font-size:12.5px; color: var(--text-muted);
+    text-decoration:none; padding:5px 10px; border-radius:6px;
+    border:1px solid var(--border); transition: color .15s ease, border-color .15s ease;
+  }
+  .titlebar-back:hover{ color: var(--accent); border-color: var(--accent-line); }
+  .sidebar-toggle{
+    display:none;
+    background:none; border:1px solid var(--border); border-radius:6px;
+    color: var(--text); width:30px; height:30px; align-items:center; justify-content:center;
+    cursor:pointer;
+  }
+  .sidebar-toggle svg{ width:16px; height:16px; }
+
+  .ide-body{ flex:1; display:flex; min-height:0; }
+
+  /* ---- sidebar ---- */
+  .sidebar{
+    width: 270px; flex-shrink:0;
+    background: var(--bg-sidebar);
+    border-right:1px solid var(--border-soft);
+    overflow-y:auto;
+    padding: 14px 0 24px;
+  }
+  .sidebar-header{
+    font-family: var(--mono); font-size:11px; letter-spacing:.08em;
+    color: var(--text-faint); padding: 4px 18px 12px;
+  }
+  .tree-root{
+    font-family: var(--mono); font-size:12.5px; color: var(--text-muted);
+    padding: 0 18px 10px;
+  }
+  .tree-folder{ }
+  .tree-folder summary{
+    cursor:pointer; list-style:none;
+    font-family: var(--mono); font-size:13px; font-weight:600;
+    color: var(--text); padding: 7px 18px;
+    display:flex; align-items:center; gap:7px;
+    user-select:none;
+  }
+  .tree-folder summary::-webkit-details-marker{ display:none; }
+  .tree-folder summary::before{
+    content:"▸"; color: var(--text-faint); font-size:10px;
+    transition: transform .15s ease;
+  }
+  .tree-folder[open] summary::before{ transform: rotate(90deg); }
+  .tree-folder summary:hover{ background: var(--accent-dim); }
+  .tree-file{
+    font-family: var(--mono); font-size:13px; color: var(--text-muted);
+    padding: 7px 18px 7px 40px;
+    cursor:pointer;
+    display:flex; align-items:center; gap:8px;
+    border-left:2px solid transparent;
+    transition: color .15s ease, background .15s ease;
+  }
+  .tree-file:hover{ background: var(--accent-dim); color: var(--text-bright); }
+  .tree-file.active{
+    color: var(--accent-strong); border-left-color: var(--accent);
+    background: var(--accent-dim);
+  }
+  .tree-file .tf-date{ margin-left:auto; font-size:10.5px; color: var(--text-dim); }
+
+  /* ---- editor / tabs ---- */
+  .editor{ flex:1; display:flex; flex-direction:column; min-width:0; }
+  .tab-bar{
+    display:flex; align-items:stretch; overflow-x:auto;
+    background: var(--bg-tab-inactive);
+    border-bottom:1px solid var(--border-soft);
+    flex-shrink:0;
+  }
+  .tab{
+    display:flex; align-items:center; gap:8px;
+    padding: 10px 10px 10px 14px;
+    font-family: var(--mono); font-size:12.5px; color: var(--text-muted);
+    background: var(--bg-tab-inactive);
+    border-right:1px solid var(--border-soft);
+    cursor:pointer; white-space:nowrap;
+    transition: color .15s ease, background .15s ease;
+  }
+  .tab:hover{ color: var(--text-bright); }
+  .tab.active{
+    background: var(--bg-tab-active); color: var(--accent-strong);
+    box-shadow: inset 0 -2px 0 var(--accent);
+  }
+  .tab .tab-close{
+    display:flex; align-items:center; justify-content:center;
+    width:16px; height:16px; border-radius:4px; color: var(--text-faint);
+    transition: color .15s ease, background .15s ease;
+  }
+  .tab .tab-close:hover{ background: var(--border-soft); color: var(--text-bright); }
+  .tab .tab-close svg{ width:11px; height:11px; }
+
+  .editor-pane{ flex:1; overflow-y:auto; }
+  .empty-state{
+    height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    color: var(--text-faint); font-family: var(--mono); font-size:13.5px; gap:10px; text-align:center; padding:20px;
+  }
+  .empty-state .es-glyph{ font-size:28px; color: var(--text-dim); }
+
+  .post{ max-width: 720px; margin: 0 auto; padding: 44px 40px 80px; }
+  .post-meta{
+    display:flex; align-items:center; gap:12px; flex-wrap:wrap;
+    font-family: var(--mono); font-size:12px; color: var(--text-faint);
+    margin-bottom:18px;
+  }
+  .post-meta .pm-cat{
+    color: var(--accent-strong); background: var(--accent-dim);
+    border:1px solid var(--accent-line); padding:2px 8px; border-radius:999px;
+  }
+  .post h1{
+    font-family: var(--sans); font-weight:800; font-size: clamp(24px,3.4vw,32px);
+    color: var(--text-bright); line-height:1.3; margin: 0 0 20px; letter-spacing:-0.01em;
+  }
+  .post p{ margin:0 0 18px; color: var(--text); }
+  .post .tags-row{
+    display:flex; flex-wrap:wrap; gap:8px; margin-top: 30px;
+    padding-top:20px; border-top:1px solid var(--border-soft);
+  }
+  .post .tag-chip{
+    font-family: var(--mono); font-size:11.5px; color: var(--text-muted);
+    background: var(--bg-card); border:1px solid var(--border); border-radius:999px; padding:3px 10px;
+  }
+
+  @media (max-width: 900px){
+    .sidebar{
+      position:fixed; top:49px; bottom:0; left:0; z-index:50;
+      transform: translateX(-100%);
+      transition: transform .2s ease;
+      box-shadow: 20px 0 40px rgba(0,0,0,.4);
+    }
+    .sidebar.open{ transform: translateX(0); }
+    .sidebar-toggle{ display:flex; }
+    .post{ padding: 30px 20px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="ide">
+  <div class="titlebar">
+    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle file explorer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+    <div class="tl-dots"><span class="tl-dot r"></span><span class="tl-dot y"></span><span class="tl-dot g"></span></div>
+    <div class="titlebar-path">aman@fixitai: ~/blog</div>
+    <a class="titlebar-back" href="../index.html">← portfolio</a>
+  </div>
+
+  <div class="ide-body">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">EXPLORER</div>
+      <div class="tree-root">/blog</div>
+
+      <details class="tree-folder" open>
+        <summary>📁 observability</summary>
+        <div class="tree-file" data-post="axiom-mcp-dashboard">📄 axiom-mcp-dashboard.md<span class="tf-date">Jul 1</span></div>
+        <div class="tree-file" data-post="otel-orphaned-spans">📄 otel-orphaned-spans.md<span class="tf-date">Jul 28</span></div>
+      </details>
+
+      <details class="tree-folder" open>
+        <summary>📁 security-agent</summary>
+        <div class="tree-file" data-post="security-agent-1">📄 part-1-the-idea.md<span class="tf-date">Jul 30</span></div>
+      </details>
+    </aside>
+
+    <div class="editor">
+      <div class="tab-bar" id="tabBar"></div>
+      <div class="editor-pane" id="editorPane">
+        <div class="empty-state">
+          <span class="es-glyph">❯</span>
+          <span>Select a post from the sidebar to open it.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var POSTS = {
+    "axiom-mcp-dashboard": {
+      title: "Building Production Dashboards with the Axiom MCP Server",
+      category: "observability",
+      date: "July 1, 2026",
+      tags: ["observability", "mcp", "axiom", "dashboards"],
+      html:
+        '<p>Staring at raw trace data in a query editor is not "observability." It\'s just a different kind of log file.</p>' +
+        '<p>I needed dashboards. I didn\'t want to spend a day clicking through a UI to build them — so I used the Axiom MCP server directly inside my coding environment instead.</p>' +
+        '<p>MCP lets you connect a service\'s API as tools the AI can call natively. I described what I wanted, it wrote the APL queries, built the chart specs, and called <code>createDashboard</code> directly. I reviewed the JSON, asked for tweaks, it patched. No context switching, no copy-pasting query strings.</p>' +
+        '<p>Ended up with two dashboards in prod:</p>' +
+        '<ul><li>Error rates across all 4 services, filterable by service and operation, refreshing every 60s</li>' +
+        '<li>p50/p95/p99 per service per operation, last 24 hours rolling</li></ul>' +
+        '<p>The latency one took 3 iterations — v1 had wrong time bucketing, v2 broke on empty datasets, v3.1 works. Each iteration was a conversation, not a rebuild.</p>' +
+        '<p>The thing that surprised me: I started asking for dashboards I wouldn\'t have bothered building manually. "Show me which service is the biggest contributor to tail latency." "Flag any operation where p99 &gt; 2x p95." Queries that would\'ve taken 30 minutes to figure out in APL, I was getting in seconds.</p>' +
+        '<p>But the real unlock isn\'t speed. It\'s that the bar for "is this worth building?" dropped enough that I actually built the thing.</p>' +
+        '<p>If you\'re running OpenTelemetry and sending data to Axiom, the MCP server takes about 5 minutes to set up.</p>'
+    },
+    "otel-orphaned-spans": {
+      title: "When Your Traces Are Lying: Debugging Orphaned Spans in an Async Pipeline",
+      category: "observability",
+      date: "July 28, 2026",
+      tags: ["opentelemetry", "observability", "python", "distributed-tracing", "backend"],
+      html:
+        '<p>We had traces flowing across our entire WhatsApp AI platform. Complete coverage — every service instrumented.</p>' +
+        '<p>The traces were lying.</p>' +
+        '<p>I opened Axiom expecting clean trace trees — connected spans, full journeys. Instead: fragments. Spans with no parent. Traces that started somewhere and went nowhere. The system was working. The data wasn\'t.</p>' +
+        '<p>The culprit was async context. Our agent pipeline runs on LangGraph — async, graph-based. Python\'s OTel SDK stores the active span in a <code>ContextVar</code>. When you spawn a coroutine or async task, that context doesn\'t carry over automatically. Nobody was passing it anywhere. Every async handoff was silently cutting the trace tree.</p>' +
+        '<p>To find the exact boundaries, I queried Axiom for spans with no parent that also weren\'t root spans. It gave me a clean list: node transitions in the agent graph, worker task spawns, async telephony calls. Each one a context black hole.</p>' +
+        '<p>The fix was explicit. At every async boundary, I captured the OTel context and re-attached it inside the new coroutine. For LangGraph, I passed trace context through the graph state so it survived node transitions.</p>' +
+        '<p>After that — complete trace trees. WhatsApp message → agent decision → DB write → call initiation. One trace, full journey.</p>' +
+        '<p>The real lesson: orphaned spans aren\'t just a tracing bug. They\'re the codebase telling you that async boundaries aren\'t being taken seriously. Fixing the traces fixed that too.</p>'
+    },
+    "security-agent-1": {
+      title: "Building My AI Security Agent — Part 1: The Idea",
+      category: "security-agent",
+      date: "July 30, 2026",
+      tags: ["security-engineering", "ai", "compliance", "sre", "building-in-public"],
+      html:
+        '<p>My company went through a compliance audit recently.</p>' +
+        '<p>The pattern was familiar: prepare, auditor arrives, issues get found, you scramble to fix them before the report goes out. The finding always comes from outside — someone else discovers the gap in your security posture, on their timeline, not yours.</p>' +
+        '<p>That bothered me.</p>' +
+        '<p>So I started building something: an AI agent that finds the same class of issues an auditor would — before they show up in someone else\'s report.</p>' +
+        '<p>Not a checklist tool. Not a vulnerability scanner that outputs a PDF nobody reads.</p>' +
+        '<p>Something that scopes a target, attacks it the way a real adversary would, and maps whatever it finds back to the actual compliance controls an auditor would be checking — PCI DSS, SOC2, ISO 27001, GDPR, HIPAA.</p>' +
+        '<p>The idea is simple: your audit findings should never surprise you.</p>' +
+        '<p>Very early right now. I\'ve got the first version running — an agent that operates autonomously, asks for scope before it touches anything, and reports back into Slack. No dashboard yet, just the skeleton doing real work.</p>' +
+        '<p>Going to be building this in public over the coming weeks.</p>'
+    }
+  };
+
+  var openTabs = [];
+  var activeId = null;
+
+  var tabBar = document.getElementById('tabBar');
+  var editorPane = document.getElementById('editorPane');
+
+  function renderTabs(){
+    tabBar.innerHTML = '';
+    openTabs.forEach(function(id){
+      var post = POSTS[id];
+      var tab = document.createElement('div');
+      tab.className = 'tab' + (id === activeId ? ' active' : '');
+      tab.setAttribute('data-tab', id);
+
+      var label = document.createElement('span');
+      label.textContent = id + '.md';
+      tab.appendChild(label);
+
+      var closeBtn = document.createElement('span');
+      closeBtn.className = 'tab-close';
+      closeBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>';
+      closeBtn.addEventListener('click', function(e){
+        e.stopPropagation();
+        closeTab(id);
+      });
+      tab.appendChild(closeBtn);
+
+      tab.addEventListener('click', function(){ setActive(id); });
+      tabBar.appendChild(tab);
+    });
+  }
+
+  function renderPost(id){
+    var post = POSTS[id];
+    if(!post){
+      editorPane.innerHTML = '<div class="empty-state"><span class="es-glyph">❯</span><span>Select a post from the sidebar to open it.</span></div>';
+      return;
+    }
+    var tagsHtml = post.tags.map(function(t){ return '<span class="tag-chip">#' + t + '</span>'; }).join('');
+    editorPane.innerHTML =
+      '<article class="post">' +
+        '<div class="post-meta"><span class="pm-cat">' + post.category + '</span><span>' + post.date + '</span></div>' +
+        '<h1>' + post.title + '</h1>' +
+        post.html +
+        '<div class="tags-row">' + tagsHtml + '</div>' +
+      '</article>';
+    editorPane.scrollTop = 0;
+  }
+
+  function setActive(id){
+    activeId = id;
+    renderTabs();
+    renderPost(id);
+    document.querySelectorAll('.tree-file').forEach(function(el){
+      el.classList.toggle('active', el.getAttribute('data-post') === id);
+    });
+    if(window.innerWidth <= 900){ closeSidebar(); }
+  }
+
+  function openTab(id){
+    if(openTabs.indexOf(id) === -1){ openTabs.push(id); }
+    setActive(id);
+  }
+
+  function closeTab(id){
+    var idx = openTabs.indexOf(id);
+    if(idx === -1){ return; }
+    openTabs.splice(idx, 1);
+    if(activeId === id){
+      var next = openTabs[idx] || openTabs[idx - 1] || null;
+      if(next){ setActive(next); }
+      else{ activeId = null; renderTabs(); renderPost(null); document.querySelectorAll('.tree-file').forEach(function(el){ el.classList.remove('active'); }); }
+    } else {
+      renderTabs();
+    }
+  }
+
+  document.querySelectorAll('.tree-file').forEach(function(el){
+    el.addEventListener('click', function(){
+      openTab(el.getAttribute('data-post'));
+    });
+  });
+
+  // ---- mobile sidebar toggle ----
+  var sidebar = document.getElementById('sidebar');
+  var sidebarToggle = document.getElementById('sidebarToggle');
+  function closeSidebar(){ sidebar.classList.remove('open'); }
+  sidebarToggle.addEventListener('click', function(){ sidebar.classList.toggle('open'); });
+
+  // open the most recent post by default
+  openTab('security-agent-1');
+})();
+</script>
+
+</body>
+</html>
