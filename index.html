@@ -1111,7 +1111,7 @@
         <h1>Aman Srivastava<br>Founding Software <span class="accent">Engineer</span>.</h1>
         <p class="lead">Building agentic AI systems and backend infrastructure at Fixit AI — from security monitoring agents to the observability stack that watches everything else.</p>
 
-        <a class="building-now" href="https://github.com/AmanSCoder/defendra-security-agent" target="_blank" rel="noopener">
+        <a class="building-now" href="https://lnkd.in/p/gtnixSGh" target="_blank" rel="noopener">
           <span class="bn-dot"></span>
           <span class="bn-text"><span class="bn-label">currently building</span> — <b>Defendra</b>, an autonomous AI security agent that finds compliance gaps before your auditor does</span>
           <span class="bn-arrow">↗</span>
@@ -1321,7 +1321,6 @@
         <article class="proj-card" data-detail="defendra">
           <div class="proj-top"><span class="proj-name">Defendra — AI Security Agent</span><span class="proj-tag">in progress</span></div>
           <p class="proj-desc">An autonomous AI agent that finds the same class of security issues a compliance auditor would — before they show up in someone else's report. Scopes a target, attacks it the way a real adversary would, and maps findings back to compliance controls (PCI DSS, SOC2, ISO 27001, GDPR, HIPAA). Early version operates autonomously and reports back into Slack.</p>
-          <a class="proj-link" href="https://github.com/AmanSCoder/defendra-security-agent" target="_blank" rel="noopener">github.com/AmanSCoder/defendra-security-agent <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
           <a class="proj-link" href="https://lnkd.in/p/gtnixSGh" target="_blank" rel="noopener">building in public — LinkedIn <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
           <div class="detail-hint">❯ view details</div>
         </article>
@@ -1481,7 +1480,7 @@
         <article class="pub-card" data-detail="pub-eeg">
           <span class="pub-badge">IEEE &middot; conference paper</span>
           <h3 class="pub-title">EEG signals analysis with 1D CNN-GRU architecture via transfer learning</h3>
-          <p class="pub-desc">A hybrid 1D CNN-GRU deep learning architecture for classifying EEG signals, using transfer learning to improve accuracy on limited neurological data.</p>
+          <p class="pub-desc">A hybrid 1D CNN-GRU architecture for EEG signal analysis via transfer learning, beating LSTM/GRU baselines with 99.26% and 96.48% accuracy across two datasets.</p>
           <a class="pub-link-lg" href="https://ieeexplore.ieee.org/document/10714752" target="_blank" rel="noopener">ieeexplore.ieee.org/document/10714752 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
           <div class="detail-hint">❯ view details</div>
         </article>
@@ -1489,7 +1488,7 @@
         <article class="pub-card" data-detail="pub-plant">
           <span class="pub-badge">IEEE &middot; conference paper</span>
           <h3 class="pub-title">Medical Plant Detection using Transfer Learning Coupled with K-Nearest Neighbour Algorithm</h3>
-          <p class="pub-desc">Combines transfer learning with a KNN classifier to identify medicinal plant species from images, aiding automated herbal identification.</p>
+          <p class="pub-desc">Transfer learning (ResNet50, MobileNet) coupled with KNN to identify 80 Indian medicinal plant species from leaf images, reaching up to 97.65% accuracy.</p>
           <a class="pub-link-lg" href="https://ieeexplore.ieee.org/document/10574671" target="_blank" rel="noopener">ieeexplore.ieee.org/document/10574671 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
           <div class="detail-hint">❯ view details</div>
         </article>
@@ -1669,8 +1668,7 @@
         '<li>Reports back into Slack; no dashboard yet, just the skeleton doing real work</li>' +
         '<li>Built on top of the OpenClaw agent framework</li>' +
         '</ul>' +
-        '<div class="dt-note">// source note: this summary is drawn from Aman\'s "building in public" LinkedIn series (part 1 of 8), not the repo\'s README — the GitHub repo itself still carries the generic OpenClaw starter README, since project-specific docs haven\'t been written yet.</div>' +
-        '<a class="dt-link" href="https://github.com/AmanSCoder/defendra-security-agent" target="_blank" rel="noopener">→ github.com/AmanSCoder/defendra-security-agent</a><br>' +
+        '<div class="dt-note">// source note: this summary is drawn from Aman\'s "building in public" LinkedIn series (part 1 of 8). The repo is currently private, so no GitHub link is shown here.</div>' +
         '<a class="dt-link" href="https://lnkd.in/p/gtnixSGh" target="_blank" rel="noopener">→ building in public — LinkedIn</a>'
     },
     "axiom-mcp": {
@@ -1804,19 +1802,31 @@
     },
     "pub-eeg": {
       file: "cat papers/eeg-cnn-gru.pdf",
-      html: '<span class="dt-tag">IEEE &middot; conference paper</span>' +
+      html: '<span class="dt-tag">IEEE &middot; I-SMAC 2024</span>' +
         '<h4>EEG signals analysis with 1D CNN-GRU architecture via transfer learning</h4>' +
-        '<p>A hybrid 1D CNN-GRU deep learning architecture for classifying EEG signals, using transfer learning to improve accuracy on limited neurological data.</p>' +
-        '<div class="dt-note">// limited info: this paper sits behind IEEE Xplore\'s paywall — only the title and DOI are accessible without institutional access, so this is the full, honest summary rather than a guess at the paper\'s actual methodology or results.</div>' +
+        '<p>A hybrid architecture combining a 1D Convolutional Neural Network with a Gated Recurrent Unit (GRU), applied to EEG signal analysis via transfer learning — aimed at handling the noise and complexity that make EEG data hard to work with directly.</p>' +
+        '<ul>' +
+        '<li>Benchmarked against LSTM, GRU, and combined LSTM+GRU baselines on two separate EEG datasets</li>' +
+        '<li>The proposed 1D CNN-GRU model outperformed all baselines on both: <b>99.26%</b> accuracy on dataset-1, <b>96.48%</b> on dataset-2</li>' +
+        '<li>Co-authored with Shubhy Gupta, Syed Naved, S. S K, and Ilayaraja V</li>' +
+        '<li>Published at the 2024 8th International Conference on I-SMAC (IoT in Social, Mobile, Analytics and Cloud)</li>' +
+        '</ul>' +
         '<a class="dt-link" href="https://ieeexplore.ieee.org/document/10714752" target="_blank" rel="noopener">→ ieeexplore.ieee.org/document/10714752</a>'
     },
     "pub-plant": {
       file: "cat papers/medical-plant-knn.pdf",
-      html: '<span class="dt-tag">IEEE &middot; conference paper</span>' +
+      html: '<span class="dt-tag">IEEE &middot; AIIoT 2024</span>' +
         '<h4>Medical Plant Detection using Transfer Learning Coupled with K-Nearest Neighbour Algorithm</h4>' +
-        '<p>Combines transfer learning with a KNN classifier to identify medicinal plant species from images, aiding automated herbal identification.</p>' +
-        '<div class="dt-note">// limited info: same situation as the EEG paper — paywalled on IEEE Xplore, so only the title/DOI are confirmed; treat the summary above as inferred from the title, not the paper\'s content.</div>' +
-        '<a class="dt-link" href="https://ieeexplore.ieee.org/document/10574671" target="_blank" rel="noopener">→ ieeexplore.ieee.org/document/10574671</a>'
+        '<p>Identifies medicinal plant species from leaf images — normally a task that needs expert botanical knowledge — by extracting features with a pretrained CNN and classifying them with K-Nearest Neighbour.</p>' +
+        '<ul>' +
+        '<li>Tested on 80 Indian medicinal plant species across 5,945 images</li>' +
+        '<li>ResNet50 + Random Forest reached <b>97.65%</b> accuracy</li>' +
+        '<li>MobileNet + KNN (the proposed approach) reached <b>97.31%</b>, edging out MobileNet + Random Forest at 96.89% — while staying light enough for mobile/embedded deployment</li>' +
+        '<li>Co-authored with Sai Subramanian S S and Dr. Somasundaram S K at VIT</li>' +
+        '<li>Published at the 2024 3rd International Conference on Artificial Intelligence for Internet of Things (AIIoT)</li>' +
+        '</ul>' +
+        '<a class="dt-link" href="https://ieeexplore.ieee.org/document/10574671" target="_blank" rel="noopener">→ ieeexplore.ieee.org/document/10574671</a><br>' +
+        '<a class="dt-link" href="https://lnkd.in/p/gNaHvX89" target="_blank" rel="noopener">→ announcement — LinkedIn</a>'
     }
   };
 
