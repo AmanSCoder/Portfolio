@@ -388,13 +388,11 @@
       editorPane.innerHTML = '<div class="empty-state"><span class="es-glyph">❯</span><span>Select a post from the sidebar to open it.</span></div>';
       return;
     }
-    var tagsHtml = post.tags.map(function(t){ return '<span class="tag-chip">#' + t + '</span>'; }).join('');
     editorPane.innerHTML =
       '<article class="post">' +
         '<div class="post-meta"><span class="pm-cat">' + post.category + '</span><span>' + post.date + '</span></div>' +
         '<h1>' + post.title + '</h1>' +
         post.html +
-        '<div class="tags-row">' + tagsHtml + '</div>' +
       '</article>';
     editorPane.scrollTop = 0;
   }
