@@ -44,6 +44,12 @@
       "headline": "Building My AI Security Agent — Part 1: The Idea",
       "datePublished": "2026-07-30",
       "author": { "@type": "Person", "name": "Aman Srivastava" }
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "Axiom Monitors MCP: Filling a Gap in the Official MCP Server",
+      "datePublished": "2026-08-04",
+      "author": { "@type": "Person", "name": "Aman Srivastava" }
     }
   ]
 }
@@ -326,6 +332,11 @@
         <summary>📁 security-agent</summary>
         <div class="tree-file" data-post="security-agent-1">📄 part-1-the-idea.md<span class="tf-date">Jul 30</span></div>
       </details>
+
+      <details class="tree-folder" open>
+        <summary>📁 open-source</summary>
+        <div class="tree-file" data-post="axiom-monitors-mcp">📄 axiom-monitors-mcp.md<span class="tf-date">Aug 4</span></div>
+      </details>
     </aside>
 
     <div class="editor">
@@ -392,6 +403,29 @@
         '<p>The idea is simple: your audit findings should never surprise you.</p>' +
         '<p>Very early right now. I\'ve got the first version running — an agent that operates autonomously, asks for scope before it touches anything, and reports back into Slack. No dashboard yet, just the skeleton doing real work.</p>' +
         '<p>Going to be building this in public over the coming weeks.</p>'
+    },
+    "axiom-monitors-mcp": {
+      title: "Axiom Monitors MCP: Filling a Gap in the Official MCP Server",
+      category: "open-source",
+      date: "August 4, 2026",
+      tags: ["mcp", "open-source", "devops", "axiom"],
+      html:
+        '<p>Spent half my day building something I genuinely thought already existed.</p>' +
+        '<p>I wanted Cursor to create Axiom monitors right from chat — "create a Slack alert for 5xx errors above 1% on prod" and have the agent just ship it.</p>' +
+        '<p>Axiom has an MCP server. I plugged it in and asked the agent to create a monitor.</p>' +
+        '<p>The agent replied: "I can only read monitors, not create them."</p>' +
+        '<p>I checked the docs. The official Axiom MCP exposes <code>getMonitors</code>, <code>createDashboard</code>, even <code>deleteDashboard</code> — but no <code>createMonitor</code>. No <code>createNotifier</code> either. The REST endpoints exist. They just aren\'t wrapped on the MCP layer.</p>' +
+        '<p>I spent an hour assuming it was a token permission issue — bumped the scopes, restarted everything, same result. Then it clicked: the MCP server\'s source code literally doesn\'t expose those tools. No token permission can call a function that doesn\'t exist on the server.</p>' +
+        '<p>So I built one.</p>' +
+        '<p><b>axiom-monitors-mcp</b> — a Python MCP server wrapping the missing endpoints:</p>' +
+        '<ul>' +
+        '<li><code>create_slack_notifier</code>, <code>create_email_notifier</code>, <code>create_pagerduty_notifier</code></li>' +
+        '<li><code>create_threshold_monitor</code>, <code>create_match_monitor</code>, <code>create_anomaly_monitor</code></li>' +
+        '<li>Full list / get / update / delete / enable / disable for both monitors and notifiers</li>' +
+        '</ul>' +
+        '<p>15 tools total. One-line uvx config for Cursor or Claude Desktop.</p>' +
+        '<p>Now I can say "create a monitor that fires when prod 5xx rate goes above 1% over 5 min, route to Slack" and the agent writes the APL, picks the notifier, and ships it.</p>' +
+        '<p>The MCP ecosystem is still early. Most of the value right now is in filling gaps where vendors haven\'t shipped tools yet.</p>'
     }
   };
 
@@ -486,7 +520,7 @@
   });
 
   // open the most recent post by default
-  openTab('security-agent-1');
+  openTab('axiom-monitors-mcp');
 })();
 </script>
 
