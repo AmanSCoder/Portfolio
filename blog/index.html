@@ -328,6 +328,18 @@
     border-left: 3px solid var(--accent-line);
     color: var(--text-muted); font-style: italic;
   }
+  .post .analogy{
+    margin: 8px 0 26px; padding: 16px 18px;
+    background: var(--accent-dim); border:1px solid var(--accent-line);
+    border-left:3px solid var(--accent); border-radius: var(--radius);
+  }
+  .post .analogy .an-label{
+    display:flex; align-items:center; gap:7px;
+    font-family:var(--mono); font-size:11px; letter-spacing:.07em;
+    text-transform:uppercase; color:var(--accent-strong); margin-bottom:8px;
+  }
+  .post .analogy p{ margin:0; color: var(--text); }
+  .post .analogy p + p{ margin-top:12px; }
   .post code{
     font-family: var(--mono); font-size:13px; color: var(--syn-string);
     background: var(--bg-card); padding:1px 6px; border-radius:4px; border:1px solid var(--border-soft);
@@ -458,6 +470,12 @@
     '</figure>';
   }
 
+  // A highlighted real-life-analogy callout, so a non-specialist has something
+  // concrete to hang the concept on. `inner` is one or more <p> paragraphs.
+  function analogy(inner){
+    return '<div class="analogy"><span class="an-label">💡 Think of it like this</span>' + inner + '</div>';
+  }
+
   var POSTS = {
     "axiom-mcp-dashboard": {
       title: "Building Production Dashboards with the Axiom MCP Server",
@@ -465,16 +483,24 @@
       date: "July 1, 2026",
       tags: ["observability", "mcp", "axiom", "dashboards"],
       html:
-        '<p>Staring at raw trace data in a query editor is not "observability." It\'s just a different kind of log file.</p>' +
-        '<p>I needed dashboards. I didn\'t want to spend a day clicking through a UI to build them — so I used the Axiom MCP server directly inside my coding environment instead.</p>' +
-        '<p>MCP lets you connect a service\'s API as tools the AI can call natively. I described what I wanted, it wrote the APL queries, built the chart specs, and called <code>createDashboard</code> directly. I reviewed the JSON, asked for tweaks, it patched. No context switching, no copy-pasting query strings.</p>' +
-        '<p>Ended up with two dashboards in prod:</p>' +
-        '<ul><li>Error rates across all 4 services, filterable by service and operation, refreshing every 60s</li>' +
-        '<li>p50/p95/p99 per service per operation, last 24 hours rolling</li></ul>' +
-        '<p>The latency one took 3 iterations — v1 had wrong time bucketing, v2 broke on empty datasets, v3.1 works. Each iteration was a conversation, not a rebuild.</p>' +
-        '<p>The thing that surprised me: I started asking for dashboards I wouldn\'t have bothered building manually. "Show me which service is the biggest contributor to tail latency." "Flag any operation where p99 &gt; 2x p95." Queries that would\'ve taken 30 minutes to figure out in APL, I was getting in seconds.</p>' +
-        '<p>But the real unlock isn\'t speed. It\'s that the bar for "is this worth building?" dropped enough that I actually built the thing.</p>' +
-        '<p>If you\'re running OpenTelemetry and sending data to Axiom, the MCP server takes about 5 minutes to set up.</p>'
+        '<p>Staring at raw trace data in a query editor is not “observability.” It is just a different kind of log file. Let me explain what that means, and why I ended up building my dashboards by <em>talking</em> to an AI instead of clicking through a tool.</p>' +
+        '<h2>First, what is actually going on here</h2>' +
+        '<p>When you run software for other people, the software constantly emits little notes about what it is doing: this request took 800 milliseconds, this one failed, this one called the database twice. That stream of notes is called <b>telemetry</b>, and “observability” is the practice of being able to answer questions about your system from it. <b>Axiom</b> is the tool we store all those notes in.</p>' +
+        '<p>The problem is that a pile of notes is not an answer. You can query it, but every question means writing a little query by hand in a language called APL. A <b>dashboard</b> is the opposite of that: a set of always-on charts that answer the important questions for you at a glance.</p>' +
+        analogy('<p>Imagine your business keeps every receipt, invoice and delivery note in a giant shoebox. Technically, the answer to “which supplier is costing us the most in late deliveries?” is in there. But finding it means emptying the box and sorting by hand, every single time you wonder. A dashboard is the laminated monthly summary taped to the wall — the questions you ask often, already answered, updating on their own.</p>') +
+        '<h2>The problem I was facing</h2>' +
+        '<p>I needed those wall charts for our production system. But building them the normal way meant spending the better part of a day clicking through a UI — picking a chart type, writing the query, fixing the time range, naming the axes, repeating. Tedious enough that I kept putting it off, which is the real danger: the dashboards you never build are the ones you wish you had at 2 a.m. during an incident.</p>' +
+        '<h2>How I solved it: talking to the tool instead of clicking it</h2>' +
+        '<p>Instead, I used something called an <b>MCP server</b> right inside my coding environment. MCP is a standard way to hand an AI assistant a set of real buttons it can press on another tool — not screenshots, not copy-paste, the actual controls.</p>' +
+        analogy('<p>Think of MCP as hiring an assistant who is fluent in a language you only half-speak. Before, I had to learn the filing system myself and operate every drawer by hand. With MCP, I just say “pull me the summary of which store loses the most money on late shipments,” and the assistant — who <em>does</em> speak the filing system fluently — walks over and does it.</p>') +
+        '<p>So I described what I wanted in plain English. The AI wrote the APL queries, built the chart specifications, and called the tool’s own <code>createDashboard</code> button directly. I reviewed what it produced, asked for tweaks, and it patched them. No switching windows, no pasting query strings back and forth.</p>' +
+        '<p>I ended up with two dashboards running in production:</p>' +
+        '<ul><li>Error rates across all four services, filterable by service and operation, refreshing every 60 seconds</li>' +
+        '<li>Response-time percentiles (p50 / p95 / p99 — the typical, the slow, and the worst-case request) for every service and operation, over a rolling 24 hours</li></ul>' +
+        '<p>The latency one took three attempts — the first grouped time incorrectly, the second broke whenever a chart had no data, the third worked. The important part: each attempt was a short conversation, not a rebuild from scratch.</p>' +
+        '<h2>Why this mattered more than I expected</h2>' +
+        '<p>Once asking was cheap, I started asking for charts I would never have bothered to build by hand. “Show me which service contributes most to the slowest requests.” “Flag any operation where the worst case is more than twice the typical case.” Questions that would have taken me 30 minutes each to express in APL, answered in seconds.</p>' +
+        '<p>And that is the real lesson, bigger than speed. When the effort of building something drops far enough, the honest question “is this worth building?” starts coming back “yes” far more often. The tool did not just make me faster. It lowered the bar until I actually did the thing.</p>'
     },
     "otel-orphaned-spans": {
       title: "When Your Traces Are Lying: Debugging Orphaned Spans in an Async Pipeline",
@@ -482,14 +508,20 @@
       date: "July 28, 2026",
       tags: ["opentelemetry", "observability", "python", "distributed-tracing", "backend"],
       html:
-        '<p>We had traces flowing across our entire WhatsApp AI platform. Complete coverage — every service instrumented.</p>' +
-        '<p>The traces were lying.</p>' +
-        '<p>I opened Axiom expecting clean trace trees — connected spans, full journeys. Instead: fragments. Spans with no parent. Traces that started somewhere and went nowhere. The system was working. The data wasn\'t.</p>' +
-        '<p>The culprit was async context. Our agent pipeline runs on LangGraph — async, graph-based. Python\'s OTel SDK stores the active span in a <code>ContextVar</code>. When you spawn a coroutine or async task, that context doesn\'t carry over automatically. Nobody was passing it anywhere. Every async handoff was silently cutting the trace tree.</p>' +
-        '<p>To find the exact boundaries, I queried Axiom for spans with no parent that also weren\'t root spans. It gave me a clean list: node transitions in the agent graph, worker task spawns, async telephony calls. Each one a context black hole.</p>' +
-        '<p>The fix was explicit. At every async boundary, I captured the OTel context and re-attached it inside the new coroutine. For LangGraph, I passed trace context through the graph state so it survived node transitions.</p>' +
-        '<p>After that — complete trace trees. WhatsApp message → agent decision → DB write → call initiation. One trace, full journey.</p>' +
-        '<p>The real lesson: orphaned spans aren\'t just a tracing bug. They\'re the codebase telling you that async boundaries aren\'t being taken seriously. Fixing the traces fixed that too.</p>'
+        '<p>We had tracing flowing across our entire WhatsApp AI platform. Complete coverage, every service wired up. And the traces were lying to us. Here is what that means and how I tracked down why.</p>' +
+        '<h2>What a “trace” is supposed to be</h2>' +
+        '<p>When a single user action — say, a WhatsApp message — travels through our system, it touches many separate services: one understands the message, one decides what to do, one writes to the database, one places a phone call. <b>Distributed tracing</b> stitches all of those steps into a single connected story so you can see the whole journey as one picture. Each step is called a <b>span</b>, and every span is supposed to record its parent — the step that caused it — so the spans link up into a tree.</p>' +
+        analogy('<p>It is exactly like the tracking number on a parcel. Every depot the package passes through scans it, so you get one unbroken history: picked up here, sorted there, out for delivery now. A trace is that tracking history for a user’s request. An <b>orphaned span</b> is a package that suddenly appears at a sorting depot with no scan history at all — you can see it is <em>there</em>, but you have no idea where it came from or what it is part of.</p>') +
+        '<h2>The problem: the map had holes</h2>' +
+        '<p>I opened Axiom expecting clean trees — connected spans, full journeys. Instead I got fragments: spans with no parent, traces that started somewhere and simply went nowhere. The system itself was working perfectly. The <em>data describing it</em> was broken, which is almost worse, because it means that during an incident the one tool you reach for would quietly mislead you.</p>' +
+        '<h2>How I debugged it</h2>' +
+        '<p>The culprit was something called <b>async context</b>. Our pipeline runs asynchronously — it does many things at once rather than one after another. Python keeps track of “which span am I currently inside” in a small piece of hidden state. The catch: when the code kicks off a new concurrent task, that hidden state does <em>not</em> automatically travel with it. Nobody was carrying it across. So every time work jumped to a new concurrent task, the thread of the story was silently cut.</p>' +
+        analogy('<p>Picture a relay race where each runner is supposed to pass a baton to the next. The baton is the context — “you are part of <em>this</em> race, started by <em>that</em> runner.” Our runners were sprinting their legs perfectly but forgetting to pass the baton. Each new runner started as if their leg were a brand-new race with no history. That is why the spans showed up parentless.</p>') +
+        '<p>To find exactly where the baton was being dropped, I asked Axiom for every span that had no parent but also was not a legitimate starting point. That query handed me a precise list of the guilty boundaries — the hand-offs between steps in the agent, the places we spawned background workers, the asynchronous phone-call steps. Each one a spot where the context fell on the floor.</p>' +
+        '<h2>The fix, and why this one</h2>' +
+        '<p>The fix was to stop relying on the context carrying itself and pass it explicitly. At every one of those hand-off points, I captured the current tracing context and re-attached it inside the new task — I made the runners hand over the baton by hand. For the parts of the pipeline where steps hand off through shared state, I threaded the context through that state so it survived the jump.</p>' +
+        '<p>After that, complete trees again: WhatsApp message → agent decision → database write → call initiation, all one connected journey.</p>' +
+        '<p>The deeper lesson stuck with me. Orphaned spans were not only a tracing bug. They were the code quietly telling me that those concurrency hand-offs were not being treated with the care they deserved — the same seams where context leaked are the seams where subtle bugs hide. Fixing the traces forced me to take those boundaries seriously, and that fixed more than the dashboards.</p>'
     },
     "security-agent-1": {
       title: "Building My AI Security Agent — Part 1: The Idea",
@@ -501,6 +533,7 @@
         '<h2>The pattern that bothered me</h2>' +
         '<p>Every audit runs the same way: you prepare, the auditor arrives, issues get found, and you scramble to fix them before the report goes out. Look at where the finding comes from. It always comes from <em>outside</em> — someone else discovers the gap in your security posture, on their timeline, and hands it to you as a surprise.</p>' +
         '<p>That felt backwards. You run the system every day. You should be the one who already knows where it is weak — long before a stranger with a checklist tells you, at the least convenient possible moment.</p>' +
+        analogy('<p>It is like only discovering your front door lock is weak when a burglar walks straight in. You had every chance to test that lock yourself, on a calm afternoon, with time to fix it. Instead you found out the worst possible way, at the worst possible time. An audit finding is that burglar — and I wanted to be the one rattling my own doors first.</p>') +
         '<h2>Why the usual tools do not fix this</h2>' +
         '<p>The obvious answer is “just run a scanner.” I did not want that, and it is worth being precise about why. A vulnerability scanner enumerates: it lists open ports, flags known CVEs, and emits a PDF nobody reads. It tells you what is <em>exposed</em>. It does not tell you what an attacker can actually <em>do</em>, and it certainly does not tell you which compliance control a given weakness violates. A checklist tool has the opposite problem — it knows the controls but never touches your actual system.</p>' +
         '<p>An auditor sits in the gap between those two. They reason about your specific target, they probe it like an adversary would, and then they translate what they find into the language of PCI DSS, SOC 2, ISO 27001, GDPR, HIPAA. That translation is the part that makes a finding actionable. That is the part I wanted to automate.</p>' +
@@ -517,22 +550,25 @@
       date: "August 4, 2026",
       tags: ["mcp", "open-source", "devops", "axiom"],
       html:
-        '<p>Spent half my day building something I genuinely thought already existed.</p>' +
-        '<p>I wanted Cursor to create Axiom monitors right from chat — "create a Slack alert for 5xx errors above 1% on prod" and have the agent just ship it.</p>' +
-        '<p>Axiom has an MCP server. I plugged it in and asked the agent to create a monitor.</p>' +
-        '<p>The agent replied: "I can only read monitors, not create them."</p>' +
-        '<p>I checked the docs. The official Axiom MCP exposes <code>getMonitors</code>, <code>createDashboard</code>, even <code>deleteDashboard</code> — but no <code>createMonitor</code>. No <code>createNotifier</code> either. The REST endpoints exist. They just aren\'t wrapped on the MCP layer.</p>' +
-        '<p>I spent an hour assuming it was a token permission issue — bumped the scopes, restarted everything, same result. Then it clicked: the MCP server\'s source code literally doesn\'t expose those tools. No token permission can call a function that doesn\'t exist on the server.</p>' +
-        '<p>So I built one.</p>' +
-        '<p><b>axiom-monitors-mcp</b> — a Python MCP server wrapping the missing endpoints:</p>' +
+        '<p>I spent half a day building something I genuinely assumed already existed. The story is small, but it says a lot about where AI tooling is right now.</p>' +
+        '<h2>What I was trying to do</h2>' +
+        '<p>A quick bit of background first. A <b>monitor</b> is an automatic watchman for your system — a rule like “if more than 1% of requests start failing on production, raise the alarm.” A <b>notifier</b> is where that alarm goes: a Slack message, an email, a page to the on-call engineer. Setting these up by hand is fiddly clicking.</p>' +
+        '<p>I wanted to skip the clicking and just tell my AI coding assistant: “create a Slack alert for failing requests above 1% on production,” and have it set the whole thing up. The assistant talks to Axiom through an <b>MCP server</b> — that menu of real buttons on a tool that I described in the dashboard post. Axiom ships one officially, so I plugged it in and asked.</p>' +
+        '<p>The assistant answered: “I can only <em>read</em> monitors, not create them.”</p>' +
+        '<h2>How I debugged it (and the hour I wasted)</h2>' +
+        '<p>My first assumption was a permissions problem — the assistant simply was not allowed. So I widened the access token, restarted everything, tried again. Same answer. I burned about an hour down that path before it clicked.</p>' +
+        '<p>The official menu exposed buttons for reading monitors and for creating and deleting <em>dashboards</em> — but there was no “create monitor” button on it at all, and no “create notifier” button either. The underlying capability exists in Axiom’s web API; it had just never been wired onto the MCP menu. And here is the insight that ended the hour:</p>' +
+        analogy('<p>I was behaving like someone jabbing at a universal TV remote, convinced the volume was muted. I kept checking the batteries and the settings — the “permissions.” The real problem was that this remote simply had no volume button <em>printed on it</em>. No amount of pressing harder, and no permission setting, can trigger a button that does not physically exist. The function was not locked; it was absent.</p>') +
+        '<h2>The fix: build the missing buttons</h2>' +
+        '<p>Once I understood it was a missing feature and not a misconfiguration, the solution was obvious: build the buttons myself. So I wrote <b>axiom-monitors-mcp</b>, a small MCP server that wraps the parts Axiom’s web API already supports but the official menu left off:</p>' +
         '<ul>' +
-        '<li><code>create_slack_notifier</code>, <code>create_email_notifier</code>, <code>create_pagerduty_notifier</code></li>' +
-        '<li><code>create_threshold_monitor</code>, <code>create_match_monitor</code>, <code>create_anomaly_monitor</code></li>' +
-        '<li>Full list / get / update / delete / enable / disable for both monitors and notifiers</li>' +
+        '<li>Create alerts that route to Slack, email, or PagerDuty</li>' +
+        '<li>Create the watchman rules themselves — threshold alarms, keyword-match alarms, and anomaly alarms that learn what “normal” looks like</li>' +
+        '<li>And the full set of everyday controls — list, inspect, update, delete, enable and disable — for both the alarms and their destinations</li>' +
         '</ul>' +
-        '<p>15 tools total. One-line uvx config for Cursor or Claude Desktop.</p>' +
-        '<p>Now I can say "create a monitor that fires when prod 5xx rate goes above 1% over 5 min, route to Slack" and the agent writes the APL, picks the notifier, and ships it.</p>' +
-        '<p>The MCP ecosystem is still early. Most of the value right now is in filling gaps where vendors haven\'t shipped tools yet.</p>'
+        '<p>Fifteen buttons in all, set up with a single line of config in Cursor or Claude Desktop. Now I can say “create a monitor that fires when production failures go above 1% over five minutes and route it to Slack,” and the assistant writes the query, picks the destination, and ships it.</p>' +
+        '<h2>Why it was worth doing</h2>' +
+        '<p>The honest payoff is bigger than my one annoyance. The whole ecosystem of AI tools is young, and most vendors have wired up only the easy, read-only half of what their products can do. Right now a lot of the real value is simply in filling those gaps — taking a capability that already exists and giving an AI assistant the button to actually use it.</p>'
     },
     "security-agent-2": {
       title: "Building My AI Security Agent — Part 2: Teaching It to Attack",
@@ -544,6 +580,7 @@
         '<h2>The problem: scanning is not auditing</h2>' +
         '<p>The first version could do recon and fingerprinting. It could map a target’s surface — subdomains, open ports, the tech stack. That felt like progress until I looked at what it was actually producing: a description of what was <em>exposed</em>, and nothing about what an attacker could <em>do</em> with it.</p>' +
         '<p>The entire distance between “port 443 is open and the app is Laravel” and “here is the exact request that dumps your users table” is the job. An auditor lives on the far side of that gap. If Defendra stopped at the near side, it was a scanner wearing an agent’s clothes.</p>' +
+        analogy('<p>A scanner is a surveyor who walks around your house and notes “there is a back door, two ground-floor windows, and a garage.” Useful, but it never checks whether any of them are actually unlocked. An attacker — and a real auditor — is the person who walks up and quietly tries every door and window to see which one actually opens. I needed Defendra to stop surveying and start trying the handles.</p>') +
         '<p>So the biggest jump this stretch was teaching it to attack something, not just scan it.</p>' +
         fig('2026-10-14_security_agent_2_attack_pipeline', 'A black-box run: recon, discovery and exploitation stages chaining into proof-of-concept findings scored with CVSS 3.1 and OWASP Top 10.', 'One black-box run: recon feeds discovery feeds exploitation, with no keyboard in between.') +
         '<h2>What I built: one continuous chain</h2>' +
@@ -567,6 +604,7 @@
         '<p>Finding a vulnerability and producing something a compliance team will accept are two completely different bars. This part of Defendra was entirely about the second one.</p>' +
         '<h2>The problem: a finding is not evidence</h2>' +
         '<p>After Part 2, the agent could find real issues. But “finds SQLi” is not the same as “here is evidence your auditor will trust.” An auditor does not accept a CVE number sitting in isolation. They ask three things a raw finding does not answer: which <em>control</em> does this violate, what is the <em>proof</em>, and how <em>bad</em> is it in business terms. Without those, a list of vulnerabilities is just homework for whoever has to triage it.</p>' +
+        analogy('<p>It is the difference between a mechanic shouting “something rattles under there” and handing you a report: “the left engine mount bolt is loose, here is the photo, it violates safety spec X, and here is what happens if it fails.” The first is an accusation; the second is evidence. In a courtroom a claim is worthless without proof you can point to — and a compliance audit is a courtroom. This part of Defendra was about turning rattles into exhibits.</p>') +
         '<p>So this stretch was about turning findings into the artifact an auditor actually signs off on.</p>' +
         fig('2026-10-21_security_agent_3_auditor_trust', 'A printed security and compliance report mapping findings to PCI DSS, SOC 2 and ISO 27001 controls with severities and a retest tracker.', 'Every finding maps to a real control, not a CVE sitting in isolation.') +
         '<h2>Reading the source, not just the surface</h2>' +
@@ -590,6 +628,7 @@
         '<p>The hardest problem building an AI security agent is not finding vulnerabilities. It is getting the agent to not lie to itself about what it found.</p>' +
         '<h2>Why a false positive is worse than a miss</h2>' +
         '<p>An autonomous agent will eventually get confident about something that is not true. For most tools that is a minor annoyance. For a security tool it is existential: a single wrong Critical and the client stops trusting <em>every</em> report you have ever handed them. Trust is the product. So this stretch was mostly about defending it.</p>' +
+        analogy('<p>It is the smoke detector that shrieks every time you make toast. After the third false alarm at 3 a.m., you pull the battery out — and now it cannot save you in a real fire. One confident-but-wrong Critical finding is that false alarm. The moment a client stops believing the alarm, the whole system is dead weight, no matter how good it is the rest of the time.</p>') +
         fig('2026-10-28_security_agent_4_hard_lessons', 'A PLAN, SHARD, MAP, REDUCE, VERIFY pipeline where a separate verifier re-executes each finding and marks it confirmed, unconfirmed or false positive.', 'A separate verifier re-runs every Critical and High finding before it is allowed into a report.') +
         '<h2>The bug that made the point for me</h2>' +
         '<p>The lesson arrived as an embarrassing finding. Defendra was reporting “leaked credentials” — and it was right, technically. It had, at one point, been scanning a local working copy of a repo and picking up my own uncommitted <code>.env</code> secrets. Technically true. Completely meaningless. And exactly the kind of false positive that burns trust fastest, because it looks authoritative and it is noise.</p>' +
@@ -610,14 +649,19 @@
       date: "November 4, 2026",
       tags: ["kubernetes", "backend", "devops", "sre"],
       html:
-        '<p>No errors. No crashes. Just calls silently dying mid-conversation during a rolling restart.</p>' +
-        '<p>The fix wasn\'t in the code. It was in understanding the difference between two signals.</p>' +
+        '<p>No errors. No crashes. Just live phone calls silently dying mid-conversation every time we shipped an update. The fix was not in the code at all — it was in understanding the difference between two signals an operating system can send a program.</p>' +
+        '<h2>A little background</h2>' +
+        '<p>Our product runs real voice calls, and like most modern systems it runs in <b>Kubernetes</b> — software that manages lots of small copies of our app (called <b>pods</b>) and restarts them whenever we deploy a new version. A “rolling restart” means it swaps those copies out a few at a time so the service never fully goes down. The question nobody thinks about until it bites them: what happens to the work a copy was in the middle of when it gets told to shut down?</p>' +
+        '<p>That depends on <em>how</em> it is told. There are two signals.</p>' +
         fig('2026-11-04_sigterm_vs_sigkill', 'A side-by-side of SIGTERM as a catchable request versus SIGKILL as an uncatchable kernel order the process cannot clean up from.', 'SIGTERM is a request your process can answer. SIGKILL is not.') +
-        '<p><b>SIGTERM</b> is a request. Your process can catch it, finish what it\'s doing, clean up, and exit. <b>SIGKILL</b> is the kernel saying it doesn\'t care. No catch. No cleanup. No warning. The process stops existing.</p>' +
-        '<p>When Kubernetes restarts a pod, it sends SIGTERM. Uvicorn receives it and immediately closes every WebSocket connection — including the active call. The user hears silence.</p>' +
-        '<p>The fix was straightforward once I understood what was happening: block new calls the moment shutdown starts, let active calls finish naturally, and only then let SIGTERM do its job.</p>' +
-        '<p>But here\'s what surprised me most. <code>kubectl delete pod --grace-period=0 --force</code> doesn\'t actually send SIGKILL first. SIGTERM still goes out. The cleanup code still ran. The call still dropped — because uvicorn closes WebSockets on SIGTERM before the application can react. A true SIGKILL — OOM kill, node crash — is a different story. No signal. No cleanup. The process stops existing mid-sentence.</p>' +
-        '<p>Design your shutdown path like SIGTERM is the norm and SIGKILL is the disaster you\'re defending against. Because in production both will happen. Only one is survivable.</p>' +
+        analogy('<p><b>SIGTERM</b> is your manager walking over and saying “wrap up and head home.” You can finish the sentence you are typing, save your file, tell the customer on the phone you will call back, and leave cleanly. <b>SIGKILL</b> is the building losing all power. No warning, no saving, no goodbye — everything you were holding is simply gone, mid-sentence.</p>') +
+        '<h2>The problem</h2>' +
+        '<p>When Kubernetes restarts a pod it sends the polite one, SIGTERM. The trouble was what our web server did with that polite request: the moment it received “wrap up,” it immediately slammed every open connection shut — including the live call someone was on. The user just heard silence. Technically we were shutting down “cleanly,” but we were hanging up on people to do it.</p>' +
+        '<h2>The fix, and why it is the right shape</h2>' +
+        '<p>The fix followed naturally once I understood the sequence: the moment a shutdown begins, stop <em>accepting</em> new calls, let the calls already in progress finish on their own, and only then let the process actually exit. We stopped treating “shut down” as “drop everything now” and started treating it as “stop taking new work, then drain what is left.” That is the appropriate design because our unit of work is a human conversation — you cannot just truncate one without the person noticing.</p>' +
+        '<h2>The part that surprised me</h2>' +
+        '<p>Here is the counter-intuitive bit I had wrong. I assumed the “force” command — the one engineers reach for to kill a stuck pod immediately — sends the brutal SIGKILL. It does not. It still sends the polite SIGTERM first. Our cleanup code still ran, and the call still dropped, because the web server was closing connections on SIGTERM before our own logic got a chance to react. A true SIGKILL only happens in genuine disasters — the system running out of memory, a machine crashing — and there, by definition, nothing can save you.</p>' +
+        '<p>So the rule I came away with: design your shutdown as if SIGTERM is the everyday case you must handle gracefully, and SIGKILL is the rare catastrophe you simply accept. Because in production both will happen — and only one of them is survivable.</p>' +
         '<blockquote>Have you ever had a bug that only showed up during deployments?</blockquote>'
     },
     "daemonset-log-safety-net": {
@@ -626,15 +670,20 @@
       date: "November 11, 2026",
       tags: ["kubernetes", "observability", "devops", "sre"],
       html:
-        '<p>We spent an hour debugging an incident with no logs.</p>' +
-        '<p>Not because we didn\'t have logging. Because the pod died before it could flush them.</p>' +
+        '<p>We once spent an hour debugging an incident with no logs. Not because we had forgotten to add logging — we had plenty. The problem was that the program died in the few seconds <em>before</em> it could send its last logs out. Those final seconds are exactly the ones you need.</p>' +
+        '<h2>Why the last logs are the ones that vanish</h2>' +
+        '<p>“Logs” are the running diary a program writes about what it is doing. To be useful, that diary has to leave the machine and go somewhere you can read it later. The usual way an app does this is to collect log lines in memory and ship them in batches every few seconds — which is efficient, right up until the program dies suddenly. When a pod is killed for using too much memory, or the machine crashes, whatever was still sitting in that in-memory batch, waiting to be sent, dies with it.</p>' +
+        analogy('<p>Imagine keeping your travel diary in your head all day, planning to write it up each night. If you have a great, uneventful day, that works fine. But if something dramatic happens and you faint at 4 p.m., the most important part — everything up to the moment you collapsed — was never written down. It was still “in memory.” That is precisely the stretch an investigator would want.</p>') +
         fig('2026-11-11_daemonset_log_safety_net', 'Log flow from app stdout to a file on the node, tailed by an OTel Collector DaemonSet that ships the final lines even after the pod dies.', 'The DaemonSet was already tailing the file on disk when the pod died.') +
-        '<p>When a pod gets OOMKilled, the last few seconds of logs just disappear. The exporter never gets a chance to flush — the process is already dead. The trail stops at exactly the moment you needed it most.</p>' +
-        '<p>So I traced the actual flow. The app writes a log to stdout. The container runtime writes it to a file on the host node. Our in-app exporter picks those up in memory and ships them in batches. That last part is the problem.</p>' +
-        '<p>When a pod crashes mid-batch, the queue is gone. But the log file on disk is still there. Kubelet doesn\'t clean it up immediately. Those lines are sitting on the node, unread.</p>' +
-        '<p>That\'s where a DaemonSet comes in. An OTel Collector DaemonSet runs one pod per node — not per service, not per deployment. One pod that tails every container log file on that host and ships them independently. So the flow becomes: app writes to stdout, kubelet writes to disk, DaemonSet tails the file. Even if the pod dies violently, the DaemonSet was already reading that file. It catches the final lines before the crash.</p>' +
-        '<p>It runs on 50m CPU and 128Mi memory per node. If you rely only on in-app telemetry, you have this blind spot right now. Most teams find it during an incident.</p>' +
-        '<blockquote>Have you?</blockquote>'
+        '<h2>How I traced what was actually happening</h2>' +
+        '<p>So I followed a log line step by step. The app prints it out. The surrounding system writes that line to a <em>file on the machine’s own disk</em>. Then our in-app shipper reads lines from memory and sends them off in batches. The weak link is that last step: when the pod dies mid-batch, the in-memory queue is gone for good.</p>' +
+        '<p>But — and this is the key realisation — the file on disk is still sitting right there. The machine does not wipe it the instant the pod dies. Those final lines exist; they are just lying on the disk with nobody reading them.</p>' +
+        '<h2>The fix: a separate reader that never dies with the app</h2>' +
+        '<p>The answer was a <b>DaemonSet</b> — in Kubernetes terms, a helper that runs <em>one copy per machine</em> rather than one per app. Its only job is to continuously tail every log file on that machine and ship the lines itself, completely independently of the apps that wrote them.</p>' +
+        analogy('<p>This is the black box flight recorder of an aircraft. The plane’s own systems can fail in a crash — but the recorder sits in its own armoured housing, on its own power, writing continuously. It survives the very event everyone most wants to understand. The DaemonSet is that recorder: a reader attached to the machine, not to the doomed app, so it captures the final lines the app itself never managed to send.</p>') +
+        '<p>Why is this the right fix and not just “flush logs faster”? Because flushing faster only shrinks the window of loss — there is always still a window. Moving the responsibility to something that cannot die with the app removes the window entirely. The payoff: even a pod that dies violently now leaves a complete trail, because the recorder was already reading that file before the crash. It costs almost nothing to run — a sliver of each machine’s CPU and memory.</p>' +
+        '<p>If you rely only on your app shipping its own logs, you have this exact blind spot right now. Most teams discover it the hard way, in the middle of the one incident where the logs they needed are the logs that never made it out.</p>' +
+        '<blockquote>Have you hit this before?</blockquote>'
     },
     "release-tag-annotation": {
       title: "Putting Deploys on the Dashboard: Release Tags and Annotations",
@@ -642,15 +691,18 @@
       date: "November 18, 2026",
       tags: ["sre", "observability", "devops", "cicd", "backend"],
       html:
-        '<p>Our production deploys were tagging releases with timestamps. Something like <code>backend-v2026.07.27.1234-prod</code>.</p>' +
-        '<p>Functional. But meaningless. It told you <em>when</em> something shipped, not <em>what</em> shipped.</p>' +
+        '<p>Every time we shipped a new version of our backend, we labelled it with a timestamp — something like <code>backend-v2026.07.27.1234-prod</code>. It worked, and it was almost useless. It told you <em>when</em> something shipped, but nothing about <em>what</em> shipped.</p>' +
+        '<h2>Two small problems that cost real time</h2>' +
+        '<p>A bit of context: shipping a new version is called a <b>deploy</b>, and we watch the health of the live system — how fast it responds, how often it errors — on charts called <b>dashboards</b>. Two annoyances kept biting us.</p>' +
+        '<p>First, a timestamp label does not tell you which actual version of the code is running. Answering “what is live right now?” meant digging back through the change history by hand, every single time. Second, and worse: our deploys were completely invisible on those health dashboards. So whenever a chart suddenly spiked, the very first question — “did we just ship something?” — could only be answered by leaving the dashboard and hunting through other tools.</p>' +
         fig('2026-11-18_release_tag_annotation', 'A p99 latency chart with a deploy annotation marking the exact moment backend-v3.4.1 went out, contrasted with the old timestamp-based tag.', 'Before and after: a meaningful version tag, and the deploy marked right on the latency chart.') +
-        '<p>Cross-referencing "which version is live right now" against an incident timeline meant digging through commit history by hand. Every single time.</p>' +
-        '<p>Worse — our deploys were invisible to our own observability stack. When a metric spiked or error rates jumped, the first question was always "did we just deploy something?" Answering it meant switching tabs to Slack or GitHub Actions, instead of looking at the dashboard already open in front of you.</p>' +
-        '<p>Two changes fixed both problems. Production releases now tag with the actual application version pulled from the service\'s version file, not a timestamp — a tag means something now. And every production deploy fires an automatic annotation into both Axiom and Grafana, so the exact moment a release goes out shows up as a marker directly on the logs, traces and metrics we\'re already watching.</p>' +
-        '<p>Both notifications are fail-open. An observability hiccup will never block an actual deploy.</p>' +
-        '<p>The payoff: "did this change because of a deploy?" is now answered by looking, not by asking. Release identity and system behaviour in the same view, which is where they should have been from the start.</p>' +
-        '<blockquote>Does your team\'s deploy process show up in your observability dashboards?</blockquote>'
+        analogy('<p>Picture moving house and labelling every box “packed Tuesday 3 p.m.” Technically accurate, completely unhelpful when you are standing in the new kitchen hunting for plates. “Kitchen — plates” is the label you actually want. And the invisible-deploys problem is like tracking your weight on a chart with no notes on it: the line jumps one week and you have no idea it was because you started a new diet on exactly that day. The fix for both is the same — write the meaningful label where you will actually be looking.</p>') +
+        '<h2>The fix</h2>' +
+        '<p>Two changes. First, releases are now labelled with the real application version — the one the code itself declares — instead of a timestamp, so the label finally means something. Second, every production deploy now automatically drops a marker onto the health dashboards themselves. The exact moment a release goes out appears as a vertical line right on the charts we are already staring at — the “we started the diet here” note, pinned to the graph.</p>' +
+        '<p>One deliberate design choice: this marker-dropping is “fail-open,” meaning if the dashboard system ever hiccups, it can never block or delay an actual deploy. The reporting is a convenience bolted on the side; it must never get in the way of shipping. That is the right trade-off — you never want your nice-to-have observability to be able to take down your ability to release.</p>' +
+        '<h2>Why it helped</h2>' +
+        '<p>The payoff is that “did this change because of a deploy?” is now answered by <em>looking</em>, not by asking and tab-hopping. What changed and how the system reacted now live in the same picture — which, honestly, is where they should have been from the start.</p>' +
+        '<blockquote>Does your team’s deploy process show up in your observability dashboards?</blockquote>'
     },
     "graceful-shutdown-timeouts": {
       title: "Graceful Shutdown Isn't One Setting — It's Four Timeouts",
@@ -658,15 +710,18 @@
       date: "November 25, 2026",
       tags: ["kubernetes", "aws", "sre", "backend", "devops"],
       html:
-        '<p>I thought Kubernetes graceful shutdown was one setting.</p>' +
-        '<p>It\'s four timeouts that all have to be sized against each other. Get one wrong and it fails silently — only under load, only during deploys.</p>' +
-        fig('2026-11-25_graceful_shutdown_timeouts', 'A timeline showing preStop, terminationGracePeriodSeconds, the readinessProbe gap and ALB deregistration delay nested inside the grace budget.', 'Drawn to scale: every timeout has to fit inside the grace budget — and outlast your longest connection.') +
-        '<p><b>preStop fires first.</b> Before SIGTERM, Kubernetes runs your preStop hook. That\'s your window to drain connections and finish in-flight work. For us, waiting for active voice calls to end naturally.</p>' +
-        '<p><b>terminationGracePeriodSeconds is the total budget.</b> It starts counting the moment deletion is triggered, not when SIGTERM is sent. Your preStop time comes out of it. A 300-second preStop against a 310-second grace period leaves you ten seconds for actual shutdown.</p>' +
-        '<p><b>Then the readinessProbe gap nobody mentions.</b> When your pod starts returning 503, Kubernetes needs <code>periodSeconds × failureThreshold</code> to mark it unready. Ours was 10s × 3 — thirty seconds where the load balancer still routes new traffic to a pod that is already shutting down. You can\'t fix that in Kubernetes config. You fix it in the application.</p>' +
-        '<p><b>Last, ALB deregistration delay.</b> Once a target enters draining, the ALB stops new connections but holds existing WebSockets open for the full delay. That\'s what lets active calls finish — but only if the delay outlasts your longest connection. Ours didn\'t. That\'s why calls were dropping.</p>' +
-        '<p>Graceful shutdown isn\'t a config value. It\'s an architecture decision spanning your load balancer, your orchestrator and your application at once.</p>' +
-        '<blockquote>What\'s your terminationGracePeriodSeconds set to, and do you know why?</blockquote>'
+        '<p>I thought shutting a server down gracefully in Kubernetes was a single setting. It is actually four separate timers that all have to be sized against each other — and if one is wrong, it fails silently, only under real traffic, only during a deploy. This one took me a week to fully understand.</p>' +
+        '<p>Quick recap from the signals post: when we ship an update, Kubernetes shuts down the old copies of our app, and our unit of work is a live phone call we must not cut off. “Graceful shutdown” is the art of retiring a copy without hanging up on anyone. The reason it is hard is that four different things all have to agree on the timing.</p>' +
+        fig('2026-11-25_graceful_shutdown_timeouts', 'A timeline showing preStop, terminationGracePeriodSeconds, the readinessProbe gap and ALB deregistration delay nested inside the grace budget.', 'Drawn to scale: every timer has to fit inside the overall budget — and outlast your longest call.') +
+        analogy('<p>It is closing a restaurant for the night. You stop seating new guests at the door (step 3 below). You let the diners already at their tables finish their meal in peace (step 1). The whole thing has to happen before the landlord locks the building for the night — your total time budget (step 2). And the valet still needs enough time to bring everyone’s car back after they get up (step 4). Mis-time any one of these — lock the doors while people are mid-dessert, or send the valet home too early — and someone has a bad night. Graceful shutdown is getting all four to line up.</p>') +
+        '<h2>The four timers, in plain terms</h2>' +
+        '<p><b>1. The drain window fires first.</b> Just before telling the app to stop, Kubernetes runs a “wind-down” step. This is the window to let in-flight work finish — for us, to wait for active calls to end naturally. This is letting the current diners finish.</p>' +
+        '<p><b>2. The grace period is the total budget.</b> There is a master countdown for the entire shutdown, and it starts the instant retirement is triggered. Crucially, the wind-down window above is spent <em>out of</em> this same budget. If the budget is 310 seconds and your wind-down takes 300, you have left yourself only 10 seconds for everything else. This is the landlord’s lock-up time.</p>' +
+        '<p><b>3. The “stop sending me customers” gap nobody warns you about.</b> A copy that is shutting down starts telling the system “I am not ready.” But the system does not believe it on the first try — it waits for a few failed health checks in a row to be sure. In our setup that confirmation took about 30 seconds, and during that entire window the load balancer kept sending <em>new</em> calls to a copy that was already on its way out. You cannot fix this with a Kubernetes setting; the app itself has to start refusing new work the instant shutdown begins. This is bolting the front door the moment you decide to close, not 30 seconds later.</p>' +
+        '<p><b>4. The valet delay.</b> Our load balancer, once told a copy is leaving, stops sending it new connections but deliberately holds existing ones open for a fixed “draining” period — which is exactly what lets active calls finish. But only if that period is <em>longer than your longest call</em>. Ours was shorter. That single mismatch was why calls were being dropped: the valet was being sent home while a diner was still waiting for their car.</p>' +
+        '<h2>The real lesson</h2>' +
+        '<p>Graceful shutdown is not a config value you set once. It is a design decision that spans three different layers at the same time — your load balancer, Kubernetes, and your own application code — and they only work if their timers are sized relative to each other. The bug was never in one place; it was in the <em>relationship</em> between four numbers nobody had lined up on purpose.</p>' +
+        '<blockquote>Do you know what your shutdown grace period is set to — and why that number?</blockquote>'
     },
     "firebase-token-cache": {
       title: "A Cache That Never Worked: A 0% Hit Rate and a Firebase Token",
@@ -674,14 +729,21 @@
       date: "December 2, 2026",
       tags: ["backend", "redis", "observability", "sre", "system-design"],
       html:
-        '<p>Our cache had a 0% hit rate. Not low. Zero. 0 hits out of 1,348 verification calls.</p>' +
+        '<p>Our cache had a 0% hit rate. Not low — zero. Zero hits out of 1,348 attempts. It had been running in production doing absolutely nothing, and almost nobody noticed. Here is how I found it and why it was broken in a way no amount of bug-fixing would have solved.</p>' +
+        '<h2>What the cache was supposed to do</h2>' +
+        '<p>Every time a logged-in user did anything, our system first had to confirm who they were by checking their login token with an outside identity service (Firebase). That check is a round trip over the network — 300 to 400 milliseconds — and it happened on <em>every single request</em>. A <b>cache</b> was supposed to make this cheap: verify the token once, remember the answer for a while, and skip the slow check next time. That is the whole point of a cache — do the expensive thing once, reuse the result.</p>' +
+        analogy('<p>Think of a conference where every time you re-enter the hall, security runs a full background check on your ID — slow, and maddening when you do it 50 times a day. The fix is a wristband: checked once at the door, then you just flash it. Our “wristband” had been printed and handed out… and it turned out the guards were ignoring it completely, running the full background check every time anyway.</p>') +
         fig('2026-12-02_firebase_token_cache_redis', 'An in-process dictionary cache behind a load balancer where pod A and pod B never share a verified token, versus a shared Redis session layer.', 'An in-process dict behind a load balancer: a token verified on pod A was invisible to pod B.') +
-        '<p>Every authenticated request verified a Firebase ID token first — a 300-400ms round trip, every call. There was already a cache meant to skip it. It had never worked. Not once.</p>' +
-        '<p>I almost didn\'t find it. The span on that function wasn\'t exporting to our observability backend in production, so the cost was invisible on the dashboards we actually look at. The path dominating our latency didn\'t appear anywhere. So I stopped trusting the instrumentation and logged the raw durations straight out of prod.</p>' +
-        '<p>The reason wasn\'t a bug. It was architectural. The cache was a plain in-process dictionary. We run multiple replicas behind a load balancer. A token verified on pod A was invisible to pod B. It only ever helped if the same user hit the same pod twice in a row.</p>' +
-        '<p>Moving it to Redis was the obvious fix. I went further and built a session layer on top of it: verify once, get an opaque session token, and every request after that is a Redis lookup, not an identity provider round trip. It fails closed if Redis hiccups, and re-checks freshness so a session never outlives a revoke.</p>' +
-        '<p>But the real lesson wasn\'t about caching. When your dashboard says a path is fast and your users are still waiting, go get the raw number yourself.</p>' +
-        '<blockquote>Has your monitoring ever hidden the thing that was actually slow?</blockquote>'
+        '<h2>How I even found it</h2>' +
+        '<p>This nearly stayed hidden forever. The piece of code doing the slow check was not reporting itself to our monitoring dashboards in production — so the single biggest drag on our response time was <em>invisible</em> on the very charts we use to find slow things. The dashboards said everything was fine. Users felt otherwise. So I stopped trusting the dashboards and measured the raw timings directly out of production, and there it was.</p>' +
+        '<h2>Why it was broken: not a bug, an architecture mismatch</h2>' +
+        '<p>Here is the twist — the cache code was not buggy. It worked exactly as written. The problem was <em>where</em> it stored its memory. It kept its list of “already-verified” tokens inside a single copy of the app, in that copy’s own private memory. But we run many copies of the app behind a <b>load balancer</b>, which sprays each incoming request to whichever copy is free.</p>' +
+        analogy('<p>So every security guard was keeping their own private notebook of wristbands — and never sharing it. A wristband guard A issued meant nothing to guard B. And because the load balancer sends you to a random guard each time, you almost never landed at the same guard twice in a row. The wristband only “worked” in the rare case you got lucky — which is why the hit rate was not just low, it was zero.</p>') +
+        '<h2>The fix, and why this one</h2>' +
+        '<p>The right fix was to give every copy of the app <em>one shared notebook</em> instead of private ones. I moved the cache into <b>Redis</b> — a fast, separate memory store that all the copies can read and write together. Now a token verified by any copy is instantly known to all of them.</p>' +
+        '<p>I went one step further and built a proper session layer on top: verify a user once, hand back a simple session pass, and every request after that is a quick lookup in the shared store instead of a slow trip to the identity service. It is deliberately built to “fail closed” — if the shared store ever goes down, the system denies access rather than letting unverified users through — and it re-checks freshness so that revoking someone’s access actually takes effect and a session never outlives it. For an auth path, failing <em>safe</em> matters more than failing <em>fast</em>.</p>' +
+        '<p>But the lesson that stuck was not really about caching. It was this: when your dashboard swears a path is fast and your users are still waiting, stop trusting the dashboard and go measure the raw number yourself.</p>' +
+        '<blockquote>Has your monitoring ever hidden the very thing that was slow?</blockquote>'
     },
     "eeg-cnn-gru": {
       title: "A 1D CNN-GRU Hybrid for EEG Seizure Detection (IEEE I-SMAC 2024)",
@@ -689,12 +751,17 @@
       date: "July 31, 2026",
       tags: ["deep-learning", "ai", "neuroscience", "eeg", "research"],
       html:
-        '<p>This paper came out almost a year ago. I\'m only getting around to posting it now — startup life.</p>' +
-        '<p>EEG signals are some of the noisiest data you\'ll ever try to classify. The signal is weak, contaminated by muscle movement, eye blinks, and electrical interference. And the pattern you\'re actually looking for — a seizure — can look different across patients and datasets.</p>' +
-        '<p>Standard approaches like LSTM and GRU handle temporal patterns well but struggle to pick up local features in the raw signal. CNNs catch local patterns but miss the long-range dependencies critical for seizure detection. So we combined them.</p>' +
-        '<p>Our paper, published at IEEE I-SMAC 2024, proposes a 1D CNN-GRU hybrid with transfer learning for EEG signal classification. The CNN layer extracts local features from the raw waveform. The GRU layer learns the temporal dependencies across the sequence. Transfer learning lets the model generalise across different datasets without training from scratch each time.</p>' +
-        '<p>Result: 99.26% accuracy on dataset-1, 96.48% on dataset-2 — outperforming LSTM, GRU, and LSTM+GRU baselines on both.</p>' +
-        '<p>The bigger picture: models like this could enable real-time seizure detection at the edge — fast enough and precise enough to matter in a clinical setting.</p>' +
+        '<p>This paper came out almost a year ago; I am only getting around to posting it now — startup life. It was my first IEEE publication, and the core idea is one a non-specialist can grasp, so let me actually explain it.</p>' +
+        '<h2>The problem: finding a whisper in a stadium</h2>' +
+        '<p>An <b>EEG</b> is a recording of the brain’s electrical activity, taken from sensors on the scalp. We wanted software that could spot a <b>seizure</b> in that recording automatically. The difficulty is that EEG is some of the messiest data you will ever try to make sense of. The signal is faint, and it is buried under noise from muscle twitches, eye blinks, and ordinary electrical interference. Worse, the thing you are hunting for — the seizure pattern — does not look identical from one patient to the next.</p>' +
+        analogy('<p>It is like trying to catch one specific whispered word in a stadium full of roaring fans. The word is in there, but it is quiet, and everything around it is loud and constantly shifting. That is the signal-in-noise problem these models have to solve.</p>') +
+        '<h2>Why the usual tools each fall short</h2>' +
+        '<p>Two families of model were the obvious candidates, and each had half the answer. One family (LSTM and GRU networks) is good at following how a signal <em>evolves over time</em> — the melody — but tends to miss small, sharp, local details. The other family (CNNs) is the opposite: excellent at spotting a distinctive little shape in the signal, but poor at tracking how things connect over a longer stretch. A seizure needs both: a telltale spike shape <em>and</em> the way the rhythm builds around it.</p>' +
+        '<h2>Our approach: use both, each for what it is good at</h2>' +
+        '<p>So we combined them into a single hybrid model. The CNN part scans the raw waveform for the distinctive local shapes. Its output is then handed to the GRU part, which tracks how those shapes play out over time. We also used <b>transfer learning</b> — a way of letting a model reuse what it already learned on one dataset instead of starting over from a blank slate for each new one.</p>' +
+        analogy('<p>Think of two specialists listening to the same recording. One has a perfect ear for a single unusual chord (the CNN spotting the spike). The other follows the melody and senses when the song is building to something (the GRU tracking the rhythm). Alone, each misses half the story; together they catch it. And transfer learning is the fact that a trained pianist picks up a new piece far faster than someone starting from scratch — the model is not learning music from zero every time.</p>') +
+        '<h2>The result and why it matters</h2>' +
+        '<p>Published at IEEE I-SMAC 2024, the hybrid reached 99.26% accuracy on the first dataset and 96.48% on the second — beating each of the individual approaches (LSTM, GRU, and LSTM+GRU) on both. The bigger picture is what makes it worth doing: a model this accurate and this lightweight could one day run on a small device at a patient’s side, catching a seizure the moment it begins rather than after the fact — which, in a clinical setting, is the difference that matters.</p>' +
         '<p>This was my first IEEE publication, built alongside Shubh Gupta, Syed Naved, Somasundaram S.K, and Ilayaraja V.</p>' +
         '<blockquote>What other biosignal problems do you think deep learning is closest to solving?</blockquote>'
     }
