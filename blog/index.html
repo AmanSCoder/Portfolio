@@ -4,14 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blog — Aman Srivastava</title>
-<meta name="description" content="Engineering notes from Aman Srivastava — Founding Software Engineer at Fixit AI. Observability, Kubernetes, and building an AI security agent in public.">
+<meta name="description" content="Engineering notes from Aman Srivastava — Founding Software Engineer at Fixit AI. Observability, Kubernetes, and building Defendra, an AI security (VAPT) agent, in public.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://amanscoder.github.io/Portfolio/blog/">
 <link rel="shortcut icon" href="../assets/images/logo.ico" type="image/x-icon">
 
 <meta property="og:type" content="blog">
 <meta property="og:title" content="Blog — Aman Srivastava">
-<meta property="og:description" content="Engineering notes on observability, Kubernetes, and building an AI security agent in public.">
+<meta property="og:description" content="Engineering notes on observability, Kubernetes, and building Defendra, an AI security (VAPT) agent, in public.">
 <meta property="og:url" content="https://amanscoder.github.io/Portfolio/blog/">
 <meta property="og:image" content="https://amanscoder.github.io/Portfolio/assets/images/avatar.jpg">
 
@@ -306,13 +306,19 @@
     font-family: var(--mono); font-size:12.5px; color: var(--text-faint);
     text-align:center;
   }
-  .post figure.anim{ position:relative; }
-  .post figure.anim::before{
-    content:"● animated"; position:absolute; top:12px; right:12px; z-index:2;
-    font-family: var(--mono); font-size:10.5px; letter-spacing:.04em;
-    color: var(--accent-strong); background: rgba(13,31,21,.78);
-    border:1px solid var(--accent-line); border-radius:999px; padding:3px 9px;
+  .post figure.media{ position:relative; }
+  .post figure.media img{ margin-bottom:10px; }
+  .post .media-play{
+    position:absolute; top:12px; right:12px; z-index:2;
+    display:inline-flex; align-items:center; gap:6px; cursor:pointer;
+    font-family: var(--mono); font-size:11px; letter-spacing:.03em;
+    color: var(--accent-strong); background: rgba(13,31,21,.82);
+    border:1px solid var(--accent-line); border-radius:999px; padding:5px 11px;
+    backdrop-filter: blur(3px);
+    transition: color .15s ease, border-color .15s ease, background .15s ease;
   }
+  .post .media-play:hover{ color: var(--text-bright); border-color: var(--accent); background: rgba(13,31,21,.95); }
+  .post figure.media.is-playing .media-play{ color: var(--text-muted); border-color: var(--border); }
   .post h2{
     font-family: var(--sans); font-weight:700; font-size: 21px;
     color: var(--text-bright); margin: 34px 0 16px; letter-spacing:-0.01em;
@@ -441,6 +447,17 @@
 (function(){
   "use strict";
 
+  // Figure that shows the static diagram by default, with an opt-in button to
+  // play the animated build-up. Still (PNG) = full diagram; anim (GIF) = reveal.
+  function fig(name, alt, caption){
+    var base = '../assets/images/blog/' + name;
+    return '<figure class="media" data-still="' + base + '.png" data-anim="' + base + '.gif">' +
+      '<img src="' + base + '.png" alt="' + alt + '" loading="lazy">' +
+      '<button class="media-play" type="button">▶ Play build-up</button>' +
+      '<figcaption>' + caption + '</figcaption>' +
+    '</figure>';
+  }
+
   var POSTS = {
     "axiom-mcp-dashboard": {
       title: "Building Production Dashboards with the Axiom MCP Server",
@@ -478,17 +495,21 @@
       title: "Building My AI Security Agent — Part 1: The Idea",
       category: "security-agent",
       date: "July 30, 2026",
-      tags: ["security-engineering", "ai", "compliance", "sre", "building-in-public"],
+      tags: ["security-engineering", "ai", "compliance", "sre", "building-in-public", "defendra"],
       html:
-        '<p>My company went through a compliance audit recently.</p>' +
-        '<p>The pattern was familiar: prepare, auditor arrives, issues get found, you scramble to fix them before the report goes out. The finding always comes from outside — someone else discovers the gap in your security posture, on their timeline, not yours.</p>' +
-        '<p>That bothered me.</p>' +
-        '<p>So I started building something: an AI agent that finds the same class of issues an auditor would — before they show up in someone else\'s report.</p>' +
-        '<p>Not a checklist tool. Not a vulnerability scanner that outputs a PDF nobody reads.</p>' +
-        '<p>Something that scopes a target, attacks it the way a real adversary would, and maps whatever it finds back to the actual compliance controls an auditor would be checking — PCI DSS, SOC2, ISO 27001, GDPR, HIPAA.</p>' +
-        '<p>The idea is simple: your audit findings should never surprise you.</p>' +
-        '<p>Very early right now. I\'ve got the first version running — an agent that operates autonomously, asks for scope before it touches anything, and reports back into Slack. No dashboard yet, just the skeleton doing real work.</p>' +
-        '<p>Going to be building this in public over the coming weeks.</p>'
+        '<p>My company went through a compliance audit recently. And the whole way through it, one thing kept bothering me — not the work, but the <em>shape</em> of it.</p>' +
+        '<h2>The pattern that bothered me</h2>' +
+        '<p>Every audit runs the same way: you prepare, the auditor arrives, issues get found, and you scramble to fix them before the report goes out. Look at where the finding comes from. It always comes from <em>outside</em> — someone else discovers the gap in your security posture, on their timeline, and hands it to you as a surprise.</p>' +
+        '<p>That felt backwards. You run the system every day. You should be the one who already knows where it is weak — long before a stranger with a checklist tells you, at the least convenient possible moment.</p>' +
+        '<h2>Why the usual tools do not fix this</h2>' +
+        '<p>The obvious answer is “just run a scanner.” I did not want that, and it is worth being precise about why. A vulnerability scanner enumerates: it lists open ports, flags known CVEs, and emits a PDF nobody reads. It tells you what is <em>exposed</em>. It does not tell you what an attacker can actually <em>do</em>, and it certainly does not tell you which compliance control a given weakness violates. A checklist tool has the opposite problem — it knows the controls but never touches your actual system.</p>' +
+        '<p>An auditor sits in the gap between those two. They reason about your specific target, they probe it like an adversary would, and then they translate what they find into the language of PCI DSS, SOC 2, ISO 27001, GDPR, HIPAA. That translation is the part that makes a finding actionable. That is the part I wanted to automate.</p>' +
+        '<h2>What I set out to build</h2>' +
+        '<p>So I started building <b>Defendra</b>: an AI agent that finds the same class of issues an auditor would — before they show up in someone else’s report. Something that scopes a target, attacks it the way a real adversary would, and maps whatever it finds back to the actual controls an auditor is checking.</p>' +
+        '<p>The idea is simple enough to put on one line: <em>your audit findings should never surprise you.</em></p>' +
+        '<p>Why an agent and not another script? Because the valuable work here is the reasoning — deciding what to probe on <em>this</em> target, chaining one finding into the next, and judging whether a result is real. That is exactly the part a fixed script cannot do and a language-model agent can, if you build it carefully.</p>' +
+        '<p>It is very early. I have the first version running — it operates autonomously, asks for explicit scope before it touches anything, and reports back into Slack. No dashboard yet, just the skeleton doing real work. I am going to build the rest of it in public over the coming weeks, including the parts that go wrong.</p>' +
+        '<blockquote>What is the most painful part of preparing for a compliance audit for you?</blockquote>'
     },
     "axiom-monitors-mcp": {
       title: "Axiom Monitors MCP: Filling a Gap in the Official MCP Server",
@@ -517,49 +538,71 @@
       title: "Building My AI Security Agent — Part 2: Teaching It to Attack",
       category: "security-agent",
       date: "October 14, 2026",
-      tags: ["security-engineering", "ai", "pentesting", "devsecops", "building-in-public"],
+      tags: ["security-engineering", "ai", "pentesting", "devsecops", "building-in-public", "defendra"],
       html:
-        '<p>I announced an AI security agent in July. Then I went quiet for two months. Here\'s what actually happened in that time.</p>' +
-        '<p>The biggest jump was teaching it to <em>attack</em> something, not just scan it.</p>' +
-        '<figure class="anim"><img src="../assets/images/blog/2026-10-14_security_agent_2_attack_pipeline.gif" alt="A black-box run: recon, discovery and exploitation stages chaining into proof-of-concept findings scored with CVSS 3.1 and OWASP Top 10." loading="lazy"><figcaption>One black-box run — 13 stages, 17 skills, zero keystrokes between them.</figcaption></figure>' +
-        '<p>I built out a full black-box pentesting pipeline — 17 skills, 13 stages, running end to end without me touching the keyboard between them.</p>' +
-        '<p><b>Recon</b> pulls from crt.sh, Shodan, the Wayback Machine, GitHub search, and subdomain enumeration across VirusTotal, Censys and OTX.</p>' +
-        '<p><b>Discovery</b> handles TLS scanning, tech-stack fingerprinting, WAF detection, and a crawler that pulls endpoints straight out of JS bundles.</p>' +
-        '<p><b>Exploitation</b> covers SQLi, XSS, SSRF, JWT algorithm confusion, XXE, IDOR, command injection, GraphQL injection, request smuggling, and OAuth misconfiguration. Real tooling is wired in as agents — <code>nmap</code>, ZAP, <code>sqlmap</code>, Metasploit. Every finding ends in a proof-of-concept with a CVSS 3.1 score and an OWASP Top 10 mapping.</p>' +
-        '<p>The part that felt real: watching OSINT output feed into subdomain enumeration, into a crawl, into a fuzzer, into an exploitation attempt. One continuous chain, running on its own.</p>' +
-        '<p>Still a work in progress. But it\'s finding real things on real targets now.</p>' +
-        '<blockquote>What\'s the one attack vector you\'d least want to first hear about from an auditor?</blockquote>'
+        '<p>I announced Defendra in July. Then I went quiet for two months. Here is what actually happened in that time — and the one decision that took the longest.</p>' +
+        '<h2>The problem: scanning is not auditing</h2>' +
+        '<p>The first version could do recon and fingerprinting. It could map a target’s surface — subdomains, open ports, the tech stack. That felt like progress until I looked at what it was actually producing: a description of what was <em>exposed</em>, and nothing about what an attacker could <em>do</em> with it.</p>' +
+        '<p>The entire distance between “port 443 is open and the app is Laravel” and “here is the exact request that dumps your users table” is the job. An auditor lives on the far side of that gap. If Defendra stopped at the near side, it was a scanner wearing an agent’s clothes.</p>' +
+        '<p>So the biggest jump this stretch was teaching it to attack something, not just scan it.</p>' +
+        fig('2026-10-14_security_agent_2_attack_pipeline', 'A black-box run: recon, discovery and exploitation stages chaining into proof-of-concept findings scored with CVSS 3.1 and OWASP Top 10.', 'One black-box run: recon feeds discovery feeds exploitation, with no keyboard in between.') +
+        '<h2>What I built: one continuous chain</h2>' +
+        '<p>I built a full black-box attack pipeline that runs end to end on its own. The shape that matters is the <em>chaining</em> — OSINT output feeds subdomain enumeration, which feeds a crawl, which feeds a fuzzer, which feeds an exploitation attempt. No human in between.</p>' +
+        '<p><b>Recon</b> pulls subdomains from certificate transparency (crt.sh), queries Shodan, mines the Wayback Machine, runs Google dorks and GitHub code search for leaked secrets, resolves DNS (including zone-transfer and DNSSEC checks), and enumerates subdomains across passive sources like VirusTotal, Censys and OTX alongside active brute force. It also probes for exposed cloud storage (S3, GCS, Azure Blob, Firebase) and dangling-CNAME subdomain takeovers.</p>' +
+        '<p><b>Discovery</b> handles TLS scanning (weak protocols, bad ciphers, the classic CVEs), tech-stack fingerprinting, WAF detection, a security-header audit, and a crawler that pulls endpoints straight out of JavaScript bundles — webpack chunks, React Router, Angular routes — and hunts for <code>swagger.json</code>, <code>openapi.json</code> and <code>/graphql</code>.</p>' +
+        '<p><b>Exploitation</b> covers SQL injection (error → boolean-blind → time-based → union), XSS (reflected, stored, DOM), SSRF (cloud-metadata endpoints, blind out-of-band via interactsh), JWT attacks (<code>alg:none</code>, RS256→HS256 confusion, weak-secret brute force), XXE, IDOR, command injection, SSTI, GraphQL abuse (introspection, query batching, circular-query DoS), and OAuth/OIDC misconfiguration. Real tooling is wired in as agents the planner can call — <code>nmap</code>, <code>nuclei</code>, OWASP ZAP, <code>sqlmap</code> (only after a SQLi is already confirmed), CrackMapExec (only when SMB/WinRM/LDAP is exposed), and Metasploit (only on a confirmed network CVE).</p>' +
+        '<h2>Why it is built this way: reach with restraint</h2>' +
+        '<p>Here is the part I spent the most time on, and the reason I would defend this design. An autonomous thing that attacks real systems is dangerous if you get it wrong. So the pipeline is not “run everything.” A planning stage looks at the target first and prunes a library of dozens of attack skills down to the handful that actually apply, and a web-testing stage then fans roughly a dozen of those out in parallel inside a single black-box run.</p>' +
+        '<p>And every offensive action is fenced. Each outbound request is checked against an explicit authorized-scope allowlist before it is sent. There is a global rate limit. Destructive operations are hard-blocked at the code level — no dropping tables, no deleting data, no <code>rm -rf</code>; when it proves database access it reads a version string, never your actual data; when Metasploit lands it runs <code>whoami</code> and <code>id</code> to prove the foothold and then closes the session, with no lateral movement. Every request is written to an audit log. The goal was a real adversary’s <em>reach</em> with a tool’s <em>restraint</em> — because an auditor you cannot trust to stay in bounds is not one you can point at production.</p>' +
+        '<h2>Where it landed</h2>' +
+        '<p>The part that felt real was watching that chain run on its own — OSINT into enumeration into a crawl into a fuzzer into an actual exploit attempt, no keystrokes between stages. Every finding comes out the other end as a proof-of-concept with a CVSS 3.1 vector and an OWASP Top 10 mapping, which is exactly the raw material the next piece needs to turn into audit evidence. Still a work in progress — but it is finding real things on real targets now.</p>' +
+        '<blockquote>What is the one attack vector you would least want to first hear about from an auditor?</blockquote>'
     },
     "security-agent-3": {
       title: "Building My AI Security Agent — Part 3: Evidence an Auditor Will Trust",
       category: "security-agent",
       date: "October 21, 2026",
-      tags: ["security-engineering", "compliance", "ai", "devsecops", "soc2"],
+      tags: ["security-engineering", "compliance", "ai", "devsecops", "soc2", "defendra"],
       html:
-        '<p>Finding a vulnerability and producing something a compliance team will accept are two completely different bars.</p>' +
-        '<p>The agent could find real issues. But "finds SQLi" is not the same as "here is evidence your auditor will trust." This stretch was about closing that gap.</p>' +
-        '<figure class="anim"><img src="../assets/images/blog/2026-10-21_security_agent_3_auditor_trust.gif" alt="A printed security and compliance report mapping findings to PCI DSS, SOC 2 and ISO 27001 controls with severities and a retest tracker." loading="lazy"><figcaption>Every finding maps to a real control, not a CVE sitting in isolation.</figcaption></figure>' +
-        '<p>I added a <b>whitebox mode</b> that reads full source trees against 16 security categories — secrets, authentication, authorization, cryptography, Kubernetes, Docker, AWS, GitHub Actions, dependency risk, and AI/LLM-specific issues.</p>' +
-        '<p>Every finding now maps to an actual control — PCI DSS, HIPAA, GDPR, SOC 2, ISO 27001, NIST — instead of a CVE number sitting in isolation.</p>' +
-        '<p>Reports are self-contained HTML with embedded screenshots, an estimated financial impact per finding, and an overall grade from A+ to F. A retest tracker fingerprints each finding, so an issue that persists across two scans shows up as "still open" rather than as a duplicate ticket.</p>' +
-        '<p>I also stress-tested it against a real Astra scan dashboard and used the gaps to add checks I\'d missed — DNSSEC validation, password policy strength, internal header leakage. The unglamorous stuff. Exactly what an auditor would catch and I wouldn\'t have thought to include.</p>' +
-        '<p>It\'s no longer just finding bugs. It\'s producing the evidence an auditor would ask for.</p>' +
+        '<p>Finding a vulnerability and producing something a compliance team will accept are two completely different bars. This part of Defendra was entirely about the second one.</p>' +
+        '<h2>The problem: a finding is not evidence</h2>' +
+        '<p>After Part 2, the agent could find real issues. But “finds SQLi” is not the same as “here is evidence your auditor will trust.” An auditor does not accept a CVE number sitting in isolation. They ask three things a raw finding does not answer: which <em>control</em> does this violate, what is the <em>proof</em>, and how <em>bad</em> is it in business terms. Without those, a list of vulnerabilities is just homework for whoever has to triage it.</p>' +
+        '<p>So this stretch was about turning findings into the artifact an auditor actually signs off on.</p>' +
+        fig('2026-10-21_security_agent_3_auditor_trust', 'A printed security and compliance report mapping findings to PCI DSS, SOC 2 and ISO 27001 controls with severities and a retest tracker.', 'Every finding maps to a real control, not a CVE sitting in isolation.') +
+        '<h2>Reading the source, not just the surface</h2>' +
+        '<p>First I added a <b>whitebox mode</b> that reads full source trees against a review methodology of 16-plus categories — secrets, authentication, authorization, input validation, web, file handling, serialization, cryptography, language- and framework-specific issues, Kubernetes, Docker, AWS, GitHub Actions, dependency risk, AI/LLM-specific issues, and most recently a dedicated logging-and-PII-exposure category. The AI/LLM category is the one I had not seen in other tools: prompt injection, executing unvalidated model output, and unrestricted tool or MCP access.</p>' +
+        '<h2>Mapping every finding to a real control</h2>' +
+        '<p>Then the part that makes it audit-grade: every finding now maps to an actual control with a specific identifier — PCI DSS v4.0, SOC 2 Type II, HIPAA, GDPR, ISO 27001:2022, plus NIST and CERT-In — instead of a CVE in isolation. The report carries a compliance-coverage matrix across those frameworks, so the question stops being “what did you find” and becomes “where do we stand against the standard we are being measured on.”</p>' +
+        '<p>The deliverable itself is a single self-contained HTML report — every screenshot embedded as base64, no external dependencies, opens in any browser and survives being emailed around. Each finding carries a CVSS 3.1 vector, an OWASP Top 10:2025 mapping, an estimated financial-impact figure, and the report rolls up to an overall security grade from A+ to F.</p>' +
+        '<h2>Not re-reporting the same issue twice</h2>' +
+        '<p>A one-shot report is useless for tracking remediation, so I added a retest tracker. It fingerprints each finding with a deterministic stable ID derived from the host, the vulnerability type, the endpoint and the parameter. Across two scans, the same underlying issue is recognised as the same thing — it shows up as “still open” or “persisting,” “fixed,” or “accepted risk,” rather than as a brand-new duplicate ticket every run. It also tracks when each framework is next due for a scan.</p>' +
+        '<h2>How I found my own blind spots</h2>' +
+        '<p>To pressure-test it, I ran it against a real commercial scan dashboard and used the <em>gaps</em> — the things the commercial tool caught and I did not — to add the unglamorous checks I would never have thought of: DNSSEC validation, password-policy strength, internal-header leakage. The point of comparing against a known-good tool was not to copy it; it was to find out what I did not know I was missing.</p>' +
+        '<p>The result: Defendra is no longer just finding bugs. It produces the evidence an auditor asks for — a control ID, a proof, a grade, and a trend across scans.</p>' +
         '<blockquote>How does your team prep for a compliance audit today?</blockquote>'
     },
     "security-agent-4": {
       title: "Building My AI Security Agent — Part 4: Getting It to Stop Lying to Itself",
       category: "security-agent",
       date: "October 28, 2026",
-      tags: ["ai", "security-engineering", "building-in-public", "devsecops"],
+      tags: ["ai", "security-engineering", "building-in-public", "devsecops", "defendra"],
       html:
-        '<p>The hardest problem building an AI security agent isn\'t finding vulnerabilities.</p>' +
-        '<p>It\'s getting the agent to not lie to itself about what it found.</p>' +
-        '<figure class="anim"><img src="../assets/images/blog/2026-10-28_security_agent_4_hard_lessons.gif" alt="A PLAN, SHARD, MAP, REDUCE, VERIFY pipeline where a separate verifier re-executes each finding and marks it confirmed, unconfirmed or false positive." loading="lazy"><figcaption>A separate verifier re-runs every Critical and High finding before it\'s allowed into a report.</figcaption></figure>' +
-        '<p>An autonomous agent will eventually get confident about something that isn\'t true. For a security tool that\'s not a minor bug — it\'s a report a client stops trusting the first time it\'s wrong. So this stretch was mostly about that.</p>' +
-        '<p>I rebuilt the pipeline around a PLAN, SHARD, MAP, REDUCE, VERIFY pattern. A planning stage studies the target before anything runs. A separate verifier independently re-executes every Critical and High finding before it\'s allowed into a report — marking it confirmed, unconfirmed, or false positive.</p>' +
-        '<p>I also locked scanning to clean, freshly-cloned source only. Turns out the agent had been scanning a local dev folder at one point and reporting my own uncommitted <code>.env</code> secrets as "leaked credentials." Technically true. Completely meaningless. The kind of false positive that destroys trust fast. Now every clone is wiped and validated against git before a scan starts.</p>' +
-        '<p>I\'m not going to wrap this up neatly, because it isn\'t done. I find a new gap or a new false-positive mode every few days and fold the fix back in. That\'s the part I\'m enjoying most.</p>' +
-        '<blockquote>What\'s the hardest thing you\'ve had to unlearn while building something autonomous?</blockquote>'
+        '<p>The hardest problem building an AI security agent is not finding vulnerabilities. It is getting the agent to not lie to itself about what it found.</p>' +
+        '<h2>Why a false positive is worse than a miss</h2>' +
+        '<p>An autonomous agent will eventually get confident about something that is not true. For most tools that is a minor annoyance. For a security tool it is existential: a single wrong Critical and the client stops trusting <em>every</em> report you have ever handed them. Trust is the product. So this stretch was mostly about defending it.</p>' +
+        fig('2026-10-28_security_agent_4_hard_lessons', 'A PLAN, SHARD, MAP, REDUCE, VERIFY pipeline where a separate verifier re-executes each finding and marks it confirmed, unconfirmed or false positive.', 'A separate verifier re-runs every Critical and High finding before it is allowed into a report.') +
+        '<h2>The bug that made the point for me</h2>' +
+        '<p>The lesson arrived as an embarrassing finding. Defendra was reporting “leaked credentials” — and it was right, technically. It had, at one point, been scanning a local working copy of a repo and picking up my own uncommitted <code>.env</code> secrets. Technically true. Completely meaningless. And exactly the kind of false positive that burns trust fastest, because it looks authoritative and it is noise.</p>' +
+        '<p>The instinct is to patch the secret detector. That would have been fixing the symptom. The real fault was the <em>input</em>: it was scanning dirty, uncommitted state that never represented the actual codebase.</p>' +
+        '<h2>Fix one: refuse to scan dirty state</h2>' +
+        '<p>So before any scanner runs now, there is a clean-clone gate. Defendra refuses to scan anything that is not a freshly-cloned, git-validated checkout: it confirms the target is a real git repository, that the working tree exactly matches <code>HEAD</code> with no modified or stray tracked files, and that the remote actually points at GitHub. On top of that, any finding whose evidence file is not git-tracked is thrown out — so a <code>.gitignore</code>d <code>.env</code> can never reach a report again. Fix the input, and a whole class of false positives disappears at the source.</p>' +
+        '<h2>Fix two: a verifier that re-proves every serious finding</h2>' +
+        '<p>The deeper fix was structural. I rebuilt the pipeline around a <b>PLAN → SHARD → MAP → REDUCE → VERIFY</b> shape. A planning stage studies the target and decides what to run before anything fires. Then the stage that matters here: a separate VERIFY step independently re-executes the exact proof-of-concept for every Critical and High finding — one request, no variation, no extra payloads — and marks it <em>confirmed</em>, <em>unconfirmed</em>, or <em>likely false positive</em>. Crucially, unconfirmed findings are downgraded and tagged, not silently deleted. Hiding uncertainty is its own kind of lie; surfacing it honestly is the point.</p>' +
+        '<h2>Why this architecture — and the context trap underneath it</h2>' +
+        '<p>I did not pick that five-stage shape for elegance. It follows an “agentic MapReduce” idea: put a language model only where genuine reasoning is needed, and keep everything else deterministic. Part of the reason is a failure mode I kept hitting — agents get dramatically worse as their context fills up. The research I was leaning on showed task success collapsing from around 96% at a small context to roughly 34% at a very large one. A single agent that holds the whole engagement in its head is an agent that quietly gets less reliable the longer it runs.</p>' +
+        '<p>So stages write their full output to disk and return only a compact summary to the orchestrator, and the reducer reads findings back from disk rather than carrying everything in a saturated context. A verifier that re-runs exactly one clean proof per finding is both the trust mechanism and a way to keep every decision small, isolated, and checkable. Verification is now the primary false-positive-reduction mechanism, and the target is a false-positive rate under 15%.</p>' +
+        '<p>I am not going to wrap this up neatly, because it is not done. I find a new gap or a new false-positive mode every few days and fold the fix back in. That is honestly the part I am enjoying most.</p>' +
+        '<blockquote>What is the hardest thing you have had to unlearn while building something autonomous?</blockquote>'
     },
     "sigterm-vs-sigkill": {
       title: "SIGTERM vs SIGKILL: Why Calls Died During Rolling Restarts",
@@ -569,7 +612,7 @@
       html:
         '<p>No errors. No crashes. Just calls silently dying mid-conversation during a rolling restart.</p>' +
         '<p>The fix wasn\'t in the code. It was in understanding the difference between two signals.</p>' +
-        '<figure class="anim"><img src="../assets/images/blog/2026-11-04_sigterm_vs_sigkill.gif" alt="A side-by-side of SIGTERM as a catchable request versus SIGKILL as an uncatchable kernel order the process cannot clean up from." loading="lazy"><figcaption>SIGTERM is a request your process can answer. SIGKILL is not.</figcaption></figure>' +
+        fig('2026-11-04_sigterm_vs_sigkill', 'A side-by-side of SIGTERM as a catchable request versus SIGKILL as an uncatchable kernel order the process cannot clean up from.', 'SIGTERM is a request your process can answer. SIGKILL is not.') +
         '<p><b>SIGTERM</b> is a request. Your process can catch it, finish what it\'s doing, clean up, and exit. <b>SIGKILL</b> is the kernel saying it doesn\'t care. No catch. No cleanup. No warning. The process stops existing.</p>' +
         '<p>When Kubernetes restarts a pod, it sends SIGTERM. Uvicorn receives it and immediately closes every WebSocket connection — including the active call. The user hears silence.</p>' +
         '<p>The fix was straightforward once I understood what was happening: block new calls the moment shutdown starts, let active calls finish naturally, and only then let SIGTERM do its job.</p>' +
@@ -585,7 +628,7 @@
       html:
         '<p>We spent an hour debugging an incident with no logs.</p>' +
         '<p>Not because we didn\'t have logging. Because the pod died before it could flush them.</p>' +
-        '<figure class="anim"><img src="../assets/images/blog/2026-11-11_daemonset_log_safety_net.gif" alt="Log flow from app stdout to a file on the node, tailed by an OTel Collector DaemonSet that ships the final lines even after the pod dies." loading="lazy"><figcaption>The DaemonSet was already tailing the file on disk when the pod died.</figcaption></figure>' +
+        fig('2026-11-11_daemonset_log_safety_net', 'Log flow from app stdout to a file on the node, tailed by an OTel Collector DaemonSet that ships the final lines even after the pod dies.', 'The DaemonSet was already tailing the file on disk when the pod died.') +
         '<p>When a pod gets OOMKilled, the last few seconds of logs just disappear. The exporter never gets a chance to flush — the process is already dead. The trail stops at exactly the moment you needed it most.</p>' +
         '<p>So I traced the actual flow. The app writes a log to stdout. The container runtime writes it to a file on the host node. Our in-app exporter picks those up in memory and ships them in batches. That last part is the problem.</p>' +
         '<p>When a pod crashes mid-batch, the queue is gone. But the log file on disk is still there. Kubelet doesn\'t clean it up immediately. Those lines are sitting on the node, unread.</p>' +
@@ -601,7 +644,7 @@
       html:
         '<p>Our production deploys were tagging releases with timestamps. Something like <code>backend-v2026.07.27.1234-prod</code>.</p>' +
         '<p>Functional. But meaningless. It told you <em>when</em> something shipped, not <em>what</em> shipped.</p>' +
-        '<figure class="anim"><img src="../assets/images/blog/2026-11-18_release_tag_annotation.gif" alt="A p99 latency chart with a deploy annotation marking the exact moment backend-v3.4.1 went out, contrasted with the old timestamp-based tag." loading="lazy"><figcaption>Before and after: a meaningful version tag, and the deploy marked right on the latency chart.</figcaption></figure>' +
+        fig('2026-11-18_release_tag_annotation', 'A p99 latency chart with a deploy annotation marking the exact moment backend-v3.4.1 went out, contrasted with the old timestamp-based tag.', 'Before and after: a meaningful version tag, and the deploy marked right on the latency chart.') +
         '<p>Cross-referencing "which version is live right now" against an incident timeline meant digging through commit history by hand. Every single time.</p>' +
         '<p>Worse — our deploys were invisible to our own observability stack. When a metric spiked or error rates jumped, the first question was always "did we just deploy something?" Answering it meant switching tabs to Slack or GitHub Actions, instead of looking at the dashboard already open in front of you.</p>' +
         '<p>Two changes fixed both problems. Production releases now tag with the actual application version pulled from the service\'s version file, not a timestamp — a tag means something now. And every production deploy fires an automatic annotation into both Axiom and Grafana, so the exact moment a release goes out shows up as a marker directly on the logs, traces and metrics we\'re already watching.</p>' +
@@ -617,7 +660,7 @@
       html:
         '<p>I thought Kubernetes graceful shutdown was one setting.</p>' +
         '<p>It\'s four timeouts that all have to be sized against each other. Get one wrong and it fails silently — only under load, only during deploys.</p>' +
-        '<figure class="anim"><img src="../assets/images/blog/2026-11-25_graceful_shutdown_timeouts.gif" alt="A timeline showing preStop, terminationGracePeriodSeconds, the readinessProbe gap and ALB deregistration delay nested inside the grace budget." loading="lazy"><figcaption>Drawn to scale: every timeout has to fit inside the grace budget — and outlast your longest connection.</figcaption></figure>' +
+        fig('2026-11-25_graceful_shutdown_timeouts', 'A timeline showing preStop, terminationGracePeriodSeconds, the readinessProbe gap and ALB deregistration delay nested inside the grace budget.', 'Drawn to scale: every timeout has to fit inside the grace budget — and outlast your longest connection.') +
         '<p><b>preStop fires first.</b> Before SIGTERM, Kubernetes runs your preStop hook. That\'s your window to drain connections and finish in-flight work. For us, waiting for active voice calls to end naturally.</p>' +
         '<p><b>terminationGracePeriodSeconds is the total budget.</b> It starts counting the moment deletion is triggered, not when SIGTERM is sent. Your preStop time comes out of it. A 300-second preStop against a 310-second grace period leaves you ten seconds for actual shutdown.</p>' +
         '<p><b>Then the readinessProbe gap nobody mentions.</b> When your pod starts returning 503, Kubernetes needs <code>periodSeconds × failureThreshold</code> to mark it unready. Ours was 10s × 3 — thirty seconds where the load balancer still routes new traffic to a pod that is already shutting down. You can\'t fix that in Kubernetes config. You fix it in the application.</p>' +
@@ -632,7 +675,7 @@
       tags: ["backend", "redis", "observability", "sre", "system-design"],
       html:
         '<p>Our cache had a 0% hit rate. Not low. Zero. 0 hits out of 1,348 verification calls.</p>' +
-        '<figure class="anim"><img src="../assets/images/blog/2026-12-02_firebase_token_cache_redis.gif" alt="An in-process dictionary cache behind a load balancer where pod A and pod B never share a verified token, versus a shared Redis session layer." loading="lazy"><figcaption>An in-process dict behind a load balancer: a token verified on pod A was invisible to pod B.</figcaption></figure>' +
+        fig('2026-12-02_firebase_token_cache_redis', 'An in-process dictionary cache behind a load balancer where pod A and pod B never share a verified token, versus a shared Redis session layer.', 'An in-process dict behind a load balancer: a token verified on pod A was invisible to pod B.') +
         '<p>Every authenticated request verified a Firebase ID token first — a 300-400ms round trip, every call. There was already a cache meant to skip it. It had never worked. Not once.</p>' +
         '<p>I almost didn\'t find it. The span on that function wasn\'t exporting to our observability backend in production, so the cost was invisible on the dashboards we actually look at. The path dominating our latency didn\'t appear anywhere. So I stopped trusting the instrumentation and logged the raw durations straight out of prod.</p>' +
         '<p>The reason wasn\'t a bug. It was architectural. The cache was a plain in-process dictionary. We run multiple replicas behind a load balancer. A token verified on pod A was invisible to pod B. It only ever helped if the same user hit the same pod twice in a row.</p>' +
@@ -702,6 +745,31 @@
         post.html +
       '</article>';
     editorPane.scrollTop = 0;
+    wireMedia(editorPane);
+  }
+
+  // Click-to-play: swap the still diagram for the animated build-up and back.
+  function wireMedia(root){
+    root.querySelectorAll('figure.media').forEach(function(f){
+      var img = f.querySelector('img');
+      var btn = f.querySelector('.media-play');
+      if(!img || !btn){ return; }
+      var still = f.getAttribute('data-still');
+      var anim = f.getAttribute('data-anim');
+      var playing = false;
+      btn.addEventListener('click', function(){
+        playing = !playing;
+        if(playing){
+          img.src = anim + '?t=' + Date.now(); // cache-bust so it restarts
+          btn.textContent = '↺ Show diagram';
+          f.classList.add('is-playing');
+        } else {
+          img.src = still;
+          btn.textContent = '▶ Play build-up';
+          f.classList.remove('is-playing');
+        }
+      });
+    });
   }
 
   function setActive(id){
