@@ -50,6 +50,60 @@
       "headline": "Axiom Monitors MCP: Filling a Gap in the Official MCP Server",
       "datePublished": "2026-08-04",
       "author": { "@type": "Person", "name": "Aman Srivastava" }
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "A 1D CNN-GRU Hybrid for EEG Seizure Detection (IEEE I-SMAC 2024)",
+      "datePublished": "2026-07-31",
+      "author": { "@type": "Person", "name": "Aman Srivastava" }
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "Building My AI Security Agent — Part 2: Teaching It to Attack",
+      "datePublished": "2026-10-14",
+      "author": { "@type": "Person", "name": "Aman Srivastava" }
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "Building My AI Security Agent — Part 3: Evidence an Auditor Will Trust",
+      "datePublished": "2026-10-21",
+      "author": { "@type": "Person", "name": "Aman Srivastava" }
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "Building My AI Security Agent — Part 4: Getting It to Stop Lying to Itself",
+      "datePublished": "2026-10-28",
+      "author": { "@type": "Person", "name": "Aman Srivastava" }
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "SIGTERM vs SIGKILL: Why Calls Died During Rolling Restarts",
+      "datePublished": "2026-11-04",
+      "author": { "@type": "Person", "name": "Aman Srivastava" }
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "The DaemonSet Log Safety Net: Catching Logs a Dying Pod Can't Flush",
+      "datePublished": "2026-11-11",
+      "author": { "@type": "Person", "name": "Aman Srivastava" }
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "Putting Deploys on the Dashboard: Release Tags and Annotations",
+      "datePublished": "2026-11-18",
+      "author": { "@type": "Person", "name": "Aman Srivastava" }
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "Graceful Shutdown Isn't One Setting — It's Four Timeouts",
+      "datePublished": "2026-11-25",
+      "author": { "@type": "Person", "name": "Aman Srivastava" }
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "A Cache That Never Worked: A 0% Hit Rate and a Firebase Token",
+      "datePublished": "2026-12-02",
+      "author": { "@type": "Person", "name": "Aman Srivastava" }
     }
   ]
 }
@@ -252,6 +306,13 @@
     font-family: var(--mono); font-size:12.5px; color: var(--text-faint);
     text-align:center;
   }
+  .post figure.anim{ position:relative; }
+  .post figure.anim::before{
+    content:"● animated"; position:absolute; top:12px; right:12px; z-index:2;
+    font-family: var(--mono); font-size:10.5px; letter-spacing:.04em;
+    color: var(--accent-strong); background: rgba(13,31,21,.78);
+    border:1px solid var(--accent-line); border-radius:999px; padding:3px 9px;
+  }
   .post h2{
     font-family: var(--sans); font-weight:700; font-size: 21px;
     color: var(--text-bright); margin: 34px 0 16px; letter-spacing:-0.01em;
@@ -323,19 +384,44 @@
       <div class="tree-root">/blog</div>
 
       <details class="tree-folder" open>
+        <summary>📁 security-agent</summary>
+        <div class="tree-file" data-post="security-agent-1">📄 part-1-the-idea.md<span class="tf-date">Jul 30</span></div>
+        <div class="tree-file" data-post="security-agent-2">📄 part-2-the-attack.md<span class="tf-date">Oct 14</span></div>
+        <div class="tree-file" data-post="security-agent-3">📄 part-3-auditor-trust.md<span class="tf-date">Oct 21</span></div>
+        <div class="tree-file" data-post="security-agent-4">📄 part-4-hard-lessons.md<span class="tf-date">Oct 28</span></div>
+      </details>
+
+      <details class="tree-folder" open>
+        <summary>📁 kubernetes</summary>
+        <div class="tree-file" data-post="sigterm-vs-sigkill">📄 sigterm-vs-sigkill.md<span class="tf-date">Nov 4</span></div>
+        <div class="tree-file" data-post="daemonset-log-safety-net">📄 daemonset-log-safety-net.md<span class="tf-date">Nov 11</span></div>
+        <div class="tree-file" data-post="graceful-shutdown-timeouts">📄 graceful-shutdown-timeouts.md<span class="tf-date">Nov 25</span></div>
+      </details>
+
+      <details class="tree-folder" open>
         <summary>📁 observability</summary>
         <div class="tree-file" data-post="axiom-mcp-dashboard">📄 axiom-mcp-dashboard.md<span class="tf-date">Jul 1</span></div>
         <div class="tree-file" data-post="otel-orphaned-spans">📄 otel-orphaned-spans.md<span class="tf-date">Jul 28</span></div>
       </details>
 
       <details class="tree-folder" open>
-        <summary>📁 security-agent</summary>
-        <div class="tree-file" data-post="security-agent-1">📄 part-1-the-idea.md<span class="tf-date">Jul 30</span></div>
+        <summary>📁 sre</summary>
+        <div class="tree-file" data-post="release-tag-annotation">📄 release-tag-annotation.md<span class="tf-date">Nov 18</span></div>
+      </details>
+
+      <details class="tree-folder" open>
+        <summary>📁 backend</summary>
+        <div class="tree-file" data-post="firebase-token-cache">📄 firebase-token-cache.md<span class="tf-date">Dec 2</span></div>
       </details>
 
       <details class="tree-folder" open>
         <summary>📁 open-source</summary>
         <div class="tree-file" data-post="axiom-monitors-mcp">📄 axiom-monitors-mcp.md<span class="tf-date">Aug 4</span></div>
+      </details>
+
+      <details class="tree-folder" open>
+        <summary>📁 research</summary>
+        <div class="tree-file" data-post="eeg-cnn-gru">📄 eeg-cnn-gru-ieee.md<span class="tf-date">Jul 31</span></div>
       </details>
     </aside>
 
@@ -426,6 +512,148 @@
         '<p>15 tools total. One-line uvx config for Cursor or Claude Desktop.</p>' +
         '<p>Now I can say "create a monitor that fires when prod 5xx rate goes above 1% over 5 min, route to Slack" and the agent writes the APL, picks the notifier, and ships it.</p>' +
         '<p>The MCP ecosystem is still early. Most of the value right now is in filling gaps where vendors haven\'t shipped tools yet.</p>'
+    },
+    "security-agent-2": {
+      title: "Building My AI Security Agent — Part 2: Teaching It to Attack",
+      category: "security-agent",
+      date: "October 14, 2026",
+      tags: ["security-engineering", "ai", "pentesting", "devsecops", "building-in-public"],
+      html:
+        '<p>I announced an AI security agent in July. Then I went quiet for two months. Here\'s what actually happened in that time.</p>' +
+        '<p>The biggest jump was teaching it to <em>attack</em> something, not just scan it.</p>' +
+        '<figure class="anim"><img src="../assets/images/blog/2026-10-14_security_agent_2_attack_pipeline.gif" alt="A black-box run: recon, discovery and exploitation stages chaining into proof-of-concept findings scored with CVSS 3.1 and OWASP Top 10." loading="lazy"><figcaption>One black-box run — 13 stages, 17 skills, zero keystrokes between them.</figcaption></figure>' +
+        '<p>I built out a full black-box pentesting pipeline — 17 skills, 13 stages, running end to end without me touching the keyboard between them.</p>' +
+        '<p><b>Recon</b> pulls from crt.sh, Shodan, the Wayback Machine, GitHub search, and subdomain enumeration across VirusTotal, Censys and OTX.</p>' +
+        '<p><b>Discovery</b> handles TLS scanning, tech-stack fingerprinting, WAF detection, and a crawler that pulls endpoints straight out of JS bundles.</p>' +
+        '<p><b>Exploitation</b> covers SQLi, XSS, SSRF, JWT algorithm confusion, XXE, IDOR, command injection, GraphQL injection, request smuggling, and OAuth misconfiguration. Real tooling is wired in as agents — <code>nmap</code>, ZAP, <code>sqlmap</code>, Metasploit. Every finding ends in a proof-of-concept with a CVSS 3.1 score and an OWASP Top 10 mapping.</p>' +
+        '<p>The part that felt real: watching OSINT output feed into subdomain enumeration, into a crawl, into a fuzzer, into an exploitation attempt. One continuous chain, running on its own.</p>' +
+        '<p>Still a work in progress. But it\'s finding real things on real targets now.</p>' +
+        '<blockquote>What\'s the one attack vector you\'d least want to first hear about from an auditor?</blockquote>'
+    },
+    "security-agent-3": {
+      title: "Building My AI Security Agent — Part 3: Evidence an Auditor Will Trust",
+      category: "security-agent",
+      date: "October 21, 2026",
+      tags: ["security-engineering", "compliance", "ai", "devsecops", "soc2"],
+      html:
+        '<p>Finding a vulnerability and producing something a compliance team will accept are two completely different bars.</p>' +
+        '<p>The agent could find real issues. But "finds SQLi" is not the same as "here is evidence your auditor will trust." This stretch was about closing that gap.</p>' +
+        '<figure class="anim"><img src="../assets/images/blog/2026-10-21_security_agent_3_auditor_trust.gif" alt="A printed security and compliance report mapping findings to PCI DSS, SOC 2 and ISO 27001 controls with severities and a retest tracker." loading="lazy"><figcaption>Every finding maps to a real control, not a CVE sitting in isolation.</figcaption></figure>' +
+        '<p>I added a <b>whitebox mode</b> that reads full source trees against 16 security categories — secrets, authentication, authorization, cryptography, Kubernetes, Docker, AWS, GitHub Actions, dependency risk, and AI/LLM-specific issues.</p>' +
+        '<p>Every finding now maps to an actual control — PCI DSS, HIPAA, GDPR, SOC 2, ISO 27001, NIST — instead of a CVE number sitting in isolation.</p>' +
+        '<p>Reports are self-contained HTML with embedded screenshots, an estimated financial impact per finding, and an overall grade from A+ to F. A retest tracker fingerprints each finding, so an issue that persists across two scans shows up as "still open" rather than as a duplicate ticket.</p>' +
+        '<p>I also stress-tested it against a real Astra scan dashboard and used the gaps to add checks I\'d missed — DNSSEC validation, password policy strength, internal header leakage. The unglamorous stuff. Exactly what an auditor would catch and I wouldn\'t have thought to include.</p>' +
+        '<p>It\'s no longer just finding bugs. It\'s producing the evidence an auditor would ask for.</p>' +
+        '<blockquote>How does your team prep for a compliance audit today?</blockquote>'
+    },
+    "security-agent-4": {
+      title: "Building My AI Security Agent — Part 4: Getting It to Stop Lying to Itself",
+      category: "security-agent",
+      date: "October 28, 2026",
+      tags: ["ai", "security-engineering", "building-in-public", "devsecops"],
+      html:
+        '<p>The hardest problem building an AI security agent isn\'t finding vulnerabilities.</p>' +
+        '<p>It\'s getting the agent to not lie to itself about what it found.</p>' +
+        '<figure class="anim"><img src="../assets/images/blog/2026-10-28_security_agent_4_hard_lessons.gif" alt="A PLAN, SHARD, MAP, REDUCE, VERIFY pipeline where a separate verifier re-executes each finding and marks it confirmed, unconfirmed or false positive." loading="lazy"><figcaption>A separate verifier re-runs every Critical and High finding before it\'s allowed into a report.</figcaption></figure>' +
+        '<p>An autonomous agent will eventually get confident about something that isn\'t true. For a security tool that\'s not a minor bug — it\'s a report a client stops trusting the first time it\'s wrong. So this stretch was mostly about that.</p>' +
+        '<p>I rebuilt the pipeline around a PLAN, SHARD, MAP, REDUCE, VERIFY pattern. A planning stage studies the target before anything runs. A separate verifier independently re-executes every Critical and High finding before it\'s allowed into a report — marking it confirmed, unconfirmed, or false positive.</p>' +
+        '<p>I also locked scanning to clean, freshly-cloned source only. Turns out the agent had been scanning a local dev folder at one point and reporting my own uncommitted <code>.env</code> secrets as "leaked credentials." Technically true. Completely meaningless. The kind of false positive that destroys trust fast. Now every clone is wiped and validated against git before a scan starts.</p>' +
+        '<p>I\'m not going to wrap this up neatly, because it isn\'t done. I find a new gap or a new false-positive mode every few days and fold the fix back in. That\'s the part I\'m enjoying most.</p>' +
+        '<blockquote>What\'s the hardest thing you\'ve had to unlearn while building something autonomous?</blockquote>'
+    },
+    "sigterm-vs-sigkill": {
+      title: "SIGTERM vs SIGKILL: Why Calls Died During Rolling Restarts",
+      category: "kubernetes",
+      date: "November 4, 2026",
+      tags: ["kubernetes", "backend", "devops", "sre"],
+      html:
+        '<p>No errors. No crashes. Just calls silently dying mid-conversation during a rolling restart.</p>' +
+        '<p>The fix wasn\'t in the code. It was in understanding the difference between two signals.</p>' +
+        '<figure class="anim"><img src="../assets/images/blog/2026-11-04_sigterm_vs_sigkill.gif" alt="A side-by-side of SIGTERM as a catchable request versus SIGKILL as an uncatchable kernel order the process cannot clean up from." loading="lazy"><figcaption>SIGTERM is a request your process can answer. SIGKILL is not.</figcaption></figure>' +
+        '<p><b>SIGTERM</b> is a request. Your process can catch it, finish what it\'s doing, clean up, and exit. <b>SIGKILL</b> is the kernel saying it doesn\'t care. No catch. No cleanup. No warning. The process stops existing.</p>' +
+        '<p>When Kubernetes restarts a pod, it sends SIGTERM. Uvicorn receives it and immediately closes every WebSocket connection — including the active call. The user hears silence.</p>' +
+        '<p>The fix was straightforward once I understood what was happening: block new calls the moment shutdown starts, let active calls finish naturally, and only then let SIGTERM do its job.</p>' +
+        '<p>But here\'s what surprised me most. <code>kubectl delete pod --grace-period=0 --force</code> doesn\'t actually send SIGKILL first. SIGTERM still goes out. The cleanup code still ran. The call still dropped — because uvicorn closes WebSockets on SIGTERM before the application can react. A true SIGKILL — OOM kill, node crash — is a different story. No signal. No cleanup. The process stops existing mid-sentence.</p>' +
+        '<p>Design your shutdown path like SIGTERM is the norm and SIGKILL is the disaster you\'re defending against. Because in production both will happen. Only one is survivable.</p>' +
+        '<blockquote>Have you ever had a bug that only showed up during deployments?</blockquote>'
+    },
+    "daemonset-log-safety-net": {
+      title: "The DaemonSet Log Safety Net: Catching Logs a Dying Pod Can't Flush",
+      category: "kubernetes",
+      date: "November 11, 2026",
+      tags: ["kubernetes", "observability", "devops", "sre"],
+      html:
+        '<p>We spent an hour debugging an incident with no logs.</p>' +
+        '<p>Not because we didn\'t have logging. Because the pod died before it could flush them.</p>' +
+        '<figure class="anim"><img src="../assets/images/blog/2026-11-11_daemonset_log_safety_net.gif" alt="Log flow from app stdout to a file on the node, tailed by an OTel Collector DaemonSet that ships the final lines even after the pod dies." loading="lazy"><figcaption>The DaemonSet was already tailing the file on disk when the pod died.</figcaption></figure>' +
+        '<p>When a pod gets OOMKilled, the last few seconds of logs just disappear. The exporter never gets a chance to flush — the process is already dead. The trail stops at exactly the moment you needed it most.</p>' +
+        '<p>So I traced the actual flow. The app writes a log to stdout. The container runtime writes it to a file on the host node. Our in-app exporter picks those up in memory and ships them in batches. That last part is the problem.</p>' +
+        '<p>When a pod crashes mid-batch, the queue is gone. But the log file on disk is still there. Kubelet doesn\'t clean it up immediately. Those lines are sitting on the node, unread.</p>' +
+        '<p>That\'s where a DaemonSet comes in. An OTel Collector DaemonSet runs one pod per node — not per service, not per deployment. One pod that tails every container log file on that host and ships them independently. So the flow becomes: app writes to stdout, kubelet writes to disk, DaemonSet tails the file. Even if the pod dies violently, the DaemonSet was already reading that file. It catches the final lines before the crash.</p>' +
+        '<p>It runs on 50m CPU and 128Mi memory per node. If you rely only on in-app telemetry, you have this blind spot right now. Most teams find it during an incident.</p>' +
+        '<blockquote>Have you?</blockquote>'
+    },
+    "release-tag-annotation": {
+      title: "Putting Deploys on the Dashboard: Release Tags and Annotations",
+      category: "sre",
+      date: "November 18, 2026",
+      tags: ["sre", "observability", "devops", "cicd", "backend"],
+      html:
+        '<p>Our production deploys were tagging releases with timestamps. Something like <code>backend-v2026.07.27.1234-prod</code>.</p>' +
+        '<p>Functional. But meaningless. It told you <em>when</em> something shipped, not <em>what</em> shipped.</p>' +
+        '<figure class="anim"><img src="../assets/images/blog/2026-11-18_release_tag_annotation.gif" alt="A p99 latency chart with a deploy annotation marking the exact moment backend-v3.4.1 went out, contrasted with the old timestamp-based tag." loading="lazy"><figcaption>Before and after: a meaningful version tag, and the deploy marked right on the latency chart.</figcaption></figure>' +
+        '<p>Cross-referencing "which version is live right now" against an incident timeline meant digging through commit history by hand. Every single time.</p>' +
+        '<p>Worse — our deploys were invisible to our own observability stack. When a metric spiked or error rates jumped, the first question was always "did we just deploy something?" Answering it meant switching tabs to Slack or GitHub Actions, instead of looking at the dashboard already open in front of you.</p>' +
+        '<p>Two changes fixed both problems. Production releases now tag with the actual application version pulled from the service\'s version file, not a timestamp — a tag means something now. And every production deploy fires an automatic annotation into both Axiom and Grafana, so the exact moment a release goes out shows up as a marker directly on the logs, traces and metrics we\'re already watching.</p>' +
+        '<p>Both notifications are fail-open. An observability hiccup will never block an actual deploy.</p>' +
+        '<p>The payoff: "did this change because of a deploy?" is now answered by looking, not by asking. Release identity and system behaviour in the same view, which is where they should have been from the start.</p>' +
+        '<blockquote>Does your team\'s deploy process show up in your observability dashboards?</blockquote>'
+    },
+    "graceful-shutdown-timeouts": {
+      title: "Graceful Shutdown Isn't One Setting — It's Four Timeouts",
+      category: "kubernetes",
+      date: "November 25, 2026",
+      tags: ["kubernetes", "aws", "sre", "backend", "devops"],
+      html:
+        '<p>I thought Kubernetes graceful shutdown was one setting.</p>' +
+        '<p>It\'s four timeouts that all have to be sized against each other. Get one wrong and it fails silently — only under load, only during deploys.</p>' +
+        '<figure class="anim"><img src="../assets/images/blog/2026-11-25_graceful_shutdown_timeouts.gif" alt="A timeline showing preStop, terminationGracePeriodSeconds, the readinessProbe gap and ALB deregistration delay nested inside the grace budget." loading="lazy"><figcaption>Drawn to scale: every timeout has to fit inside the grace budget — and outlast your longest connection.</figcaption></figure>' +
+        '<p><b>preStop fires first.</b> Before SIGTERM, Kubernetes runs your preStop hook. That\'s your window to drain connections and finish in-flight work. For us, waiting for active voice calls to end naturally.</p>' +
+        '<p><b>terminationGracePeriodSeconds is the total budget.</b> It starts counting the moment deletion is triggered, not when SIGTERM is sent. Your preStop time comes out of it. A 300-second preStop against a 310-second grace period leaves you ten seconds for actual shutdown.</p>' +
+        '<p><b>Then the readinessProbe gap nobody mentions.</b> When your pod starts returning 503, Kubernetes needs <code>periodSeconds × failureThreshold</code> to mark it unready. Ours was 10s × 3 — thirty seconds where the load balancer still routes new traffic to a pod that is already shutting down. You can\'t fix that in Kubernetes config. You fix it in the application.</p>' +
+        '<p><b>Last, ALB deregistration delay.</b> Once a target enters draining, the ALB stops new connections but holds existing WebSockets open for the full delay. That\'s what lets active calls finish — but only if the delay outlasts your longest connection. Ours didn\'t. That\'s why calls were dropping.</p>' +
+        '<p>Graceful shutdown isn\'t a config value. It\'s an architecture decision spanning your load balancer, your orchestrator and your application at once.</p>' +
+        '<blockquote>What\'s your terminationGracePeriodSeconds set to, and do you know why?</blockquote>'
+    },
+    "firebase-token-cache": {
+      title: "A Cache That Never Worked: A 0% Hit Rate and a Firebase Token",
+      category: "backend",
+      date: "December 2, 2026",
+      tags: ["backend", "redis", "observability", "sre", "system-design"],
+      html:
+        '<p>Our cache had a 0% hit rate. Not low. Zero. 0 hits out of 1,348 verification calls.</p>' +
+        '<figure class="anim"><img src="../assets/images/blog/2026-12-02_firebase_token_cache_redis.gif" alt="An in-process dictionary cache behind a load balancer where pod A and pod B never share a verified token, versus a shared Redis session layer." loading="lazy"><figcaption>An in-process dict behind a load balancer: a token verified on pod A was invisible to pod B.</figcaption></figure>' +
+        '<p>Every authenticated request verified a Firebase ID token first — a 300-400ms round trip, every call. There was already a cache meant to skip it. It had never worked. Not once.</p>' +
+        '<p>I almost didn\'t find it. The span on that function wasn\'t exporting to our observability backend in production, so the cost was invisible on the dashboards we actually look at. The path dominating our latency didn\'t appear anywhere. So I stopped trusting the instrumentation and logged the raw durations straight out of prod.</p>' +
+        '<p>The reason wasn\'t a bug. It was architectural. The cache was a plain in-process dictionary. We run multiple replicas behind a load balancer. A token verified on pod A was invisible to pod B. It only ever helped if the same user hit the same pod twice in a row.</p>' +
+        '<p>Moving it to Redis was the obvious fix. I went further and built a session layer on top of it: verify once, get an opaque session token, and every request after that is a Redis lookup, not an identity provider round trip. It fails closed if Redis hiccups, and re-checks freshness so a session never outlives a revoke.</p>' +
+        '<p>But the real lesson wasn\'t about caching. When your dashboard says a path is fast and your users are still waiting, go get the raw number yourself.</p>' +
+        '<blockquote>Has your monitoring ever hidden the thing that was actually slow?</blockquote>'
+    },
+    "eeg-cnn-gru": {
+      title: "A 1D CNN-GRU Hybrid for EEG Seizure Detection (IEEE I-SMAC 2024)",
+      category: "research",
+      date: "July 31, 2026",
+      tags: ["deep-learning", "ai", "neuroscience", "eeg", "research"],
+      html:
+        '<p>This paper came out almost a year ago. I\'m only getting around to posting it now — startup life.</p>' +
+        '<p>EEG signals are some of the noisiest data you\'ll ever try to classify. The signal is weak, contaminated by muscle movement, eye blinks, and electrical interference. And the pattern you\'re actually looking for — a seizure — can look different across patients and datasets.</p>' +
+        '<p>Standard approaches like LSTM and GRU handle temporal patterns well but struggle to pick up local features in the raw signal. CNNs catch local patterns but miss the long-range dependencies critical for seizure detection. So we combined them.</p>' +
+        '<p>Our paper, published at IEEE I-SMAC 2024, proposes a 1D CNN-GRU hybrid with transfer learning for EEG signal classification. The CNN layer extracts local features from the raw waveform. The GRU layer learns the temporal dependencies across the sequence. Transfer learning lets the model generalise across different datasets without training from scratch each time.</p>' +
+        '<p>Result: 99.26% accuracy on dataset-1, 96.48% on dataset-2 — outperforming LSTM, GRU, and LSTM+GRU baselines on both.</p>' +
+        '<p>The bigger picture: models like this could enable real-time seizure detection at the edge — fast enough and precise enough to matter in a clinical setting.</p>' +
+        '<p>This was my first IEEE publication, built alongside Shubh Gupta, Syed Naved, Somasundaram S.K, and Ilayaraja V.</p>' +
+        '<blockquote>What other biosignal problems do you think deep learning is closest to solving?</blockquote>'
     }
   };
 
@@ -519,8 +747,8 @@
     document.body.classList.toggle('sidebar-collapsed');
   });
 
-  // open the most recent post by default
-  openTab('axiom-monitors-mcp');
+  // open the most recent published post by default
+  openTab('security-agent-2');
 })();
 </script>
 
